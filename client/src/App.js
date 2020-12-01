@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
 
-import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = {value: 0, storageValue: 0, web3: null, accounts: null, contract: null };
+
+  constructor(props){
+    super(props)
+
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   componentDidMount = async () => {
     try {
@@ -35,11 +43,15 @@ class App extends Component {
     }
   };
 
+  handleChange(event){
+    this.setState({value:event.target.value})
+  }
+
   runExample = async () => {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    await contract.methods.set(this.state.value).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.get().call();
@@ -54,16 +66,20 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar.Brand href="#home">E-Prescription-Service</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Add new prescriptions</Nav.Link>
+            <Nav.Link href="#link">Show current prescriptions</Nav.Link>
+          </Nav>
+          <Button variant="outline-danger">Logout</Button>
+        </Navbar.Collapse>
+      </Navbar>
         <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
+        <input type="text" value={this.state.value} onChange={this.handleChange}/>
+        <button onClick={this.runExample}>Commit!</button>
         <div>The stored value is: {this.state.storageValue}</div>
       </div>
     );
