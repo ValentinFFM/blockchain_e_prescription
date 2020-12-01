@@ -1,29 +1,32 @@
 # E-Prescription-System build on Ethereum Blockchain
 
 - [E-Prescription-System build on Ethereum Blockchain](#e-prescription-system-build-on-ethereum-blockchain)
-  - [Prerequisites](#prerequisites)
-  - [Used Template](#used-template)
+  - [Used Technologies and Templates](#used-technologies-and-templates)
   - [Installation](#installation)
 
 ----
 
-## Prerequisites
+## Used Technologies and Templates
 
-- Truffle:
+- **Ethereum:**
+  - Open-Access Blockchain
+  - Documentation: https://ethereum.org/en/developers/docs/
+
+- **Truffle:**
   - Development and Testing Environment for Smart Contracts using Ethereum Virtual Machine
-  - https://www.trufflesuite.com/truffle
+  - Download: https://www.trufflesuite.com/truffle
 
-- Ganache:
+- **Truffle Box React:**
+  - Basic Template for a React Application working with Ethereum Smart Contracts
+  - Download: https://www.trufflesuite.com/boxes/react
+
+- **Ganache:**
   - Local Ethereum Blockchain
-  - https://www.trufflesuite.com/ganache
+  - Download: https://www.trufflesuite.com/ganache
 
-----
-
-## Used Template
-
-- Truffle Box React:
-  - Basic Template for a React Application working with Smart Contracts
-  - https://www.trufflesuite.com/boxes/react
+- **React:**
+  - JavaScript Library for building user interfaces
+  - Documentation: https://reactjs.org/docs/getting-started.html
 
 ----
 
