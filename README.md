@@ -12,6 +12,10 @@
   - Open-Access Blockchain
   - Documentation: https://ethereum.org/en/developers/docs/
 
+- **Solidity:**
+  - Programming language for Smart Contracts using Ethereum Virtual Machine
+  - Documentation: https://docs.soliditylang.org/en/latest/
+
 - **Truffle:**
   - Development and Testing Environment for Smart Contracts using Ethereum Virtual Machine
   - Download: https://www.trufflesuite.com/truffle
