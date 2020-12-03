@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import Home from './Home'
-import Blockchain from './Blockchain';
+import Home from './home'
+import Blockchain from './blockchain';
 
 import {
     BrowserRouter as Router,
@@ -16,14 +16,14 @@ class Navigation extends Component {
         return(
             <Router>
                 <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="#home">E-Prescription-Service</Navbar.Brand>
+                <Navbar.Brand href="/home">E-Prescription</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/Home">Home</Nav.Link>
                         <Nav.Link href="/Blockchain">Blockchain</Nav.Link>
                     </Nav>
-                    <Button variant="outline-danger">Logout</Button>
+                    <Button href="/Logout" variant="outline-danger">Logout</Button>
                 </Navbar.Collapse>
                 </Navbar>
 

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Imports of all used components 
-import Navigation from './Navigation'
+import Navigation from './navigation'
 
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
