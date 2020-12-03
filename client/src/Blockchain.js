@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
 
 
-class App extends Component {
+class Blockchain extends Component {
   state = {value: 0, storageValue: 0, web3: null, accounts: null, contract: null };
 
   constructor(props){
@@ -66,17 +63,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="#home">E-Prescription-Service</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Add new prescriptions</Nav.Link>
-            <Nav.Link href="#link">Show current prescriptions</Nav.Link>
-          </Nav>
-          <Button variant="outline-danger">Logout</Button>
-        </Navbar.Collapse>
-      </Navbar>
+        
         <h1>Good to Go!</h1>
         <input type="text" value={this.state.value} onChange={this.handleChange}/>
         <button onClick={this.runExample}>Commit!</button>
@@ -86,4 +73,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Blockchain;
