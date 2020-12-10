@@ -21,7 +21,7 @@ class Navigation extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/Home">Home</Nav.Link>
-                        <Nav.Link href="/Blockchain">Blockchain</Nav.Link>
+                        <Nav.Link href="/NewPrescription">New prescription</Nav.Link>
                     </Nav>
                     <Button href="/Logout" variant="outline-danger">Logout</Button>
                 </Navbar.Collapse>
@@ -32,7 +32,7 @@ class Navigation extends Component {
                     <Route path="/Home">
                         <Home />
                     </Route>
-                    <Route path="/Blockchain">
+                    <Route path="/NewPrescription">
                         <Blockchain />
                     </Route>
                 </Switch>
