@@ -73,13 +73,98 @@ class Blockchain extends Component {
     return (
       <Container fluid className="mt-5">
           <Row> 
-            <Col>
+            <Col sm={2}>
             </Col>
-            <Col>
+            <Col className="">
               <Form>
                 <Form.Group controlId="insurance">
                   <Form.Control type="text" placeholder="Krankenkasse bzw. Kostenträger" value={this.state.value} onChange={this.handleChange}></Form.Control>
                 </Form.Group>
+
+                
+                <Container>
+                  <Row>
+                    <Col className="p-0 pr-1">
+                      <Form.Group controlId="insured_surname">
+                        <Form.Control type="text" placeholder="Vorname des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pl-1">
+                      <Form.Group controlId="insured_name">
+                        <Form.Control type="text" placeholder="Name des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col className="p-0 pr-1" sm={9}>
+                      <Form.Group controlId="insured_street">
+                        <Form.Control type="text" placeholder="Straße des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={3}>
+                      <Form.Group controlId="insured_street_number">
+                        <Form.Control type="text" placeholder="Hausnummer des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="insured_post_code">
+                        <Form.Control type="number" placeholder="Postleitzahl des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={8}>
+                      <Form.Group controlId="insured_city">
+                        <Form.Control type="text" placeholder="Stadt des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Form.Group controlId="insured_birth_date">
+                    <Form.Control type="text" placeholder="Geburtstag des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                  </Form.Group>
+                    
+
+                  <Row>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="insurance_number">
+                        <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="insured_number">
+                        <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="status">
+                        <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="institution_number">
+                        <Form.Control type="number" placeholder="Betriebsstätten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="physician_number">
+                        <Form.Control type="number" placeholder="Arzt-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col className="p-0 pr-1" sm={4}>
+                      <Form.Group controlId="date">
+                        <Form.Control type="number" placeholder="Datum" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                </Container>
+
 
                 <Form.Group controlId="charges">
                   <Form.Control as="select">
@@ -101,7 +186,7 @@ class Blockchain extends Component {
               <br></br>
               <div>The stored value is: {this.state.storageValue}</div>
             </Col>
-            <Col>
+            <Col sm={2}>
             </Col>
           </Row>
       </Container>
