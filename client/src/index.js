@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Imports of all used components 
-import Navigation from './navigation'
+import Login from './login'
 
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-ReactDOM.render([<Navigation />], document.getElementById('root'));
+ReactDOM.render([<Login />], document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
