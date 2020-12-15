@@ -1,0 +1,110 @@
+{
+  "contractName": "User",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":\"User\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":{\"keccak256\":\"0xaf9dcb758b21de2e04bdc192c8549f3a9d1a5b9a2d9022736c26e86168b5c268\",\"urls\":[\"bzz-raw://f3b9d041266bacd0d10bd9bdf77031d56a8c8518fe240b36aeb41a5f93acc20a\",\"dweb:/ipfs/QmcZrX1NF2sVJHgCRWHFUJATXPBxiAA6C4EttKuaYU14rM\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158206964599f66a982d75dd7aa1ab86393a8a1fe4f8bc8d13cf3d43fe9941a52c9ec64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158206964599f66a982d75dd7aa1ab86393a8a1fe4f8bc8d13cf3d43fe9941a52c9ec64736f6c63430005100032",
+  "sourceMap": "66:18:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:18:2;;;;;;;",
+  "deployedSourceMap": "66:18:2:-;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract User {\n\n}",
+  "sourcePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
+  "ast": {
+    "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
+    "exportedSymbols": {
+      "User": [
+        42
+      ]
+    },
+    "id": 43,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 41,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 42,
+        "linearizedBaseContracts": [
+          42
+        ],
+        "name": "User",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 43,
+        "src": "66:18:2"
+      }
+    ],
+    "src": "32:52:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
+    "exportedSymbols": {
+      "User": [
+        42
+      ]
+    },
+    "id": 43,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 41,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:2"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 42,
+        "linearizedBaseContracts": [
+          42
+        ],
+        "name": "User",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 43,
+        "src": "66:18:2"
+      }
+    ],
+    "src": "32:52:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.2",
+  "updatedAt": "2020-12-15T08:22:10.872Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
