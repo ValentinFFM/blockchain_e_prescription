@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Home from './home'
-import Blockchain from './blockchain';
+import NewPrescription from './newPrescription';
 
 import {
     BrowserRouter as Router,
@@ -33,7 +33,7 @@ class Navigation extends Component {
                         <Home />
                     </Route>
                     <Route path="/NewPrescription">
-                        <Blockchain />
+                        <NewPrescription />
                     </Route>
                 </Switch>
             </Router>

@@ -1,52 +1,21 @@
 {
   "contractName": "Prescription",
-  "abi": [
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getInsurance",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "givenInsurance",
-          "type": "string"
-        }
-      ],
-      "name": "setInsurance",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"getInsurance\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"givenInsurance\",\"type\":\"string\"}],\"name\":\"setInsurance\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol\":\"Prescription\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol\":{\"keccak256\":\"0xb10e2b38b4b452c2561b3eee56a891b8a1daf5718398059ee42abf06a493eeeb\",\"urls\":[\"bzz-raw://3963709ca209bd591fc391689511d31161c24401ff660bc7e76d30ef29b2c4da\",\"dweb:/ipfs/QmU1y49RSSmmNmosv3gPgJ4Vu6nz4ujfysZHFviZKb2Nwe\"]}},\"version\":1}",
-  "bytecode": "0x6080604052604051806020016040528060008152506000908051906020019061002992919061003c565b5034801561003657600080fd5b506100e1565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061007d57805160ff19168380011785556100ab565b828001600101855582156100ab579182015b828111156100aa57825182559160200191906001019061008f565b5b5090506100b891906100bc565b5090565b6100de91905b808211156100da5760008160009055506001016100c2565b5090565b90565b61030f806100f06000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063267a8da01461003b578063bf5348d4146100be575b600080fd5b610043610179565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610083578082015181840152602081019050610068565b50505050905090810190601f1680156100b05780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b610177600480360360208110156100d457600080fd5b81019080803590602001906401000000008111156100f157600080fd5b82018360208201111561010357600080fd5b8035906020019184600183028401116401000000008311171561012557600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061021b565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102115780601f106101e657610100808354040283529160200191610211565b820191906000526020600020905b8154815290600101906020018083116101f457829003601f168201915b5050505050905090565b8060009080519060200190610231929190610235565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061027657805160ff19168380011785556102a4565b828001600101855582156102a4579182015b828111156102a3578251825591602001919060010190610288565b5b5090506102b191906102b5565b5090565b6102d791905b808211156102d35760008160009055506001016102bb565b5090565b9056fea265627a7a72315820e4fca87671edb5a6af71cafa6dff768ef7caa1c0d61c91f86068c8d080611fe864736f6c63430005100032",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063267a8da01461003b578063bf5348d4146100be575b600080fd5b610043610179565b6040518080602001828103825283818151815260200191508051906020019080838360005b83811015610083578082015181840152602081019050610068565b50505050905090810190601f1680156100b05780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b610177600480360360208110156100d457600080fd5b81019080803590602001906401000000008111156100f157600080fd5b82018360208201111561010357600080fd5b8035906020019184600183028401116401000000008311171561012557600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061021b565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102115780601f106101e657610100808354040283529160200191610211565b820191906000526020600020905b8154815290600101906020018083116101f457829003601f168201915b5050505050905090565b8060009080519060200190610231929190610235565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061027657805160ff19168380011785556102a4565b828001600101855582156102a4579182015b828111156102a3578251825591602001919060010190610288565b5b5090506102b191906102b5565b5090565b6102d791905b808211156102d35760008160009055506001016102bb565b5090565b9056fea265627a7a72315820e4fca87671edb5a6af71cafa6dff768ef7caa1c0d61c91f86068c8d080611fe864736f6c63430005100032",
-  "sourceMap": "66:447:1:-;;;92:21;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;66:447;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:447:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
-  "deployedSourceMap": "66:447:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:447:1;;;;;;;;;;;;;;;;;;;;;;;;324:87;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;324:87:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;415:96;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;415:96:1;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;415:96:1;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;415:96:1;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;415:96:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;415:96:1;;;;;;;;;;;;;;;:::i;:::-;;324:87;369:13;397:9;390:16;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;324:87;:::o;415:96::-;492:14;480:9;:26;;;;;;;;;;;;:::i;:::-;;415:96;:::o;66:447::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract Prescription {\n  string insurance = \"\";\n\n  // string insured_surname = \"\";\n  // string insured_name = \"\";\n  // string insured_street = \"\";\n  // string insured_street_number = \"\";\n  // uint insured_post_code = null;\n  // string insured_city = \"\";\n\n  function getInsurance() public view returns (string memory) {\n    return insurance;\n  }\n\n  function setInsurance(string memory givenInsurance) public {\n    insurance = givenInsurance;\n  }\n}\n",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol\":\"Prescription\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol\":{\"keccak256\":\"0xb10fcae80b7fcdd72ea49f7b55fe7be5ea2379e71a082ab903431b334860d466\",\"urls\":[\"bzz-raw://c86153f3d1d2e54489ad9e2801866fdb870e498597c17004736332276142ff3a\",\"dweb:/ipfs/QmRDJvb6cEvrUkD6gKFfVy6VqBEYZQ2pYbCKTqrtM9dabc\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a7231582074e20c6583d4ad8c31bab1eecca91a31b55b7351f277cc318fa1b34e9b1c70df64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a7231582074e20c6583d4ad8c31bab1eecca91a31b55b7351f277cc318fa1b34e9b1c70df64736f6c63430005100032",
+  "sourceMap": "66:26:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:26:1;;;;;;;",
+  "deployedSourceMap": "66:26:1:-;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract Prescription {\n\n}\n",
   "sourcePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol",
   "ast": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol",
     "exportedSymbols": {
       "Prescription": [
-        60
+        39
       ]
     },
-    "id": 61,
+    "id": 40,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -69,256 +38,27 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 60,
+        "id": 39,
         "linearizedBaseContracts": [
-          60
+          39
         ],
         "name": "Prescription",
         "nodeType": "ContractDefinition",
-        "nodes": [
-          {
-            "constant": false,
-            "id": 41,
-            "name": "insurance",
-            "nodeType": "VariableDeclaration",
-            "scope": 60,
-            "src": "92:21:1",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_string_storage",
-              "typeString": "string"
-            },
-            "typeName": {
-              "id": 39,
-              "name": "string",
-              "nodeType": "ElementaryTypeName",
-              "src": "92:6:1",
-              "typeDescriptions": {
-                "typeIdentifier": "t_string_storage_ptr",
-                "typeString": "string"
-              }
-            },
-            "value": {
-              "argumentTypes": null,
-              "hexValue": "",
-              "id": 40,
-              "isConstant": false,
-              "isLValue": false,
-              "isPure": true,
-              "kind": "string",
-              "lValueRequested": false,
-              "nodeType": "Literal",
-              "src": "111:2:1",
-              "subdenomination": null,
-              "typeDescriptions": {
-                "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
-                "typeString": "literal_string \"\""
-              },
-              "value": ""
-            },
-            "visibility": "internal"
-          },
-          {
-            "body": {
-              "id": 48,
-              "nodeType": "Block",
-              "src": "384:27:1",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 46,
-                    "name": "insurance",
-                    "nodeType": "Identifier",
-                    "overloadedDeclarations": [],
-                    "referencedDeclaration": 41,
-                    "src": "397:9:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage",
-                      "typeString": "string storage ref"
-                    }
-                  },
-                  "functionReturnParameters": 45,
-                  "id": 47,
-                  "nodeType": "Return",
-                  "src": "390:16:1"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 49,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "getInsurance",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 42,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "345:2:1"
-            },
-            "returnParameters": {
-              "id": 45,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 44,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 49,
-                  "src": "369:13:1",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 43,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "369:6:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "368:15:1"
-            },
-            "scope": 60,
-            "src": "324:87:1",
-            "stateMutability": "view",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 58,
-              "nodeType": "Block",
-              "src": "474:37:1",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 56,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftHandSide": {
-                      "argumentTypes": null,
-                      "id": 54,
-                      "name": "insurance",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 41,
-                      "src": "480:9:1",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_storage",
-                        "typeString": "string storage ref"
-                      }
-                    },
-                    "nodeType": "Assignment",
-                    "operator": "=",
-                    "rightHandSide": {
-                      "argumentTypes": null,
-                      "id": 55,
-                      "name": "givenInsurance",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 51,
-                      "src": "492:14:1",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_memory_ptr",
-                        "typeString": "string memory"
-                      }
-                    },
-                    "src": "480:26:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage",
-                      "typeString": "string storage ref"
-                    }
-                  },
-                  "id": 57,
-                  "nodeType": "ExpressionStatement",
-                  "src": "480:26:1"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 59,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "setInsurance",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 52,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 51,
-                  "name": "givenInsurance",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 59,
-                  "src": "437:28:1",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 50,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "437:6:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "436:30:1"
-            },
-            "returnParameters": {
-              "id": 53,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "474:0:1"
-            },
-            "scope": 60,
-            "src": "415:96:1",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          }
-        ],
-        "scope": 61,
-        "src": "66:447:1"
+        "nodes": [],
+        "scope": 40,
+        "src": "66:26:1"
       }
     ],
-    "src": "32:482:1"
+    "src": "32:61:1"
   },
   "legacyAST": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescription.sol",
     "exportedSymbols": {
       "Prescription": [
-        60
+        39
       ]
     },
-    "id": 61,
+    "id": 40,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -341,247 +81,18 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 60,
+        "id": 39,
         "linearizedBaseContracts": [
-          60
+          39
         ],
         "name": "Prescription",
         "nodeType": "ContractDefinition",
-        "nodes": [
-          {
-            "constant": false,
-            "id": 41,
-            "name": "insurance",
-            "nodeType": "VariableDeclaration",
-            "scope": 60,
-            "src": "92:21:1",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_string_storage",
-              "typeString": "string"
-            },
-            "typeName": {
-              "id": 39,
-              "name": "string",
-              "nodeType": "ElementaryTypeName",
-              "src": "92:6:1",
-              "typeDescriptions": {
-                "typeIdentifier": "t_string_storage_ptr",
-                "typeString": "string"
-              }
-            },
-            "value": {
-              "argumentTypes": null,
-              "hexValue": "",
-              "id": 40,
-              "isConstant": false,
-              "isLValue": false,
-              "isPure": true,
-              "kind": "string",
-              "lValueRequested": false,
-              "nodeType": "Literal",
-              "src": "111:2:1",
-              "subdenomination": null,
-              "typeDescriptions": {
-                "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
-                "typeString": "literal_string \"\""
-              },
-              "value": ""
-            },
-            "visibility": "internal"
-          },
-          {
-            "body": {
-              "id": 48,
-              "nodeType": "Block",
-              "src": "384:27:1",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 46,
-                    "name": "insurance",
-                    "nodeType": "Identifier",
-                    "overloadedDeclarations": [],
-                    "referencedDeclaration": 41,
-                    "src": "397:9:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage",
-                      "typeString": "string storage ref"
-                    }
-                  },
-                  "functionReturnParameters": 45,
-                  "id": 47,
-                  "nodeType": "Return",
-                  "src": "390:16:1"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 49,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "getInsurance",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 42,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "345:2:1"
-            },
-            "returnParameters": {
-              "id": 45,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 44,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 49,
-                  "src": "369:13:1",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 43,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "369:6:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "368:15:1"
-            },
-            "scope": 60,
-            "src": "324:87:1",
-            "stateMutability": "view",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 58,
-              "nodeType": "Block",
-              "src": "474:37:1",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 56,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftHandSide": {
-                      "argumentTypes": null,
-                      "id": 54,
-                      "name": "insurance",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 41,
-                      "src": "480:9:1",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_storage",
-                        "typeString": "string storage ref"
-                      }
-                    },
-                    "nodeType": "Assignment",
-                    "operator": "=",
-                    "rightHandSide": {
-                      "argumentTypes": null,
-                      "id": 55,
-                      "name": "givenInsurance",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 51,
-                      "src": "492:14:1",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_string_memory_ptr",
-                        "typeString": "string memory"
-                      }
-                    },
-                    "src": "480:26:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage",
-                      "typeString": "string storage ref"
-                    }
-                  },
-                  "id": 57,
-                  "nodeType": "ExpressionStatement",
-                  "src": "480:26:1"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 59,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "setInsurance",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 52,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 51,
-                  "name": "givenInsurance",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 59,
-                  "src": "437:28:1",
-                  "stateVariable": false,
-                  "storageLocation": "memory",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_memory_ptr",
-                    "typeString": "string"
-                  },
-                  "typeName": {
-                    "id": 50,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "437:6:1",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "436:30:1"
-            },
-            "returnParameters": {
-              "id": 53,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "474:0:1"
-            },
-            "scope": 60,
-            "src": "415:96:1",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          }
-        ],
-        "scope": 61,
-        "src": "66:447:1"
+        "nodes": [],
+        "scope": 40,
+        "src": "66:26:1"
       }
     ],
-    "src": "32:482:1"
+    "src": "32:61:1"
   },
   "compiler": {
     "name": "solc",
@@ -591,12 +102,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x3e3C75367d871D71bf9c237a8E92eD5938116275",
-      "transactionHash": "0x72983a544c0aa08dc6e7f4932a1038fab13a46c5d0bb8588e58abcfb54bab076"
+      "address": "0xF4F7d18B43Ccc6dd84eBCD461B856950D8053453",
+      "transactionHash": "0x9b9e95e77559696e51fa1ba87c89d50fac0ea4de6f26f7bb439a1f307b856785"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-12T20:57:45.096Z",
+  "updatedAt": "2020-12-15T08:22:10.869Z",
   "devdoc": {
     "methods": {}
   },
