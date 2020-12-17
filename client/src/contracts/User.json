@@ -1,21 +1,67 @@
 {
   "contractName": "User",
-  "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":\"User\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":{\"keccak256\":\"0xaf9dcb758b21de2e04bdc192c8549f3a9d1a5b9a2d9022736c26e86168b5c268\",\"urls\":[\"bzz-raw://f3b9d041266bacd0d10bd9bdf77031d56a8c8518fe240b36aeb41a5f93acc20a\",\"dweb:/ipfs/QmcZrX1NF2sVJHgCRWHFUJATXPBxiAA6C4EttKuaYU14rM\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158206964599f66a982d75dd7aa1ab86393a8a1fe4f8bc8d13cf3d43fe9941a52c9ec64736f6c63430005100032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158206964599f66a982d75dd7aa1ab86393a8a1fe4f8bc8d13cf3d43fe9941a52c9ec64736f6c63430005100032",
-  "sourceMap": "66:18:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:18:2;;;;;;;",
-  "deployedSourceMap": "66:18:2:-;;;;;",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract User {\n\n}",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "surname_",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "name_",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "street_",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "street_number_",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "post_code_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "city_",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "birth_date_",
+          "type": "string"
+        }
+      ],
+      "name": "addNewUser",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"surname_\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"name_\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"street_\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"street_number_\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"post_code_\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"city_\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"birth_date_\",\"type\":\"string\"}],\"name\":\"addNewUser\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":\"User\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":{\"keccak256\":\"0xec3ba816b85011e84f67fc06a8a0dd9949e43eb14b14f93cf5963c98c4c8663d\",\"urls\":[\"bzz-raw://6ad995e03f380adc6da6c5d17a64479741ad4fd2959ffd407072bc6952f97682\",\"dweb:/ipfs/QmQc8bC46YjpDJo4z349h72QwvYuPgE8P4AkKXWrgXLqTF\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061062f806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063dc4e832a14610030575b600080fd5b6103e6600480360360e081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290803590602001906401000000008111156100fa57600080fd5b82018360208201111561010c57600080fd5b8035906020019184600183028401116401000000008311171561012e57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561019157600080fd5b8201836020820111156101a357600080fd5b803590602001918460018302840111640100000000831117156101c557600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561022857600080fd5b82018360208201111561023a57600080fd5b8035906020019184600183028401116401000000008311171561025c57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929080359060200190929190803590602001906401000000008111156102c957600080fd5b8201836020820111156102db57600080fd5b803590602001918460018302840111640100000000831117156102fd57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561036057600080fd5b82018360208201111561037257600080fd5b8035906020019184600183028401116401000000008311171561039457600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506103e8565b005b6103f0610518565b6040518060e0016040528089815260200188815260200187815260200186815260200185815260200184815260200183815250905060008190806001815401808255809150509060018203906000526020600020906007020160009091929091909150600082015181600001908051906020019061046f929190610555565b50602082015181600101908051906020019061048c929190610555565b5060408201518160020190805190602001906104a9929190610555565b5060608201518160030190805190602001906104c6929190610555565b506080820151816004015560a08201518160050190805190602001906104ed929190610555565b5060c082015181600601908051906020019061050a929190610555565b505050505050505050505050565b6040518060e00160405280606081526020016060815260200160608152602001606081526020016000815260200160608152602001606081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061059657805160ff19168380011785556105c4565b828001600101855582156105c4579182015b828111156105c35782518255916020019190600101906105a8565b5b5090506105d191906105d5565b5090565b6105f791905b808211156105f35760008160009055506001016105db565b5090565b9056fea265627a7a72315820ce2a8c8b81d0c49eb75206706e9235e0f482645fbdff23c55dd09cf682884b6064736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063dc4e832a14610030575b600080fd5b6103e6600480360360e081101561004657600080fd5b810190808035906020019064010000000081111561006357600080fd5b82018360208201111561007557600080fd5b8035906020019184600183028401116401000000008311171561009757600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290803590602001906401000000008111156100fa57600080fd5b82018360208201111561010c57600080fd5b8035906020019184600183028401116401000000008311171561012e57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561019157600080fd5b8201836020820111156101a357600080fd5b803590602001918460018302840111640100000000831117156101c557600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561022857600080fd5b82018360208201111561023a57600080fd5b8035906020019184600183028401116401000000008311171561025c57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929080359060200190929190803590602001906401000000008111156102c957600080fd5b8201836020820111156102db57600080fd5b803590602001918460018302840111640100000000831117156102fd57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561036057600080fd5b82018360208201111561037257600080fd5b8035906020019184600183028401116401000000008311171561039457600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192905050506103e8565b005b6103f0610518565b6040518060e0016040528089815260200188815260200187815260200186815260200185815260200184815260200183815250905060008190806001815401808255809150509060018203906000526020600020906007020160009091929091909150600082015181600001908051906020019061046f929190610555565b50602082015181600101908051906020019061048c929190610555565b5060408201518160020190805190602001906104a9929190610555565b5060608201518160030190805190602001906104c6929190610555565b506080820151816004015560a08201518160050190805190602001906104ed929190610555565b5060c082015181600601908051906020019061050a929190610555565b505050505050505050505050565b6040518060e00160405280606081526020016060815260200160608152602001606081526020016000815260200160608152602001606081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061059657805160ff19168380011785556105c4565b828001600101855582156105c4579182015b828111156105c35782518255916020019190600101906105a8565b5b5090506105d191906105d5565b5090565b6105f791905b808211156105f35760008160009055506001016105db565b5090565b9056fea265627a7a72315820ce2a8c8b81d0c49eb75206706e9235e0f482645fbdff23c55dd09cf682884b6064736f6c63430005100032",
+  "sourceMap": "66:832:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:832:2;;;;;;;",
+  "deployedSourceMap": "66:832:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:832:2;;;;;;;;;;;;;;;;;;;319:576;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;319:576:2;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;319:576:2;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;319:576:2;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;319:576:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;319:576:2;;;;;;;;;;;;;;;:::i;:::-;;;520:23;;:::i;:::-;546:299;;;;;;;;594:8;546:299;;;;626:5;546:299;;;;657:7;546:299;;;;697:14;546:299;;;;740:10;546:299;;;;774:5;546:299;;;;810:11;546:299;;;520:325;;856:17;879:8;856:32;;39:1:-1;33:3;27:10;23:18;57:10;52:3;45:23;79:10;72:17;;0:93;856:32:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;319:576;;;;;;;;:::o;66:832::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract User {\n\n    struct Insured {\n        string surname;\n        string name;\n        string street;\n        string street_number;\n        uint post_code;\n        string city;\n        string birth_date;\n    }\n\n    Insured[] registeredInsured;\n\n    function addNewUser(string memory surname_, string memory name_, string memory street_, string memory street_number_, uint post_code_, string memory city_, string memory birth_date_)  public{\n\n        Insured memory insured_ = Insured(\n            {\n                surname: surname_,\n                name: name_,\n                street: street_,\n                street_number: street_number_,\n                post_code: post_code_,\n                city: city_,\n                birth_date : birth_date_\n            }\n        );\n\n        registeredInsured.push(insured_);\n    }\n\n}",
   "sourcePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
   "ast": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
     "exportedSymbols": {
       "User": [
-        42
+        96
       ]
     },
-    "id": 43,
+    "id": 97,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -38,27 +84,742 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 42,
+        "id": 96,
         "linearizedBaseContracts": [
-          42
+          96
         ],
         "name": "User",
         "nodeType": "ContractDefinition",
-        "nodes": [],
-        "scope": 43,
-        "src": "66:18:2"
+        "nodes": [
+          {
+            "canonicalName": "User.Insured",
+            "id": 56,
+            "members": [
+              {
+                "constant": false,
+                "id": 43,
+                "name": "surname",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "112:14:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 42,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "112:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 45,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "136:11:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 44,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "136:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 47,
+                "name": "street",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "157:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 46,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "157:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 49,
+                "name": "street_number",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "180:20:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 48,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "180:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 51,
+                "name": "post_code",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "210:14:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 50,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "210:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53,
+                "name": "city",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "234:11:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 52,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "234:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 55,
+                "name": "birth_date",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "255:17:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 54,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "255:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Insured",
+            "nodeType": "StructDefinition",
+            "scope": 96,
+            "src": "87:192:2",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 59,
+            "name": "registeredInsured",
+            "nodeType": "VariableDeclaration",
+            "scope": 96,
+            "src": "285:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage",
+              "typeString": "struct User.Insured[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 57,
+                "name": "Insured",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 56,
+                "src": "285:7:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Insured_$56_storage_ptr",
+                  "typeString": "struct User.Insured"
+                }
+              },
+              "id": 58,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "285:9:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage_ptr",
+                "typeString": "struct User.Insured[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 94,
+              "nodeType": "Block",
+              "src": "509:386:2",
+              "statements": [
+                {
+                  "assignments": [
+                    77
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 77,
+                      "name": "insured_",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 94,
+                      "src": "520:23:2",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                        "typeString": "struct User.Insured"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 76,
+                        "name": "Insured",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 56,
+                        "src": "520:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Insured_$56_storage_ptr",
+                          "typeString": "struct User.Insured"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 87,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 79,
+                        "name": "surname_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 61,
+                        "src": "594:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 80,
+                        "name": "name_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 63,
+                        "src": "626:5:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 81,
+                        "name": "street_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 65,
+                        "src": "657:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 82,
+                        "name": "street_number_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "697:14:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 83,
+                        "name": "post_code_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 69,
+                        "src": "740:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 84,
+                        "name": "city_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "774:5:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 85,
+                        "name": "birth_date_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 73,
+                        "src": "810:11:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 78,
+                      "name": "Insured",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 56,
+                      "src": "546:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Insured_$56_storage_ptr_$",
+                        "typeString": "type(struct User.Insured storage pointer)"
+                      }
+                    },
+                    "id": 86,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [
+                      "surname",
+                      "name",
+                      "street",
+                      "street_number",
+                      "post_code",
+                      "city",
+                      "birth_date"
+                    ],
+                    "nodeType": "FunctionCall",
+                    "src": "546:299:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Insured_$56_memory",
+                      "typeString": "struct User.Insured memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "520:325:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "insured_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 77,
+                        "src": "879:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                          "typeString": "struct User.Insured memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                          "typeString": "struct User.Insured memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 88,
+                        "name": "registeredInsured",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 59,
+                        "src": "856:17:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage",
+                          "typeString": "struct User.Insured storage ref[] storage ref"
+                        }
+                      },
+                      "id": 90,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "856:22:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Insured_$56_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct User.Insured storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 92,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "856:32:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 93,
+                  "nodeType": "ExpressionStatement",
+                  "src": "856:32:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 95,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addNewUser",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 74,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 61,
+                  "name": "surname_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "339:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 60,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "339:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 63,
+                  "name": "name_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "363:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 62,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "363:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 65,
+                  "name": "street_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "384:21:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 64,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 67,
+                  "name": "street_number_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "407:28:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 66,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "407:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 69,
+                  "name": "post_code_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "437:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 68,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "437:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 71,
+                  "name": "city_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "454:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 70,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "454:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 73,
+                  "name": "birth_date_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "475:25:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 72,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "475:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "338:163:2"
+            },
+            "returnParameters": {
+              "id": 75,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "509:0:2"
+            },
+            "scope": 96,
+            "src": "319:576:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 97,
+        "src": "66:832:2"
       }
     ],
-    "src": "32:52:2"
+    "src": "32:866:2"
   },
   "legacyAST": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol",
     "exportedSymbols": {
       "User": [
-        42
+        96
       ]
     },
-    "id": 43,
+    "id": 97,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -81,26 +842,749 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 42,
+        "id": 96,
         "linearizedBaseContracts": [
-          42
+          96
         ],
         "name": "User",
         "nodeType": "ContractDefinition",
-        "nodes": [],
-        "scope": 43,
-        "src": "66:18:2"
+        "nodes": [
+          {
+            "canonicalName": "User.Insured",
+            "id": 56,
+            "members": [
+              {
+                "constant": false,
+                "id": 43,
+                "name": "surname",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "112:14:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 42,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "112:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 45,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "136:11:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 44,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "136:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 47,
+                "name": "street",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "157:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 46,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "157:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 49,
+                "name": "street_number",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "180:20:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 48,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "180:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 51,
+                "name": "post_code",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "210:14:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 50,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "210:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53,
+                "name": "city",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "234:11:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 52,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "234:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 55,
+                "name": "birth_date",
+                "nodeType": "VariableDeclaration",
+                "scope": 56,
+                "src": "255:17:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 54,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "255:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Insured",
+            "nodeType": "StructDefinition",
+            "scope": 96,
+            "src": "87:192:2",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 59,
+            "name": "registeredInsured",
+            "nodeType": "VariableDeclaration",
+            "scope": 96,
+            "src": "285:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage",
+              "typeString": "struct User.Insured[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 57,
+                "name": "Insured",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 56,
+                "src": "285:7:2",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Insured_$56_storage_ptr",
+                  "typeString": "struct User.Insured"
+                }
+              },
+              "id": 58,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "285:9:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage_ptr",
+                "typeString": "struct User.Insured[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 94,
+              "nodeType": "Block",
+              "src": "509:386:2",
+              "statements": [
+                {
+                  "assignments": [
+                    77
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 77,
+                      "name": "insured_",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 94,
+                      "src": "520:23:2",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                        "typeString": "struct User.Insured"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 76,
+                        "name": "Insured",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 56,
+                        "src": "520:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Insured_$56_storage_ptr",
+                          "typeString": "struct User.Insured"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 87,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 79,
+                        "name": "surname_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 61,
+                        "src": "594:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 80,
+                        "name": "name_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 63,
+                        "src": "626:5:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 81,
+                        "name": "street_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 65,
+                        "src": "657:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 82,
+                        "name": "street_number_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 67,
+                        "src": "697:14:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 83,
+                        "name": "post_code_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 69,
+                        "src": "740:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 84,
+                        "name": "city_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 71,
+                        "src": "774:5:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 85,
+                        "name": "birth_date_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 73,
+                        "src": "810:11:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 78,
+                      "name": "Insured",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 56,
+                      "src": "546:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_Insured_$56_storage_ptr_$",
+                        "typeString": "type(struct User.Insured storage pointer)"
+                      }
+                    },
+                    "id": 86,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [
+                      "surname",
+                      "name",
+                      "street",
+                      "street_number",
+                      "post_code",
+                      "city",
+                      "birth_date"
+                    ],
+                    "nodeType": "FunctionCall",
+                    "src": "546:299:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Insured_$56_memory",
+                      "typeString": "struct User.Insured memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "520:325:2"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "insured_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 77,
+                        "src": "879:8:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                          "typeString": "struct User.Insured memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Insured_$56_memory_ptr",
+                          "typeString": "struct User.Insured memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 88,
+                        "name": "registeredInsured",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 59,
+                        "src": "856:17:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Insured_$56_storage_$dyn_storage",
+                          "typeString": "struct User.Insured storage ref[] storage ref"
+                        }
+                      },
+                      "id": 90,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "856:22:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Insured_$56_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct User.Insured storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 92,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "856:32:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 93,
+                  "nodeType": "ExpressionStatement",
+                  "src": "856:32:2"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 95,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addNewUser",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 74,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 61,
+                  "name": "surname_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "339:22:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 60,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "339:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 63,
+                  "name": "name_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "363:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 62,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "363:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 65,
+                  "name": "street_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "384:21:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 64,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 67,
+                  "name": "street_number_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "407:28:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 66,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "407:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 69,
+                  "name": "post_code_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "437:15:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 68,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "437:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 71,
+                  "name": "city_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "454:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 70,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "454:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 73,
+                  "name": "birth_date_",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 95,
+                  "src": "475:25:2",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 72,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "475:6:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "338:163:2"
+            },
+            "returnParameters": {
+              "id": 75,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "509:0:2"
+            },
+            "scope": 96,
+            "src": "319:576:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 97,
+        "src": "66:832:2"
       }
     ],
-    "src": "32:52:2"
+    "src": "32:866:2"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x6B186bcE456D02330788749ef6E08C9AF1019550",
+      "transactionHash": "0x3b2f8da620260bfc0f977f704861b088bf6704e52d39bf42de66177d4a46ffbb"
+    }
+  },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-15T08:22:10.872Z",
+  "updatedAt": "2020-12-17T21:41:48.961Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
