@@ -4,11 +4,10 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 // Imports of all used components 
-import Login from './login'
+import Navigation from './navigation'
 
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './navigation';
 
 
 ReactDOM.render([<Navigation />], document.getElementById('root'));

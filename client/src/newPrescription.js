@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PrescriptionContract from "./contracts/Prescription.json";
+import UserContract from "./contracts/User.json";
 import getWeb3 from "./getWeb3";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -9,6 +9,16 @@ import Button from 'react-bootstrap/Button'
 
 
 class NewPrescription extends Component {
+  state = {value: "", web3: null, accounts: null, contract: null };
+
+  constructor(props){
+    super(props)
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event){
+    this.setState({value:event.target.value})
+  }
 
   render() {
     // if (!this.state.web3) {
@@ -22,10 +32,10 @@ class NewPrescription extends Component {
             <Col className="">
               <Form>
                 <Form.Group controlId="insurance">
-                  <Form.Control type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
+                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
                 </Form.Group>
                 
-                <Button variant="success" block onClick={this.newPrescription}>Submit</Button>
+                <Button variant="success" block>Submit</Button>
               </Form>
             </Col>
             <Col sm={2}>
