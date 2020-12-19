@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserContract from "./contracts/User.json";
+import UserContract from "../contracts/User.json";
 import getWeb3 from "./getWeb3";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'

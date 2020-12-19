@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Home from './home'
 import NewPrescription from './newPrescription';
-import RegisterInsured from './registerInsured'
+import RegisterInsured from './accountManagement/registerInsured'
 
 import {
     BrowserRouter as Router,

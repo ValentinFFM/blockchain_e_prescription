@@ -1,10 +1,10 @@
 // Default react imports 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './app/serviceWorker';
 
 // Imports of all used components 
-import Navigation from './navigation'
+import Navigation from './app/navigation'
 
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
