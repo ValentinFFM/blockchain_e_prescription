@@ -56,28 +56,28 @@ class RegisterPhysician extends Component {
 
         console.log(user)
 
-        const insured_number = user.insured_number
-        const insurance_number = user.insurance_number
-        const insured_status = user.insured_status
+        const business_number = user.business_number
+        const physician_number = user.physician_number
 
-        const surname = user.insured_surname
-        const name = user.insured_name
-        const street = user.insured_street
-        const street_number = user.insured_street_number
-        const post_code = parseInt(user.insured_post_code)
-        const city = user.insured_city
-        const birth_date = user.insured_birth_date
+        const job_title = user.physician_job_title
+        const surname = user.physician_surname
+        const name = user.physician_name
+        const street = user.physician_street
+        const street_number = user.physician_street_number
+        const post_code = parseInt(user.physician_post_code)
+        const city = user.physician_city
+        const telephone_number = user.telephone_number
         
-        await contract.methods.addNewInsured(insured_number, {insurance_number, insured_status, surname, name, street, street_number, post_code, city, birth_date}).send({ from: accounts[0], gas: 1000000 });
+        await contract.methods.addNewPhysician(physician_number, {business_number, job_title, surname, name, street, street_number, post_code, city, telephone_number}).send({ from: accounts[0], gas: 1000000 });
       };
 
 
       getUser = async () => {
         const { user, accounts, contract } = this.state;
 
-        const insured_number = user.user
+        const physician_number = user.user
 
-        const returnedValue = await contract.methods.checkInsuredExistance(insured_number).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await contract.methods.checkPhysicianExistance(physician_number).call({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue)
       }
 
@@ -92,32 +92,44 @@ class RegisterPhysician extends Component {
                 </Col>
                 <Col className="">
                   <Form>
-                    
+
                     <div className="pb-3 pt-4">
-                        Allgemeine Angaben:
+                        Angaben zum Arzt:
                     </div>
+                    
+                    <Form.Group controlId="physician_job_title">
+                        <Form.Control type="text" placeholder="Berufsbezeichnung" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    </Form.Group>
 
                     <Row>
                         <Col className="pr-1">
-                        <Form.Group controlId="insured_surname">
+                        <Form.Group controlId="physician_surname">
                             <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
                         </Form.Group>
                         </Col>
                         <Col className="pl-1">
-                        <Form.Group controlId="insured_name">
+                        <Form.Group controlId="physician_name">
                             <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
                         </Form.Group>
                         </Col>
                     </Row>
 
+                    <Form.Group controlId="physician_number">
+                        <Form.Control type="number" placeholder="Arzt-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    </Form.Group>
+
+                    <div className="pb-3 pt-4">
+                        Angaben zur Betriebsstätte:
+                    </div>
+
                     <Row>
                         <Col className="pr-1" sm={9}>
-                            <Form.Group controlId="insured_street">
+                            <Form.Group controlId="physician_street">
                                 <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
                             </Form.Group>
                         </Col>
                         <Col className="pl-1" sm={3}>
-                            <Form.Group controlId="insured_street_number">
+                            <Form.Group controlId="physician_street_number">
                                 <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
                             </Form.Group>
                         </Col>
@@ -125,48 +137,30 @@ class RegisterPhysician extends Component {
 
                     <Row>
                         <Col className="pr-1" sm={4}>
-                            <Form.Group controlId="insured_post_code">
+                            <Form.Group controlId="physician_post_code">
                                 <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
                             </Form.Group>
                         </Col>
                         <Col className="pl-1" sm={8}>
-                            <Form.Group controlId="insured_city">
+                            <Form.Group controlId="physician_city">
                                 <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
                             </Form.Group>
                         </Col>
                     </Row>
 
-                    <Form.Group controlId="insured_birth_date">
-                        <Form.Control type="text" placeholder="Geburtstag" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    <Form.Group controlId="telephone_number">
+                        <Form.Control type="text" placeholder="Telefon-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
                     </Form.Group>
 
-                    <div className="pb-3 pt-4">
-                        Angaben zur Krankenkasse:
-                    </div>
-
-                    <Form.Group controlId="insurance">
-                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
+                    <Form.Group controlId="business_number">
+                        <Form.Control type="number" placeholder="Betriebsstätten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
                     </Form.Group>
-
-                    <Row>
-                        <Col className="pr-1" sm={4}>
-                        <Form.Group controlId="insurance_number">
-                            <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                        <Col className="px-1" sm={4}>
-                        <Form.Group controlId="insured_number">
-                            <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                        <Col className="pl-1" sm={4}>
-                        <Form.Group controlId="insured_status">
-                            <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                    </Row>
+                        
+                    <div className="pb-3"></div>
 
                     <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
+
+                    <div className="pb-5 pt-5"></div>
 
                     <Form.Group controlId="user">
                       <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Nutzer"></Form.Control>

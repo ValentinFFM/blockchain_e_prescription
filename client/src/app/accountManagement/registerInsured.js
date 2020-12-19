@@ -68,7 +68,7 @@ class RegisterInsured extends Component {
         const city = user.insured_city
         const birth_date = user.insured_birth_date
         
-        await contract.methods.addNewInsured(insured_number, {insurance_number, insured_status, surname, name, street, street_number, post_code, city, birth_date}).send({ from: accounts[0], gas: 1000000 });
+        await contract.methods.addNewInsured(insured_number, {insurance_number, insured_status, surname, name, birth_date, street, street_number, post_code, city}).send({ from: accounts[0], gas: 1000000 });
       };
 
 
@@ -141,7 +141,7 @@ class RegisterInsured extends Component {
                     </Form.Group>
 
                     <div className="pb-3 pt-4">
-                        Angaben zur Krankenkasse:
+                        Angaben zur Krankenversicherung:
                     </div>
 
                     <Form.Group controlId="insurance">

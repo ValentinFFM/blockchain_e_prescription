@@ -28,7 +28,6 @@ class Navigation extends Component {
                     </Navbar.Collapse>
                 </Navbar>
 
-
                 <Switch>
                     <Route path="/Home">
                         <Home />
