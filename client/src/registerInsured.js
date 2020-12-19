@@ -69,6 +69,16 @@ class RegisterInsured extends Component {
         await contract.methods.addNewUser(surname, name, street, street_number, post_code, city, birth_date).send({ from: accounts[0], gas: 1000000 });
       };
 
+
+      getUser = async () => {
+        const { user, accounts, contract } = this.state;
+
+        const unsername = user.user
+
+        const returnedValue = await contract.methods.getUser(unsername).call({ from: accounts[0], gas: 1000000 });
+        console.log(returnedValue)
+      }
+
     render() {
         // if (!this.state.web3) {
         //   return <div>Loading Web3, accounts, and contract...</div>;
@@ -155,6 +165,12 @@ class RegisterInsured extends Component {
                     </Row>
 
                     <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
+
+                    <Form.Group controlId="user">
+                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Nutzer"></Form.Control>
+                    </Form.Group>
+
+                    <Button variant="success" block onClick={this.getUser}>Abfragen</Button>
                   </Form>
                 </Col>
                 <Col xs={0} sm={1} md={3} lg={4}>
