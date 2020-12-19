@@ -56,6 +56,10 @@ class RegisterInsured extends Component {
 
         console.log(user)
 
+        const insured_number = user.insured_number
+        const insurance_number = user.insurance_number
+        const insured_status = user.insured_status
+
         const surname = user.insured_surname
         const name = user.insured_name
         const street = user.insured_street
@@ -63,19 +67,17 @@ class RegisterInsured extends Component {
         const post_code = parseInt(user.insured_post_code)
         const city = user.insured_city
         const birth_date = user.insured_birth_date
-
-        console.log(post_code)
         
-        await contract.methods.addNewUser(surname, name, street, street_number, post_code, city, birth_date).send({ from: accounts[0], gas: 1000000 });
+        await contract.methods.addNewInsured(insured_number, {insurance_number, insured_status, surname, name, street, street_number, post_code, city, birth_date}).send({ from: accounts[0], gas: 1000000 });
       };
 
 
       getUser = async () => {
         const { user, accounts, contract } = this.state;
 
-        const unsername = user.user
+        const insured_number = user.user
 
-        const returnedValue = await contract.methods.getUser(unsername).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await contract.methods.checkInsuredExistance(insured_number).call({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue)
       }
 
@@ -158,7 +160,7 @@ class RegisterInsured extends Component {
                         </Form.Group>
                         </Col>
                         <Col className="pl-1" sm={4}>
-                        <Form.Group controlId="status">
+                        <Form.Group controlId="insured_status">
                             <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
                         </Form.Group>
                         </Col>

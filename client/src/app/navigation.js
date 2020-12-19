@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import Home from './home'
-import NewPrescription from './newPrescription';
-import RegisterInsured from './accountManagement/registerInsured'
+import Home from './home';
+import RegisterInsured from './accountManagement/registerInsured';
+import RegisterPhysician from './accountManagement/registerPhysician';
 
 import {
     BrowserRouter as Router,
@@ -21,8 +21,8 @@ class Navigation extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/Home">Home</Nav.Link>
-                            <Nav.Link href="/NewPrescription">New prescription</Nav.Link>
+                            <Nav.Link href="/registerInsured">Registration Insured</Nav.Link>
+                            <Nav.Link href="/registerPhysician">Registration Physician</Nav.Link>
                         </Nav>
                         <Button href="/Logout" variant="outline-danger">Logout</Button>
                     </Navbar.Collapse>
@@ -33,11 +33,11 @@ class Navigation extends Component {
                     <Route path="/Home">
                         <Home />
                     </Route>
-                    <Route path="/NewPrescription">
-                        <NewPrescription />
-                    </Route>
                     <Route path="/registerInsured">
                         <RegisterInsured />
+                    </Route>
+                    <Route path="/registerPhysician">
+                        <RegisterPhysician />
                     </Route>
                 </Switch>
             </Router>
