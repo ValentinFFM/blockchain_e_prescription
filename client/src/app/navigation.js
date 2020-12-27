@@ -6,6 +6,7 @@ import Home from './home';
 import RegisterInsured from './accountManagement/registerInsured';
 import RegisterPhysician from './accountManagement/registerPhysician';
 import Administration from './accountManagement/administration';
+import NewPrescription from './newPrescription';
 
 import {
     BrowserRouter as Router,
@@ -25,6 +26,7 @@ class Navigation extends Component {
                             <Nav.Link href="/registerInsured">Registration Insured</Nav.Link>
                             <Nav.Link href="/registerPhysician">Registration Physician</Nav.Link>
                             <Nav.Link href="/admin">Administration</Nav.Link>
+                            <Nav.Link href="/newPrescription">New Prescription</Nav.Link>
                         </Nav>
                         <Button href="/Logout" variant="outline-danger">Logout</Button>
                     </Navbar.Collapse>
@@ -42,6 +44,9 @@ class Navigation extends Component {
                     </Route>
                     <Route path="/admin">
                         <Administration />
+                    </Route>
+                    <Route path="/newPrescription">
+                        <NewPrescription />
                     </Route>
                 </Switch>
             </Router>

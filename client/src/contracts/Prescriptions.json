@@ -1,0 +1,428 @@
+{
+  "contractName": "Prescriptions",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "newPrescription",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"newPrescription\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":\"Prescriptions\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":{\"keccak256\":\"0x8f1d0fcf77f6a767ba52a248f0281ca50b8116410261421eb47f8eeec415b357\",\"urls\":[\"bzz-raw://650b9dc43c5978d0d8a2cc13fb6c54269ba5d17427e33f08c0c03ba1c98ae20b\",\"dweb:/ipfs/QmetpYbsNNb5VoxCkjcJRvKjRHg74hZJzq2AJFWisqfLdx\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50606c80601d6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c8063abe6c5cc14602d575b600080fd5b60336035565b005b56fea265627a7a723158205ac1a72e74385ef6bd0ceafe52e3af5a1ac2a6bfd983068efcc465afcdbdd24b64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c8063abe6c5cc14602d575b600080fd5b60336035565b005b56fea265627a7a723158205ac1a72e74385ef6bd0ceafe52e3af5a1ac2a6bfd983068efcc465afcdbdd24b64736f6c63430005100032",
+  "sourceMap": "66:297:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:297:1;;;;;;;",
+  "deployedSourceMap": "66:297:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:297:1;;;;;;;;;;;;;;;;;;;311:50;;;:::i;:::-;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract Prescriptions {\n\n    struct Prescription {\n        address physician;\n        address patient;\n\n        string medicine_name;\n        string medicine_amount;\n\n        // bool charges_free;\n        // bool charges_mandatory;\n    }\n\n\n    function newPrescription() public {\n        \n    }\n}\n",
+  "sourcePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
+  "ast": {
+    "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
+    "exportedSymbols": {
+      "Prescriptions": [
+        52
+      ]
+    },
+    "id": 53,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 38,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 52,
+        "linearizedBaseContracts": [
+          52
+        ],
+        "name": "Prescriptions",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Prescriptions.Prescription",
+            "id": 47,
+            "members": [
+              {
+                "constant": false,
+                "id": 40,
+                "name": "physician",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "126:17:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 39,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "126:7:1",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 42,
+                "name": "patient",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "153:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 41,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "153:7:1",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44,
+                "name": "medicine_name",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "179:20:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 43,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "179:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 46,
+                "name": "medicine_amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "209:22:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 45,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "209:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Prescription",
+            "nodeType": "StructDefinition",
+            "scope": 52,
+            "src": "96:208:1",
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 50,
+              "nodeType": "Block",
+              "src": "345:16:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 51,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newPrescription",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 48,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "335:2:1"
+            },
+            "returnParameters": {
+              "id": 49,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "345:0:1"
+            },
+            "scope": 52,
+            "src": "311:50:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 53,
+        "src": "66:297:1"
+      }
+    ],
+    "src": "32:332:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
+    "exportedSymbols": {
+      "Prescriptions": [
+        52
+      ]
+    },
+    "id": 53,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 38,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 52,
+        "linearizedBaseContracts": [
+          52
+        ],
+        "name": "Prescriptions",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Prescriptions.Prescription",
+            "id": 47,
+            "members": [
+              {
+                "constant": false,
+                "id": 40,
+                "name": "physician",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "126:17:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 39,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "126:7:1",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 42,
+                "name": "patient",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "153:15:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 41,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "153:7:1",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44,
+                "name": "medicine_name",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "179:20:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 43,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "179:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 46,
+                "name": "medicine_amount",
+                "nodeType": "VariableDeclaration",
+                "scope": 47,
+                "src": "209:22:1",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 45,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "209:6:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Prescription",
+            "nodeType": "StructDefinition",
+            "scope": 52,
+            "src": "96:208:1",
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 50,
+              "nodeType": "Block",
+              "src": "345:16:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 51,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newPrescription",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 48,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "335:2:1"
+            },
+            "returnParameters": {
+              "id": 49,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "345:0:1"
+            },
+            "scope": 52,
+            "src": "311:50:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 53,
+        "src": "66:297:1"
+      }
+    ],
+    "src": "32:332:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x956bA645b54CC6b6a52683AEB5b0a351a930f2eC",
+      "transactionHash": "0x5dc42a9a4e21984ad40fd8308878fbd0301ada78f5d16787d6cd3949c39f555e"
+    }
+  },
+  "schemaVersion": "3.3.2",
+  "updatedAt": "2020-12-27T11:08:00.852Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -90,4 +90,12 @@ contract User {
             return physicians[public_key];
         } 
     }
+
+    function checkInsuredVerification(address public_key) public view returns (bool){
+        if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
