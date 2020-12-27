@@ -8,17 +8,19 @@ contract User {
 
     // Defining datatype insured to store all necessary data related to the insured
     struct Insured {
-        uint insurance_number;
-        uint insured_status;
-        
         string surname;
         string name;
-        string birth_date;
-
         string street;
         string street_number;
         uint post_code;
         string city;
+
+        string birth_date;
+
+        string insurance;
+        uint insurance_number;
+        uint insured_number;
+        uint insured_status;
     }
 
     // Defining datatype physician to store all necessary data related to the physician
@@ -38,14 +40,14 @@ contract User {
     }
 
     // Insured Number mapped on the related insured object with all data of the insured
-    mapping(string => Insured) public insureds;
+    mapping(address => Insured) public insureds;
 
     // Physician Number mapped on the related physician object with all data of the physician
     mapping(uint => Physician) public physicians;
 
     // Function to add a new Insured
-    function addNewInsured(string memory insured_number_, Insured memory insured_)  public{
-        insureds[insured_number_] = Insured(insured_.insurance_number, insured_.insured_status, insured_.surname, insured_.name, insured_.birth_date, insured_.street, insured_.street_number, insured_.post_code, insured_.city);
+    function addNewInsured(Insured memory insured_)  public{
+        insureds[msg.sender] = Insured(insured_.surname, insured_.name, insured_.street, insured_.street_number, insured_.post_code, insured_.city, insured_.birth_date, insured_.insurance, insured_.insurance_number, insured_.insured_number, insured_.insured_status);
     }
 
     // Function to add a new Physician
@@ -54,8 +56,8 @@ contract User {
     }
 
     // Function returns true, if insured with the insured_number_ exists
-    function checkInsuredExistance(string memory insured_number_) public view returns(bool){
-        if(insureds[insured_number_].insurance_number > 0){
+    function checkInsuredExistance(address public_key) public view returns(bool){
+        if(insureds[public_key].insurance_number > 0){
             return true;
         } else {
             return false;

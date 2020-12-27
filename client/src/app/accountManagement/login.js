@@ -18,7 +18,7 @@ class Login extends Component {
 
     checkLogin(){
         console.log(document.getElementById('public_key').value)
-        console.log(document.getElementById('private_key').value)
+        console.log(document.getElementById('password').value)
     }
 
     render(){
@@ -38,8 +38,8 @@ class Login extends Component {
                                     <Form.Group controlId="public_key">
                                         <Form.Control type="text" placeholder="Public key"></Form.Control>
                                     </Form.Group>
-                                    <Form.Group controlId="private_key">
-                                        <Form.Control type="password" placeholder="Private key"></Form.Control>
+                                    <Form.Group controlId="password">
+                                        <Form.Control type="password" placeholder="Password"></Form.Control>
                                     </Form.Group>
 
                                     <Button variant="success" onClick={this.checkLogin} block>Login</Button>

@@ -56,10 +56,6 @@ class RegisterInsured extends Component {
 
         console.log(user)
 
-        const insured_number = user.insured_number
-        const insurance_number = user.insurance_number
-        const insured_status = user.insured_status
-
         const surname = user.insured_surname
         const name = user.insured_name
         const street = user.insured_street
@@ -67,8 +63,15 @@ class RegisterInsured extends Component {
         const post_code = parseInt(user.insured_post_code)
         const city = user.insured_city
         const birth_date = user.insured_birth_date
+
+        const insurance = user.insurance 
+        const insurance_number = user.insurance_number
+        const insured_number = user.insured_number
+        const insured_status = user.insured_status
+
+        const account = user.public_key
         
-        await contract.methods.addNewInsured(insured_number, {insurance_number, insured_status, surname, name, birth_date, street, street_number, post_code, city}).send({ from: accounts[0], gas: 1000000 });
+        await contract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: account, gas: 1000000 });
       };
 
 
@@ -93,6 +96,11 @@ class RegisterInsured extends Component {
                 <Col className="">
                   <Form>
                     
+                    <Form.Group controlId="public_key">
+                        <Form.Control type="text" placeholder="public_key" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    </Form.Group>
+
+
                     <div className="pb-3 pt-4">
                         Allgemeine Angaben:
                     </div>
