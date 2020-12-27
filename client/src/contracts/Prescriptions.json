@@ -39,14 +39,8 @@
     },
     {
       "constant": true,
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "public_key",
-          "type": "address"
-        }
-      ],
-      "name": "checkInsured",
+      "inputs": [],
+      "name": "newPrescription",
       "outputs": [
         {
           "internalType": "bool",
@@ -59,21 +53,21 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"public_key\",\"type\":\"address\"}],\"name\":\"checkInsured\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"smart_contract_key\",\"type\":\"address\"}],\"name\":\"establishConnectionToUserSmartContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"verifying_institution\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":\"Prescriptions\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":{\"keccak256\":\"0xe45bd25f4960e00a320853d66040ef69e095370c6df498529c8c328dfc1d8b52\",\"urls\":[\"bzz-raw://9f509f146dd09ecb48ac9c0cd8209f8c4e0c478b64334842482d043c007cb03b\",\"dweb:/ipfs/QmRT3iK6wKhWGkrv3vFLHEJYKxbd4qw5LDk4RRUL298W5E\"]},\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":{\"keccak256\":\"0x5e82d143a845bc54a4beafcd66e7d80b94771a9f3350b7c8790785038cc766b2\",\"urls\":[\"bzz-raw://10092b4723c53024a06067a47c778815e74654ba89eebb036406d0c8c4afa998\",\"dweb:/ipfs/QmWEgwaPSwNrN8c73Q13FxBvgZ3nnWt1FJXxoixcFcWVgK\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506103a0806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80630f807a421461004657806381eceeb7146100a2578063a6127293146100ec575b600080fd5b6100886004803603602081101561005c57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610130565b604051808215151515815260200191505060405180910390f35b6100aa610213565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61012e6004803603602081101561010257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610238565b005b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166327b52abc836040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b1580156101d157600080fd5b505afa1580156101e5573d6000803e3d6000fd5b505050506040513d60208110156101fb57600080fd5b81019080805190602001909291905050509050919050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146102dd576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252604a815260200180610322604a913960600191505060405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505056fe4f6e6c79207468652076657269667920696e737469747574696f6e206861732074686520726967687420746f20636f6e6e65637420707265736372697074696f6e20746f207573657221a265627a7a72315820a3c310dbbc3af4a8ccef81592da096a3eb04020e01a4eee3cbae1d09da1b023d64736f6c63430005100032",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80630f807a421461004657806381eceeb7146100a2578063a6127293146100ec575b600080fd5b6100886004803603602081101561005c57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610130565b604051808215151515815260200191505060405180910390f35b6100aa610213565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61012e6004803603602081101561010257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610238565b005b6000600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166327b52abc836040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b1580156101d157600080fd5b505afa1580156101e5573d6000803e3d6000fd5b505050506040513d60208110156101fb57600080fd5b81019080805190602001909291905050509050919050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146102dd576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252604a815260200180610322604a913960600191505060405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505056fe4f6e6c79207468652076657269667920696e737469747574696f6e206861732074686520726967687420746f20636f6e6e65637420707265736372697074696f6e20746f207573657221a265627a7a72315820a3c310dbbc3af4a8ccef81592da096a3eb04020e01a4eee3cbae1d09da1b023d64736f6c63430005100032",
-  "sourceMap": "88:807:1:-;;;183:73;8:9:-1;5:2;;;30:1;27;20:12;5:2;183:73:1;239:10;215:21;;:34;;;;;;;;;;;;;;;;;;88:807;;;;;;",
-  "deployedSourceMap": "88:807:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:807:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;753:140;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;753:140:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;117:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;476:271;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;476:271:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;753:140;815:4;837:12;;;;;;;;;;;:37;;;875:10;837:49;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;837:49:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;837:49:1;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;837:49:1;;;;;;;;;;;;;;;;830:56;;753:140;;;:::o;117:36::-;;;;;;;;;;;;;:::o;476:271::-;591:21;;;;;;;;;;;577:35;;:10;:35;;;569:122;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;721:18;701:12;;:39;;;;;;;;;;;;;;;;;;476:271;:::o",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\nimport \"./User.sol\";\n\ncontract Prescriptions {\n    address public verifying_institution;\n    User UserContract;\n\n    constructor () public {\n        verifying_institution = msg.sender;\n    }\n\n    struct Prescription {\n        address physician;\n        address patient;\n\n        string medicine_name;\n        string medicine_amount;\n\n        // bool charges_free;\n        // bool charges_mandatory;\n    }\n\n    function establishConnectionToUserSmartContract(address smart_contract_key) public {\n        require(msg.sender == verifying_institution, \"Only the verify institution has the right to connect prescription to user!\");\n        UserContract = User(smart_contract_key);\n    }\n\n    function checkInsured(address public_key) public view returns(bool){\n        return UserContract.checkInsuredVerification(public_key);\n    }\n}\n",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"smart_contract_key\",\"type\":\"address\"}],\"name\":\"establishConnectionToUserSmartContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"newPrescription\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"verifying_institution\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":\"Prescriptions\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol\":{\"keccak256\":\"0x98fc87b646050e91738771064b698e7bb6d754cd4fb74dc8f28bf4c2af9c1d8e\",\"urls\":[\"bzz-raw://cbdf31ffbffe53be94e73bb799ebcb11133bb1b7b08d6c3679633984b313b73e\",\"dweb:/ipfs/QmUtXGdKLmiwAxfmUsQ1d62dN3qbPYRSRZRAUQNaePq2zf\"]},\"/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/User.sol\":{\"keccak256\":\"0xe439443023d4658152b4fa3ff87daf6e7a1ddfb2b162cfd6c716098ea92aace8\",\"urls\":[\"bzz-raw://97832132855f433a3332c7e69b25e96fd92a8dcdc42a523128b6fac17234eaae\",\"dweb:/ipfs/QmXRwKuPe1Cmir9SmDJnkQU7ZUoCVyECAtueZT5dQNfHkK\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506103f4806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806381eceeb714610046578063a612729314610090578063abe6c5cc146100d4575b600080fd5b61004e6100f6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100d2600480360360208110156100a657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061011b565b005b6100dc610204565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101c0576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252604a815260200180610344604a913960600191505060405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b600060011515600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663c2b85314336040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b1580156102a957600080fd5b505afa1580156102bd573d6000803e3d6000fd5b505050506040513d60208110156102d357600080fd5b810190808051906020019092919050505015151461033c576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603281526020018061038e6032913960400191505060405180910390fd5b600190509056fe4f6e6c79207468652076657269667920696e737469747574696f6e206861732074686520726967687420746f20636f6e6e65637420707265736372697074696f6e20746f207573657221596f7520646f6e277420686176652074686520726967687420746f20637265617465206120707265736372697074696f6e21a265627a7a72315820763c85c7cb87b2e7127e0a70bb946a4e01628f550bd1cec1e192204c68ed70a664736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806381eceeb714610046578063a612729314610090578063abe6c5cc146100d4575b600080fd5b61004e6100f6565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100d2600480360360208110156100a657600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061011b565b005b6100dc610204565b604051808215151515815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101c0576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252604a815260200180610344604a913960600191505060405180910390fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050565b600060011515600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663c2b85314336040518263ffffffff1660e01b8152600401808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060206040518083038186803b1580156102a957600080fd5b505afa1580156102bd573d6000803e3d6000fd5b505050506040513d60208110156102d357600080fd5b810190808051906020019092919050505015151461033c576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252603281526020018061038e6032913960400191505060405180910390fd5b600190509056fe4f6e6c79207468652076657269667920696e737469747574696f6e206861732074686520726967687420746f20636f6e6e65637420707265736372697074696f6e20746f207573657221596f7520646f6e277420686176652074686520726967687420746f20637265617465206120707265736372697074696f6e21a265627a7a72315820763c85c7cb87b2e7127e0a70bb946a4e01628f550bd1cec1e192204c68ed70a664736f6c63430005100032",
+  "sourceMap": "88:917:1:-;;;183:73;8:9:-1;5:2;;;30:1;27;20:12;5:2;183:73:1;239:10;215:21;;:34;;;;;;;;;;;;;;;;;;88:917;;;;;;",
+  "deployedSourceMap": "88:917:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:917:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;117:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;476:271;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;476:271:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;753:250;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;117:36;;;;;;;;;;;;;:::o;476:271::-;591:21;;;;;;;;;;;577:35;;:10;:35;;;569:122;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;721:18;701:12;;:39;;;;;;;;;;;;;;;;;;476:271;:::o;753:250::-;838:4;916;861:59;;:12;;;;;;;;;;;:39;;;901:10;861:51;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;861:51:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;861:51:1;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;861:51:1;;;;;;;;;;;;;;;;:59;;;853:122;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;992:4;985:11;;753:250;:::o",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\nimport \"./User.sol\";\n\ncontract Prescriptions {\n    address public verifying_institution;\n    User UserContract;\n\n    constructor () public {\n        verifying_institution = msg.sender;\n    }\n\n    struct Prescription {\n        address physician;\n        address patient;\n\n        string medicine_name;\n        string medicine_amount;\n\n        // bool charges_free;\n        // bool charges_mandatory;\n    }\n\n    function establishConnectionToUserSmartContract(address smart_contract_key) public {\n        require(msg.sender == verifying_institution, \"Only the verify institution has the right to connect prescription to user!\");\n        UserContract = User(smart_contract_key);\n    }\n\n    function newPrescription(/*Prescription memory prescription_*/) public view returns (bool){\n        require(UserContract.checkPhysicianVerification(msg.sender) == true, \"You don't have the right to create a prescription!\");\n        return true;\n    }\n}\n",
   "sourcePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
   "ast": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
     "exportedSymbols": {
       "Prescriptions": [
-        95
+        101
       ]
     },
-    "id": 96,
+    "id": 102,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -95,8 +89,8 @@
         "file": "./User.sol",
         "id": 39,
         "nodeType": "ImportDirective",
-        "scope": 96,
-        "sourceUnit": 373,
+        "scope": 102,
+        "sourceUnit": 407,
         "src": "66:20:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -107,9 +101,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 95,
+        "id": 101,
         "linearizedBaseContracts": [
-          95
+          101
         ],
         "name": "Prescriptions",
         "nodeType": "ContractDefinition",
@@ -119,7 +113,7 @@
             "id": 41,
             "name": "verifying_institution",
             "nodeType": "VariableDeclaration",
-            "scope": 95,
+            "scope": 101,
             "src": "117:36:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -146,12 +140,12 @@
             "id": 43,
             "name": "UserContract",
             "nodeType": "VariableDeclaration",
-            "scope": 95,
+            "scope": 101,
             "src": "159:17:1",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_User_$372",
+              "typeIdentifier": "t_contract$_User_$406",
               "typeString": "contract User"
             },
             "typeName": {
@@ -159,10 +153,10 @@
               "id": 42,
               "name": "User",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 372,
+              "referencedDeclaration": 406,
               "src": "159:4:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_User_$372",
+                "typeIdentifier": "t_contract$_User_$406",
                 "typeString": "contract User"
               }
             },
@@ -206,7 +200,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 387,
+                        "referencedDeclaration": 421,
                         "src": "239:3:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -258,7 +252,7 @@
               "parameters": [],
               "src": "205:0:1"
             },
-            "scope": 95,
+            "scope": 101,
             "src": "183:73:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -377,7 +371,7 @@
             ],
             "name": "Prescription",
             "nodeType": "StructDefinition",
-            "scope": 95,
+            "scope": 101,
             "src": "262:208:1",
             "visibility": "public"
           },
@@ -410,7 +404,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 387,
+                            "referencedDeclaration": 421,
                             "src": "577:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -486,10 +480,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        390,
-                        391
+                        424,
+                        425
                       ],
-                      "referencedDeclaration": 391,
+                      "referencedDeclaration": 425,
                       "src": "569:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -531,7 +525,7 @@
                       "referencedDeclaration": 43,
                       "src": "701:12:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_User_$372",
+                        "typeIdentifier": "t_contract$_User_$406",
                         "typeString": "contract User"
                       }
                     },
@@ -565,10 +559,10 @@
                         "name": "User",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 372,
+                        "referencedDeclaration": 406,
                         "src": "716:4:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_User_$372_$",
+                          "typeIdentifier": "t_type$_t_contract$_User_$406_$",
                           "typeString": "type(contract User)"
                         }
                       },
@@ -582,13 +576,13 @@
                       "nodeType": "FunctionCall",
                       "src": "716:24:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_User_$372",
+                        "typeIdentifier": "t_contract$_User_$406",
                         "typeString": "contract User"
                       }
                     },
                     "src": "701:39:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_User_$372",
+                      "typeIdentifier": "t_contract$_User_$406",
                       "typeString": "contract User"
                     }
                   },
@@ -645,7 +639,7 @@
               "parameters": [],
               "src": "559:0:1"
             },
-            "scope": 95,
+            "scope": 101,
             "src": "476:271:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -653,9 +647,9 @@
           },
           {
             "body": {
-              "id": 93,
+              "id": 99,
               "nodeType": "Block",
-              "src": "820:73:1",
+              "src": "843:160:1",
               "statements": [
                 {
                   "expression": {
@@ -663,53 +657,167 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 90,
-                        "name": "public_key",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 83,
-                        "src": "875:10:1",
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 89,
+                                "name": "msg",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 421,
+                                "src": "901:3:1",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_message",
+                                  "typeString": "msg"
+                                }
+                              },
+                              "id": 90,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "sender",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": null,
+                              "src": "901:10:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 87,
+                              "name": "UserContract",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 43,
+                              "src": "861:12:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_User_$406",
+                                "typeString": "contract User"
+                              }
+                            },
+                            "id": 88,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "checkPhysicianVerification",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 405,
+                            "src": "861:39:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                              "typeString": "function (address) view external returns (bool)"
+                            }
+                          },
+                          "id": 91,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "861:51:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "hexValue": "74727565",
+                          "id": 92,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "916:4:1",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "true"
+                        },
+                        "src": "861:59:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
                         }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "596f7520646f6e277420686176652074686520726967687420746f20637265617465206120707265736372697074696f6e21",
+                        "id": 94,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "922:52:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_dd4fa14b7b32d8d7186aef69e0838638b3bf9f6f3c0c9338aaba778405507d4a",
+                          "typeString": "literal_string \"You don't have the right to create a prescription!\""
+                        },
+                        "value": "You don't have the right to create a prescription!"
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_dd4fa14b7b32d8d7186aef69e0838638b3bf9f6f3c0c9338aaba778405507d4a",
+                          "typeString": "literal_string \"You don't have the right to create a prescription!\""
                         }
                       ],
-                      "expression": {
-                        "argumentTypes": null,
-                        "id": 88,
-                        "name": "UserContract",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 43,
-                        "src": "837:12:1",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_User_$372",
-                          "typeString": "contract User"
-                        }
-                      },
-                      "id": 89,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "lValueRequested": false,
-                      "memberName": "checkInsuredVerification",
-                      "nodeType": "MemberAccess",
-                      "referencedDeclaration": 371,
-                      "src": "837:37:1",
+                      "id": 86,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        424,
+                        425
+                      ],
+                      "referencedDeclaration": 425,
+                      "src": "853:7:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
-                        "typeString": "function (address) view external returns (bool)"
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 91,
+                    "id": 95,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -717,71 +825,66 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "837:49:1",
+                    "src": "853:122:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 96,
+                  "nodeType": "ExpressionStatement",
+                  "src": "853:122:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 97,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "992:4:1",
+                    "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
-                    }
+                    },
+                    "value": "true"
                   },
-                  "functionReturnParameters": 87,
-                  "id": 92,
+                  "functionReturnParameters": 85,
+                  "id": 98,
                   "nodeType": "Return",
-                  "src": "830:56:1"
+                  "src": "985:11:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 94,
+            "id": 100,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
-            "name": "checkInsured",
+            "name": "newPrescription",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 84,
+              "id": 82,
               "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 83,
-                  "name": "public_key",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 94,
-                  "src": "775:18:1",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 82,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "775:7:1",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "774:20:1"
+              "parameters": [],
+              "src": "777:39:1"
             },
             "returnParameters": {
-              "id": 87,
+              "id": 85,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 86,
+                  "id": 84,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 94,
-                  "src": "815:4:1",
+                  "scope": 100,
+                  "src": "838:4:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -789,10 +892,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 85,
+                    "id": 83,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "815:4:1",
+                    "src": "838:4:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -802,29 +905,29 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "814:6:1"
+              "src": "837:6:1"
             },
-            "scope": 95,
-            "src": "753:140:1",
+            "scope": 101,
+            "src": "753:250:1",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 96,
-        "src": "88:807:1"
+        "scope": 102,
+        "src": "88:917:1"
       }
     ],
-    "src": "32:864:1"
+    "src": "32:974:1"
   },
   "legacyAST": {
     "absolutePath": "/Users/valentin/Documents/Programmdaten/Visual_Studio/5_Semester/Integrationsseminar/blockchain_e_prescription/contracts/Prescriptions.sol",
     "exportedSymbols": {
       "Prescriptions": [
-        95
+        101
       ]
     },
-    "id": 96,
+    "id": 102,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -846,8 +949,8 @@
         "file": "./User.sol",
         "id": 39,
         "nodeType": "ImportDirective",
-        "scope": 96,
-        "sourceUnit": 373,
+        "scope": 102,
+        "sourceUnit": 407,
         "src": "66:20:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -858,9 +961,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 95,
+        "id": 101,
         "linearizedBaseContracts": [
-          95
+          101
         ],
         "name": "Prescriptions",
         "nodeType": "ContractDefinition",
@@ -870,7 +973,7 @@
             "id": 41,
             "name": "verifying_institution",
             "nodeType": "VariableDeclaration",
-            "scope": 95,
+            "scope": 101,
             "src": "117:36:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -897,12 +1000,12 @@
             "id": 43,
             "name": "UserContract",
             "nodeType": "VariableDeclaration",
-            "scope": 95,
+            "scope": 101,
             "src": "159:17:1",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_User_$372",
+              "typeIdentifier": "t_contract$_User_$406",
               "typeString": "contract User"
             },
             "typeName": {
@@ -910,10 +1013,10 @@
               "id": 42,
               "name": "User",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 372,
+              "referencedDeclaration": 406,
               "src": "159:4:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_User_$372",
+                "typeIdentifier": "t_contract$_User_$406",
                 "typeString": "contract User"
               }
             },
@@ -957,7 +1060,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 387,
+                        "referencedDeclaration": 421,
                         "src": "239:3:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1009,7 +1112,7 @@
               "parameters": [],
               "src": "205:0:1"
             },
-            "scope": 95,
+            "scope": 101,
             "src": "183:73:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1128,7 +1231,7 @@
             ],
             "name": "Prescription",
             "nodeType": "StructDefinition",
-            "scope": 95,
+            "scope": 101,
             "src": "262:208:1",
             "visibility": "public"
           },
@@ -1161,7 +1264,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 387,
+                            "referencedDeclaration": 421,
                             "src": "577:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -1237,10 +1340,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        390,
-                        391
+                        424,
+                        425
                       ],
-                      "referencedDeclaration": 391,
+                      "referencedDeclaration": 425,
                       "src": "569:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1282,7 +1385,7 @@
                       "referencedDeclaration": 43,
                       "src": "701:12:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_User_$372",
+                        "typeIdentifier": "t_contract$_User_$406",
                         "typeString": "contract User"
                       }
                     },
@@ -1316,10 +1419,10 @@
                         "name": "User",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 372,
+                        "referencedDeclaration": 406,
                         "src": "716:4:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_User_$372_$",
+                          "typeIdentifier": "t_type$_t_contract$_User_$406_$",
                           "typeString": "type(contract User)"
                         }
                       },
@@ -1333,13 +1436,13 @@
                       "nodeType": "FunctionCall",
                       "src": "716:24:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_User_$372",
+                        "typeIdentifier": "t_contract$_User_$406",
                         "typeString": "contract User"
                       }
                     },
                     "src": "701:39:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_User_$372",
+                      "typeIdentifier": "t_contract$_User_$406",
                       "typeString": "contract User"
                     }
                   },
@@ -1396,7 +1499,7 @@
               "parameters": [],
               "src": "559:0:1"
             },
-            "scope": 95,
+            "scope": 101,
             "src": "476:271:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1404,9 +1507,9 @@
           },
           {
             "body": {
-              "id": 93,
+              "id": 99,
               "nodeType": "Block",
-              "src": "820:73:1",
+              "src": "843:160:1",
               "statements": [
                 {
                   "expression": {
@@ -1414,53 +1517,167 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 90,
-                        "name": "public_key",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 83,
-                        "src": "875:10:1",
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 89,
+                                "name": "msg",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 421,
+                                "src": "901:3:1",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_message",
+                                  "typeString": "msg"
+                                }
+                              },
+                              "id": 90,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "sender",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": null,
+                              "src": "901:10:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 87,
+                              "name": "UserContract",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 43,
+                              "src": "861:12:1",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_User_$406",
+                                "typeString": "contract User"
+                              }
+                            },
+                            "id": 88,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "checkPhysicianVerification",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 405,
+                            "src": "861:39:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
+                              "typeString": "function (address) view external returns (bool)"
+                            }
+                          },
+                          "id": 91,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "861:51:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "hexValue": "74727565",
+                          "id": 92,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "916:4:1",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "true"
+                        },
+                        "src": "861:59:1",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
                         }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "596f7520646f6e277420686176652074686520726967687420746f20637265617465206120707265736372697074696f6e21",
+                        "id": 94,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "922:52:1",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_dd4fa14b7b32d8d7186aef69e0838638b3bf9f6f3c0c9338aaba778405507d4a",
+                          "typeString": "literal_string \"You don't have the right to create a prescription!\""
+                        },
+                        "value": "You don't have the right to create a prescription!"
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_dd4fa14b7b32d8d7186aef69e0838638b3bf9f6f3c0c9338aaba778405507d4a",
+                          "typeString": "literal_string \"You don't have the right to create a prescription!\""
                         }
                       ],
-                      "expression": {
-                        "argumentTypes": null,
-                        "id": 88,
-                        "name": "UserContract",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 43,
-                        "src": "837:12:1",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_User_$372",
-                          "typeString": "contract User"
-                        }
-                      },
-                      "id": 89,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "lValueRequested": false,
-                      "memberName": "checkInsuredVerification",
-                      "nodeType": "MemberAccess",
-                      "referencedDeclaration": 371,
-                      "src": "837:37:1",
+                      "id": 86,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        424,
+                        425
+                      ],
+                      "referencedDeclaration": 425,
+                      "src": "853:7:1",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
-                        "typeString": "function (address) view external returns (bool)"
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 91,
+                    "id": 95,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1468,71 +1685,66 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "837:49:1",
+                    "src": "853:122:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 96,
+                  "nodeType": "ExpressionStatement",
+                  "src": "853:122:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 97,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "992:4:1",
+                    "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
-                    }
+                    },
+                    "value": "true"
                   },
-                  "functionReturnParameters": 87,
-                  "id": 92,
+                  "functionReturnParameters": 85,
+                  "id": 98,
                   "nodeType": "Return",
-                  "src": "830:56:1"
+                  "src": "985:11:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 94,
+            "id": 100,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
-            "name": "checkInsured",
+            "name": "newPrescription",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 84,
+              "id": 82,
               "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 83,
-                  "name": "public_key",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 94,
-                  "src": "775:18:1",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 82,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "775:7:1",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "774:20:1"
+              "parameters": [],
+              "src": "777:39:1"
             },
             "returnParameters": {
-              "id": 87,
+              "id": 85,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 86,
+                  "id": 84,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 94,
-                  "src": "815:4:1",
+                  "scope": 100,
+                  "src": "838:4:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1540,10 +1752,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 85,
+                    "id": 83,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "815:4:1",
+                    "src": "838:4:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1553,20 +1765,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "814:6:1"
+              "src": "837:6:1"
             },
-            "scope": 95,
-            "src": "753:140:1",
+            "scope": 101,
+            "src": "753:250:1",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 96,
-        "src": "88:807:1"
+        "scope": 102,
+        "src": "88:917:1"
       }
     ],
-    "src": "32:864:1"
+    "src": "32:974:1"
   },
   "compiler": {
     "name": "solc",
@@ -1576,12 +1788,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xFe493EBB3dBE2faEafa9a875F61aE0eea2EC45eb",
-      "transactionHash": "0x1168afb8c75fd52377f60d14afd3f3a26f28c1610958dfa9f17e3cd5b616529f"
+      "address": "0x931bC646aCeB5F54504EE0d66a1E87858400194B",
+      "transactionHash": "0x8c8e857d53f3de3123c5290d8b8dd257a9b1c0e60af439cc45905636f23b6c7d"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-27T12:19:47.174Z",
+  "updatedAt": "2020-12-27T12:48:37.250Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

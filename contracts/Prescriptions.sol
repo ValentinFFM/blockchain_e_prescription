@@ -27,7 +27,8 @@ contract Prescriptions {
         UserContract = User(smart_contract_key);
     }
 
-    function checkInsured(address public_key) public view returns(bool){
-        return UserContract.checkInsuredVerification(public_key);
+    function newPrescription(/*Prescription memory prescription_*/) public view returns (bool){
+        require(UserContract.checkPhysicianVerification(msg.sender) == true, "You don't have the right to create a prescription!");
+        return true;
     }
 }

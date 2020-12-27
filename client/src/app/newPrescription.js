@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserContract from "../contracts/User.json";
+import PrescriptionsContract from './../contracts/Prescriptions.json'
 import getWeb3 from "./getWeb3";
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -9,15 +9,55 @@ import Button from 'react-bootstrap/Button'
 
 
 class NewPrescription extends Component {
-  state = {value: "", web3: null, accounts: null, contract: null };
+  state = {user: {}, web3: null, accounts: null, prescriptions_contract: null };
 
   constructor(props){
     super(props)
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount = async () => {
+    try {
+        // Get web3 instance and the accounts that are stored 
+        const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
+
+        // Get the contract instance.
+        const networkId = await web3.eth.net.getId();
+
+        const PrescriptionsContractNetwork = PrescriptionsContract.networks[networkId];
+
+        const PrescriptionsContractInstance = new web3.eth.Contract(
+            PrescriptionsContract.abi,
+            PrescriptionsContractNetwork && PrescriptionsContractNetwork.address,
+        );
+
+        // Save data into the react state
+        this.setState({ web3, accounts, prescriptions_contract: PrescriptionsContractInstance});
+    } catch (error) {
+        alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+        );
+        console.error(error);
+    }
+  };
+
   handleChange(event){
-    this.setState({value:event.target.value})
+    // Reading out the value and the id of the triggered input
+    const event_id = event.target.id
+    const event_value = event.target.value
+
+    // Setting the value into the user object of the state
+    const { user } = this.state;
+    user[event_id] = event_value
+    this.setState({user: user})
+  }
+
+  newPrescription = async () => {
+    const { user, accounts, prescriptions_contract } = this.state;
+    const account = user.insurance
+    const response = await prescriptions_contract.methods.newPrescription().call({ from: account, gas: 1000000 });
+    console.log(response)
   }
 
   render() {
@@ -35,7 +75,7 @@ class NewPrescription extends Component {
                   <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
                 </Form.Group>
                 
-                <Button variant="success" block>Submit</Button>
+                <Button variant="success" block onClick={this.newPrescription}>Submit</Button>
               </Form>
             </Col>
             <Col sm={2}>

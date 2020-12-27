@@ -98,4 +98,12 @@ contract User {
             return false;
         }
     }
+
+    function checkPhysicianVerification(address public_key) public view returns (bool){
+        if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
