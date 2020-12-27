@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Home from './home';
 import RegisterInsured from './accountManagement/registerInsured';
 import RegisterPhysician from './accountManagement/registerPhysician';
+import Administration from './accountManagement/administration';
 
 import {
     BrowserRouter as Router,
@@ -23,6 +24,7 @@ class Navigation extends Component {
                         <Nav className="mr-auto">
                             <Nav.Link href="/registerInsured">Registration Insured</Nav.Link>
                             <Nav.Link href="/registerPhysician">Registration Physician</Nav.Link>
+                            <Nav.Link href="/admin">Administration</Nav.Link>
                         </Nav>
                         <Button href="/Logout" variant="outline-danger">Logout</Button>
                     </Navbar.Collapse>
@@ -37,6 +39,9 @@ class Navigation extends Component {
                     </Route>
                     <Route path="/registerPhysician">
                         <RegisterPhysician />
+                    </Route>
+                    <Route path="/admin">
+                        <Administration />
                     </Route>
                 </Switch>
             </Router>

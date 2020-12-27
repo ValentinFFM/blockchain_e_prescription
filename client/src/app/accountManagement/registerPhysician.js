@@ -71,26 +71,7 @@ class RegisterPhysician extends Component {
         const account = user.public_key
         
         await contract.methods.addNewPhysician({job_title, surname, name, physician_number, street, street_number, post_code, city, telephone_number, business_number}).send({ from: account, gas: 1000000 });
-      };
-
-
-    getUser = async () => {
-        const { user, accounts, contract } = this.state;
-
-        const physician_number = user.user
-
-        const returnedValue = await contract.methods.getPhysician(physician_number).call({ from: accounts[0], gas: 1000000 });
-        console.log(returnedValue)
-    }
-
-    verifyUser = async () => {
-        const { user, accounts, contract } = this.state;
-
-        const physician_number = user.user
-
-        const returnedValue = await contract.methods.verifyPhysician(physician_number).send({ from: accounts[0], gas: 1000000 });
-        console.log(returnedValue)
-    }
+    };
 
     render() {
         // if (!this.state.web3) {
@@ -174,15 +155,6 @@ class RegisterPhysician extends Component {
                     <div className="pb-3"></div>
 
                     <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
-
-                    <div className="pb-5 pt-5"></div>
-
-                    <Form.Group controlId="user">
-                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Nutzer"></Form.Control>
-                    </Form.Group>
-
-                    <Button variant="success" block onClick={this.getUser}>Get</Button>
-                    <Button variant="success" block onClick={this.verifyUser}>Verify</Button>
                   </Form>
                 </Col>
                 <Col xs={0} sm={1} md={3} lg={4}>
