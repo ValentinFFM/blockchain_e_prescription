@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 
 class RegisterInsured extends Component {
-    state = {user: {}, web3: null, accounts: null, contract: null}
+    state = {user: {}, web3: null, accounts: null, user_contract: null}
 
     constructor(props){
         super(props)
@@ -24,14 +24,15 @@ class RegisterInsured extends Component {
 
             // Get the contract instance.
             const networkId = await web3.eth.net.getId();
-            const deployedNetwork = UserContract.networks[networkId];
-            const instance = new web3.eth.Contract(
+            const UserContractNetwork = UserContract.networks[networkId];
+
+            const UserContractInstance = new web3.eth.Contract(
                 UserContract.abi,
-                deployedNetwork && deployedNetwork.address,
+                UserContractNetwork && UserContractNetwork.address,
             );
 
             // Save data into the react state
-            this.setState({ web3, accounts, contract: instance });
+            this.setState({ web3, accounts, user_contract: UserContractInstance });
         } catch (error) {
             alert(
             `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -52,7 +53,7 @@ class RegisterInsured extends Component {
     }
 
     addNewUser = async () => {
-        const { user, accounts, contract } = this.state;
+        const { user, accounts, user_contract } = this.state;
 
         console.log(user)
 
@@ -71,7 +72,7 @@ class RegisterInsured extends Component {
 
         const account = user.public_key
         
-        await contract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: account, gas: 1000000 });
+        await user_contract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: account, gas: 1000000 });
     };
 
     render() {
