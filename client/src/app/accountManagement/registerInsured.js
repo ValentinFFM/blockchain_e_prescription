@@ -80,7 +80,16 @@ class RegisterInsured extends Component {
 
         const insured_number = user.user
 
-        const returnedValue = await contract.methods.checkInsuredExistance(insured_number).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await contract.methods.getInsured(insured_number).call({ from: accounts[0], gas: 1000000 });
+        console.log(returnedValue)
+      }
+
+      verifyUser = async () => {
+        const { user, accounts, contract } = this.state;
+
+        const insured_number = user.user
+
+        const returnedValue = await contract.methods.verifyInsured(insured_number).send({ from: insured_number, gas: 1000000 });
         console.log(returnedValue)
       }
 
@@ -180,7 +189,8 @@ class RegisterInsured extends Component {
                       <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Nutzer"></Form.Control>
                     </Form.Group>
 
-                    <Button variant="success" block onClick={this.getUser}>Abfragen</Button>
+                    <Button variant="success" block onClick={this.getUser}>Get</Button>
+                    <Button variant="success" block onClick={this.verifyUser}>Verify</Button>
                   </Form>
                 </Col>
                 <Col xs={0} sm={1} md={3} lg={4}>

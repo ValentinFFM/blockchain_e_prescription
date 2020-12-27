@@ -56,30 +56,41 @@ class RegisterPhysician extends Component {
 
         console.log(user)
 
-        const business_number = user.business_number
-        const physician_number = user.physician_number
+        const job_title = user.physician_job_title;
+        const surname = user.physician_surname;
+        const name = user.physician_name;
+        const physician_number = user.physician_number;
 
-        const job_title = user.physician_job_title
-        const surname = user.physician_surname
-        const name = user.physician_name
-        const street = user.physician_street
-        const street_number = user.physician_street_number
-        const post_code = parseInt(user.physician_post_code)
-        const city = user.physician_city
-        const telephone_number = user.telephone_number
+        const street = user.physician_street;
+        const street_number = user.physician_street_number;
+        const post_code = parseInt(user.physician_post_code);
+        const city = user.physician_city;
+        const telephone_number = user.telephone_number;
+        const business_number = user.business_number;
+
+        const account = user.public_key
         
-        await contract.methods.addNewPhysician(physician_number, {business_number, job_title, surname, name, street, street_number, post_code, city, telephone_number}).send({ from: accounts[0], gas: 1000000 });
+        await contract.methods.addNewPhysician({job_title, surname, name, physician_number, street, street_number, post_code, city, telephone_number, business_number}).send({ from: account, gas: 1000000 });
       };
 
 
-      getUser = async () => {
+    getUser = async () => {
         const { user, accounts, contract } = this.state;
 
         const physician_number = user.user
 
-        const returnedValue = await contract.methods.checkPhysicianExistance(physician_number).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await contract.methods.getPhysician(physician_number).call({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue)
-      }
+    }
+
+    verifyUser = async () => {
+        const { user, accounts, contract } = this.state;
+
+        const physician_number = user.user
+
+        const returnedValue = await contract.methods.verifyPhysician(physician_number).send({ from: accounts[0], gas: 1000000 });
+        console.log(returnedValue)
+    }
 
     render() {
         // if (!this.state.web3) {
@@ -92,6 +103,10 @@ class RegisterPhysician extends Component {
                 </Col>
                 <Col className="">
                   <Form>
+
+                    <Form.Group controlId="public_key">
+                        <Form.Control type="text" placeholder="public_key" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    </Form.Group>
 
                     <div className="pb-3 pt-4">
                         Angaben zum Arzt:
@@ -166,7 +181,8 @@ class RegisterPhysician extends Component {
                       <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Nutzer"></Form.Control>
                     </Form.Group>
 
-                    <Button variant="success" block onClick={this.getUser}>Abfragen</Button>
+                    <Button variant="success" block onClick={this.getUser}>Get</Button>
+                    <Button variant="success" block onClick={this.verifyUser}>Verify</Button>
                   </Form>
                 </Col>
                 <Col xs={0} sm={1} md={3} lg={4}>

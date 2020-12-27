@@ -11,7 +11,6 @@ contract User {
         verifying_institution = msg.sender;
     }
 
-
     // Defining datatype insured to store all necessary data related to the insured
     struct Insured {
         string surname;
@@ -27,55 +26,68 @@ contract User {
         uint insurance_number;
         uint insured_number;
         uint insured_status;
+
+        bool verified;
     }
 
     // Defining datatype physician to store all necessary data related to the physician
     struct Physician {
-        uint business_number;
-
         string job_title;
         string surname;
         string name;
+        uint physician_number;
 
         string street;
         string street_number;
         uint post_code;
         string city;
-
         string telephone_number; 
+        uint business_number;
+
+        bool verified;
     }
 
     // Insured Number mapped on the related insured object with all data of the insured
     mapping(address => Insured) public insureds;
 
     // Physician Number mapped on the related physician object with all data of the physician
-    mapping(uint => Physician) public physicians;
+    mapping(address => Physician) public physicians;
 
     // Function to add a new Insured
     function addNewInsured(Insured memory insured_)  public{
-        insureds[msg.sender] = Insured(insured_.surname, insured_.name, insured_.street, insured_.street_number, insured_.post_code, insured_.city, insured_.birth_date, insured_.insurance, insured_.insurance_number, insured_.insured_number, insured_.insured_status);
+        insureds[msg.sender] = Insured(insured_.surname, insured_.name, insured_.street, insured_.street_number, insured_.post_code, insured_.city, insured_.birth_date, insured_.insurance, insured_.insurance_number, insured_.insured_number, insured_.insured_status, false);
     }
 
-    // Function to add a new Physician
-    function addNewPhysician(uint physician_number_, Physician memory physician_) public{
-        physicians[physician_number_] = Physician(physician_.business_number, physician_.job_title, physician_.surname, physician_.name, physician_.street, physician_.street_number, physician_.post_code, physician_.city, physician_.telephone_number);
+    // From the address of the veryifying_institution every insured can be verified
+    function verifyInsured(address public_key) public returns (bool){
+        require(msg.sender == verifying_institution, "Only the verify institution has the right to verify insured!");
+        require(insureds[public_key].insured_number > 0, "No insured exists under this address!");
+        insureds[public_key].verified = true;
     }
 
     // Function returns true, if insured with the insured_number_ exists
-    function checkInsuredExistance(address public_key) public view returns(bool){
-        if(insureds[public_key].insurance_number > 0){
-            return true;
-        } else {
-            return false;
-        }
+    function getInsured(address public_key) public view returns(Insured memory){
+        if(insureds[public_key].insured_number > 0){
+            return insureds[public_key];
+        } 
+    }
+
+    // Function to add a new Physician
+    function addNewPhysician(Physician memory physician_) public{
+        physicians[msg.sender] = Physician(physician_.job_title, physician_.surname, physician_.name, physician_.physician_number, physician_.street, physician_.street_number, physician_.post_code, physician_.city, physician_.telephone_number, physician_.business_number, false);
+    }
+
+    // From the address of the veryifying_institution every insured can be verified
+    function verifyPhysician(address public_key) public returns (bool){
+        require(msg.sender == verifying_institution, "Only the verify institution has the right to verify physician!");
+        require(physicians[public_key].physician_number > 0, "No physician exists under this address!");
+        physicians[public_key].verified = true;
     }
 
     // Function returns true, if insured with the physician_number_ exists
-    function checkPhysicianExistance(uint physician_number_) public view returns(bool){
-        if(physicians[physician_number_].business_number > 0){
-            return true;
-        } else {
-            return false;
-        }
+    function getPhysician(address public_key) public view returns(Physician memory){
+        if(physicians[public_key].physician_number > 0){
+            return physicians[public_key];
+        } 
     }
 }
