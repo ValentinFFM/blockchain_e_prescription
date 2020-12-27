@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import UserContract from "../../contracts/User.json";
+import PrescriptionsContract from "../../contracts/Prescriptions.json" 
 import getWeb3 from "../getWeb3";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -9,7 +10,7 @@ import Button from 'react-bootstrap/Button'
 
 
 class RegisterInsured extends Component {
-    state = {user: {}, web3: null, accounts: null, contract: null}
+    state = {user: {}, web3: null, accounts: null, user_contract: null, prescriptions_contract: null}
 
     constructor(props){
         super(props)
@@ -24,14 +25,22 @@ class RegisterInsured extends Component {
 
             // Get the contract instance.
             const networkId = await web3.eth.net.getId();
-            const deployedNetwork = UserContract.networks[networkId];
-            const instance = new web3.eth.Contract(
+
+            const UserContractNetwork = UserContract.networks[networkId];
+            const PrescriptionsContractNetwork = PrescriptionsContract.networks[networkId];
+
+            const UserContractInstance = new web3.eth.Contract(
                 UserContract.abi,
-                deployedNetwork && deployedNetwork.address,
+                UserContractNetwork && UserContractNetwork.address,
+            );
+
+            const PrescriptionsContractInstance = new web3.eth.Contract(
+                PrescriptionsContract.abi,
+                PrescriptionsContractNetwork && PrescriptionsContractNetwork.address,
             );
 
             // Save data into the react state
-            this.setState({ web3, accounts, contract: instance });
+            this.setState({ web3, accounts, user_contract: UserContractInstance, prescriptions_contract: PrescriptionsContractInstance});
         } catch (error) {
             alert(
             `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -52,31 +61,38 @@ class RegisterInsured extends Component {
     }
 
     getInsured = async () => {
-        const { user, accounts, contract } = this.state;
+        const { user, accounts, user_contract } = this.state;
         const insured_address_ = user.insured_address;
-        const returnedValue = await contract.methods.getInsured(insured_address_).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await user_contract.methods.getInsured(insured_address_).call({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue);
     }
 
     verifyInsured = async () => {
-        const { user, accounts, contract } = this.state;
+        const { user, accounts, user_contract } = this.state;
         const insured_address_ = user.insured_address;
-        const returnedValue = await contract.methods.verifyInsured(insured_address_).send({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await user_contract.methods.verifyInsured(insured_address_).send({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue);
     }
 
     getUser = async () => {
-        const { user, accounts, contract } = this.state;
+        const { user, accounts, user_contract } = this.state;
         const physician_address_ = user.physician_address;
-        const returnedValue = await contract.methods.getInsured(physician_address_).call({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await user_contract.methods.getInsured(physician_address_).call({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue);
     }
     
     verifyUser = async () => {
-        const { user, accounts, contract } = this.state;
+        const { user, accounts, user_contract } = this.state;
         const physician_address_ = user.physician_address;
-        const returnedValue = await contract.methods.verifyInsured(physician_address_).send({ from: accounts[0], gas: 1000000 });
+        const returnedValue = await user_contract.methods.verifyInsured(physician_address_).send({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue);
+    }
+
+    connectSmartContractUser = async () => {
+        const { user, accounts, prescriptions_contract } = this.state;
+        console.log(this.state)
+        const smart_contract_key = user.user_smart_contract;
+        await prescriptions_contract.methods.setAddressOfSmartContractUser(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
     }
 
     render() {
@@ -116,6 +132,27 @@ class RegisterInsured extends Component {
 
                         <Button variant="primary" block onClick={this.getPhysisican}>Get</Button>
                         <Button variant="success" block onClick={this.verifyPhysisican}>Verify</Button>
+                    </Form>
+                </Col>
+
+                <Col xs={0} sm={0} md={1} lg={2}>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={0} sm={0} md={1} lg={2}>
+                </Col>
+
+                <Col>
+                    <div className="pb-3 pt-4">
+                        User Smart Contract:
+                    </div>
+
+                    <Form>
+                        <Form.Group controlId="user_smart_contract">
+                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
+                        </Form.Group>
+
+                        <Button variant="primary" block onClick={this.connectSmartContractUser}>Connect</Button>
                     </Form>
                 </Col>
 
