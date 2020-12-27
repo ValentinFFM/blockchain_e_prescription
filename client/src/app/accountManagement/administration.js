@@ -92,7 +92,15 @@ class RegisterInsured extends Component {
         const { user, accounts, prescriptions_contract } = this.state;
         console.log(this.state)
         const smart_contract_key = user.user_smart_contract;
-        await prescriptions_contract.methods.setAddressOfSmartContractUser(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
+        await prescriptions_contract.methods.establishConnectionToUserSmartContract(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
+    }
+
+    check = async () => {
+        const { user, accounts, prescriptions_contract } = this.state;
+        console.log(this.state)
+        const user_address = user.user_address;
+        const response = await prescriptions_contract.methods.checkInsured(user_address).call({ from: accounts[0], gas: 1000000 });
+        console.log(response);
     }
 
     render() {
@@ -153,6 +161,11 @@ class RegisterInsured extends Component {
                         </Form.Group>
 
                         <Button variant="primary" block onClick={this.connectSmartContractUser}>Connect</Button>
+                        
+                        <Form.Group controlId="user_address">
+                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
+                        </Form.Group>
+                        <Button variant="primary" block onClick={this.check}>Check</Button>
                     </Form>
                 </Col>
 

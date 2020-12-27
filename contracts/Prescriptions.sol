@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <0.7.0;
 
+import "./User.sol";
+
 contract Prescriptions {
     address public verifying_institution;
-    address public smart_contract_user;
+    User UserContract;
 
     constructor () public {
         verifying_institution = msg.sender;
@@ -20,8 +22,12 @@ contract Prescriptions {
         // bool charges_mandatory;
     }
 
-    function setAddressOfSmartContractUser(address smart_contract_key) public {
+    function establishConnectionToUserSmartContract(address smart_contract_key) public {
         require(msg.sender == verifying_institution, "Only the verify institution has the right to connect prescription to user!");
-        smart_contract_user = smart_contract_key;
+        UserContract = User(smart_contract_key);
+    }
+
+    function checkInsured(address public_key) public view returns(bool){
+        return UserContract.checkInsuredVerification(public_key);
     }
 }
