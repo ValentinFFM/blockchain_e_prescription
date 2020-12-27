@@ -5,6 +5,12 @@ pragma solidity >=0.4.21 <0.7.0;
 pragma experimental ABIEncoderV2;
 
 contract User {
+    address public verifying_institution;
+
+    constructor () public {
+        verifying_institution = msg.sender;
+    }
+
 
     // Defining datatype insured to store all necessary data related to the insured
     struct Insured {
