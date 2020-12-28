@@ -7,7 +7,8 @@ import * as serviceWorker from './app/serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navigation from './app/navigation';
+import LandingInsured from './app/landingPages/landingInsured';
+import LandingPhysician from './app/landingPages/landingPhysician'
 import Login from './app/accountManagement/login';
 import RegisterInsured from './app/accountManagement/registerInsured';
 import RegisterPhysician from './app/accountManagement/registerPhysician';
@@ -17,8 +18,11 @@ import NewPrescription from './app/newPrescription';
 ReactDOM.render((
     <Router>
         <Switch>
-            <Route path="/home">
-                <Navigation/>
+            <Route path="/insured">
+                <LandingInsured/>
+            </Route>
+            <Route path="/physician">
+                <LandingPhysician/>
             </Route>
             <Route path="/registerInsured">
                 <RegisterInsured/>
@@ -27,11 +31,9 @@ ReactDOM.render((
                 <RegisterPhysician/>
             </Route>
             <Route path="/admin">
-                <Navigation/>
                 <Administration/>
             </Route>
             <Route path="/newPrescription">
-                <Navigation/>
                 <NewPrescription/>
             </Route>
             <Route path="/">

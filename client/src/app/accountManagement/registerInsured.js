@@ -219,8 +219,8 @@ class RegisterInsured extends Component {
         } else {
             return(
                 <div>
-                    <Router>
-                        <Redirect to='/login'/>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/login'/>
                         <Switch>
                             <Route path="/login">
                                 <Login/>

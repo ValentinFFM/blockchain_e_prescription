@@ -9,9 +9,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navigation from "./../navigation";
 import RegisterInsured from './registerInsured';
 import RegisterPhysician from './registerPhysician';
+import LandingInsured from '../landingPages/landingInsured';
+import LandingPhysician from '../landingPages/landingPhysician';
 
 class Login extends Component {
     
@@ -78,7 +79,12 @@ class Login extends Component {
 
                 // Checking if an user exists with the public key and if its verified
                 if(verified === true){
-                    this.setState({status: 'correct_login'})
+
+                    if(role === "Versicherte"){
+                        this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_insured"})
+                    } else if (role === "Arzt"){
+                        this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_physician" })
+                    }
                 } else {
                     this.setState({missingInput: false, unknownUser: false, unverifiedUser: true})
                 }
@@ -117,7 +123,7 @@ class Login extends Component {
             }
         } 
 
-        if(existenceInsured === true || existencePhysician !== true){
+        if(existenceInsured === true || existencePhysician === true){
             existence = true
         } else {
             existence = false
@@ -203,15 +209,27 @@ class Login extends Component {
                     </Container>
                 </div>            
             )
-        } else if (this.state.status === 'correct_login'){
+        } else if (this.state.status === 'login_insured'){
             return(
                 <div>
-                    
-                    <Router>
-                        <Redirect to='/home'/>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/insured'/>
                         <Switch>
-                            <Route path="/home">
-                                <Navigation/>
+                            <Route path="/insured">
+                                <LandingInsured/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            )
+        } else if (this.state.status === 'login_physician'){
+            return(
+                <div>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/physician'/>
+                        <Switch>
+                            <Route path="/physician">
+                                <LandingPhysician/>
                             </Route>
                         </Switch>
                     </Router>
@@ -220,8 +238,8 @@ class Login extends Component {
         } else if (this.state.status === 'registration_insured'){
             return(
                 <div>
-                    <Router>
-                        <Redirect to='/registerInsured'/>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/registerInsured'/>
                         <Switch>
                             <Route path="/registerInsured">
                                 <RegisterInsured/>
@@ -233,8 +251,8 @@ class Login extends Component {
         } else if (this.state.status === 'registration_physician'){
             return(
                 <div>
-                    <Router>
-                        <Redirect to='/registerPhysician'/>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/registerPhysician'/>
                         <Switch>
                             <Route path="/registerPhysician">
                                 <RegisterPhysician/>
