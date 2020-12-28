@@ -91,6 +91,7 @@ contract User {
         } 
     }
 
+    // Checks if an insured exists under the given public_key and if he is verified
     function checkInsuredVerification(address public_key) public view returns (bool){
         if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
             return true;
@@ -99,6 +100,7 @@ contract User {
         }
     }
 
+    // Checks if an physisician exists under the given public_key and if he is verified
     function checkPhysicianVerification(address public_key) public view returns (bool){
         if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
             return true;

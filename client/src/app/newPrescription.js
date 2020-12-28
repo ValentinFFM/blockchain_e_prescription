@@ -22,6 +22,8 @@ class NewPrescription extends Component {
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
 
+        console.log(await web3.eth.accounts)
+
         // Get the contract instance.
         const networkId = await web3.eth.net.getId();
 
@@ -54,9 +56,23 @@ class NewPrescription extends Component {
   }
 
   newPrescription = async () => {
-    const { user, accounts, prescriptions_contract } = this.state;
-    const account = user.insurance
-    const response = await prescriptions_contract.methods.newPrescription().call({ from: account, gas: 1000000 });
+    const { user, prescriptions_contract } = this.state;
+
+    const physician = user.public_key_physician;
+    const patient = user.public_key_patient;
+
+    const medicine_name = user.medicine_name;
+    const medicine_amount = user.medicine_amount;
+
+    await prescriptions_contract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
+  }
+
+  getPrescriptions = async () => {
+    const { user, prescriptions_contract } = this.state;
+
+    const physician = user.public_key_physician;
+
+    const response = await prescriptions_contract.methods.getPrescriptions(physician).call({ from: physician, gas: 1000000 });
     console.log(response)
   }
 
@@ -71,11 +87,30 @@ class NewPrescription extends Component {
             </Col>
             <Col className="">
               <Form>
-                <Form.Group controlId="insurance">
-                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
+
+                <Form.Group controlId="public_key_physician">
+                  <Form.Control type="text" placeholder="public_key_physician" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId="public_key_patient">
+                  <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                </Form.Group>
+
+                <div className="pb-3 pt-4">
+                    Rezept:
+                </div>
+
+                <Form.Group controlId="medicine_name">
+                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Name des Medikaments"></Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId="medicine_amount">
+                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
                 </Form.Group>
                 
-                <Button variant="success" block onClick={this.newPrescription}>Submit</Button>
+                <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
+
+                <Button variant="success" block onClick={this.getPrescriptions}>Get Rezept</Button>
               </Form>
             </Col>
             <Col sm={2}>
