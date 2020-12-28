@@ -84,7 +84,7 @@ class RegisterInsured extends Component {
               <Row> 
                 <Col xs={0} sm={1} md={3} lg={4}>
                 </Col>
-                <Col className="">
+                <Col>
                   <Form>
                     
                     <Form.Group controlId="public_key">

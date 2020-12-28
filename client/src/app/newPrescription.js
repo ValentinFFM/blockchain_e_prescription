@@ -64,6 +64,8 @@ class NewPrescription extends Component {
     const medicine_name = user.medicine_name;
     const medicine_amount = user.medicine_amount;
 
+    console.log(physician, patient, medicine_amount, medicine_name)
+
     await prescriptions_contract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
   }
 

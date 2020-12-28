@@ -3,14 +3,46 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './app/serviceWorker';
 
-// Imports of all used components 
-import Navigation from './app/navigation'
-
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { Redirect, BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import Navigation from './app/navigation';
+import Login from './app/accountManagement/login';
+import RegisterInsured from './app/accountManagement/registerInsured';
+import RegisterPhysician from './app/accountManagement/registerPhysician';
+import Administration from './app/accountManagement/administration';
+import NewPrescription from './app/newPrescription';
 
-ReactDOM.render([<Navigation />], document.getElementById('root'));
+ReactDOM.render((
+    <Router>
+        <Switch>
+            <Route path="/home">
+                <Navigation/>
+            </Route>
+            <Route path="/registerInsured">
+                <Navigation/>
+                <RegisterInsured/>
+            </Route>
+            <Route path="/registerPhysician">
+                <Navigation/>
+                <RegisterPhysician/>
+            </Route>
+            <Route path="/admin">
+                <Navigation/>
+                <Administration/>
+            </Route>
+            <Route path="/newPrescription">
+                <Navigation/>
+                <NewPrescription/>
+            </Route>
+            <Route path="/">
+                <Login/>
+            </Route>
+        </Switch>
+    </Router>
+    )
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
