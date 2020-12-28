@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { Redirect, BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navigation from "./../navigation";
 import RegisterInsured from './registerInsured';
 import RegisterPhysician from './registerPhysician';
@@ -98,25 +98,32 @@ class Login extends Component {
 
     checkExistance = async (role, public_key) => {
         const {accounts, user_contract } = this.state;
+        var existanceInsured = false;
+        var existancePhysician = false;
         var existance = undefined;
+
 
         if(role === "Versicherte"){
             try{
-                existance = await user_contract.methods.checkExistance('insured', public_key).call({from: accounts[0], gas: 1000000});
+                existanceInsured = await user_contract.methods.checkExistance('insured', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
-                existance = false;
+                existanceInsured = false;
             }
         } else if (role === "Arzt"){
             try{
-                existance =  await user_contract.methods.checkExistance('physician', public_key).call({from: accounts[0], gas: 1000000});
+                existancePhysician =  await user_contract.methods.checkExistance('physician', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
-                existance = false;
+                existancePhysician = false;
             }
-        } else if (role === "Apotheker"){
-            existance = false;
+        } 
+
+        if(existanceInsured === true || existancePhysician !== true){
+            existance = true
         } else {
-            existance = false;
+            existance = false
         }
+
+        return existance
     }
 
     // Checks out if the user with the public_key exists in the mapping of the role in the smart contract
@@ -183,7 +190,7 @@ class Login extends Component {
                                     <Button variant="success" className="mb-3" onClick={this.login} block>Login</Button>
     
                                     <Alert show={this.state.unverifiedUser} variant="danger" className="mt-3">
-                                        Dieser Account wurde noch nicht verifiziert!
+                                        Dieser Account wurde noch nicht verifiziert oder Sie haben sich mit der falschen Rolle angemeldet!
                                     </Alert>
                                     <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                                         Bitte füllen Sie alle Eingabefelder aus!
