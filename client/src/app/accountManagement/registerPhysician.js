@@ -54,7 +54,7 @@ class RegisterPhysician extends Component {
     }
 
     addNewUser = async () => {
-        const { user, accounts, user_contract } = this.state;
+        const { user, user_contract } = this.state;
 
         const job_title = user.physician_job_title;
         const surname = user.physician_surname;

@@ -10,10 +10,12 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { Redirect, BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import Navigation from "./../navigation";
+import RegisterInsured from './registerInsured';
+import RegisterPhysician from './registerPhysician';
 
 class Login extends Component {
     
-    state = {user: {}, web3: null, accounts: null, user_contract: null, missingInput: false, unknownUser: false, login_accepted: false}
+    state = {user: {}, web3: null, accounts: null, user_contract: null, missingInput: false, unknownUser: false, unverifiedUser: false, status: 'default'}
 
     constructor(props){
         super(props)
@@ -58,30 +60,62 @@ class Login extends Component {
 
     login= async () => {
         //Reset all alerts that are shown
-
         this.setState({missingInput: false, unknownUser: false})
-        console.log("Reset", this.state.missingInput, this.state.unknownUser)
 
         // Reading out the data from the form
         const { user } = this.state;
         const role = user.role;
         const public_key = user.public_key;
         const private_key = user.private_key;
+        console.log(role, public_key, private_key)
 
         // Checking if all inputs are filled and returning an alert, if not
         if(role !== undefined && role !== "" && public_key !== undefined && public_key !== "" && private_key !== undefined && private_key !== ""){
+            const existance = await this.checkExistance(role, public_key)
 
-            // Checking if an user exists with the public key and if its verified
-            if(this.checkVerification(role, public_key) === true){
-                this.setState({login_accepted: true})
+            if(existance === true){
+                const verified = await this.checkVerification(role, public_key) 
+
+                // Checking if an user exists with the public key and if its verified
+                if(verified === true){
+                    this.setState({status: 'correct_login'})
+                } else {
+                    this.setState({missingInput: false, unknownUser: false, unverifiedUser: true})
+                }
             } else {
-                this.setState({missingInput: false, unknownUser: true})
-                console.log("After verification", this.state.missingInput, this.state.unknownUser)
+
+                if(role === "Versicherte"){
+                    this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "registration_insured"})
+                } else if (role === "Arzt"){
+                    this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "registration_physician" })
+                }
             }
 
         } else {
-            this.setState({missingInput: true, unknownUser: false})
-            console.log("After missing input", this.state.missingInput, this.state.unknownUser)
+            this.setState({missingInput: true, unknownUser: false, unverifiedUser: false})
+        }
+    }
+
+    checkExistance = async (role, public_key) => {
+        const {accounts, user_contract } = this.state;
+        var existance = undefined;
+
+        if(role === "Versicherte"){
+            try{
+                existance = await user_contract.methods.checkExistance('insured', public_key).call({from: accounts[0], gas: 1000000});
+            } catch {
+                existance = false;
+            }
+        } else if (role === "Arzt"){
+            try{
+                existance =  await user_contract.methods.checkExistance('physician', public_key).call({from: accounts[0], gas: 1000000});
+            } catch {
+                existance = false;
+            }
+        } else if (role === "Apotheker"){
+            existance = false;
+        } else {
+            existance = false;
         }
     }
 
@@ -90,15 +124,15 @@ class Login extends Component {
         const {accounts, user_contract } = this.state;
         var verified = undefined;
 
-        if(role === "Patient"){
+        if(role === "Versicherte"){
             try{
-                verified = await user_contract.methods.checkInsuredVerification(public_key).call({from: accounts[0], gas: 1000000});
+                verified = await user_contract.methods.checkVerification('insured', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
                 verified = false;
             }
         } else if (role === "Arzt"){
             try{
-                verified =  await user_contract.methods.checkPhysicianVerification(public_key).call({from: accounts[0], gas: 1000000});
+                verified =  await user_contract.methods.checkVerification('physician', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
                 verified = false;
             }
@@ -114,7 +148,7 @@ class Login extends Component {
     // Renders page content
     render(){
 
-        if(this.state.login_accepted === false){
+        if(this.state.status === 'default'){
             return(
                 <div>
                     <Navbar bg="dark" variant="dark" expand="lg">
@@ -147,12 +181,9 @@ class Login extends Component {
                                     </Form.Group>
     
                                     <Button variant="success" className="mb-3" onClick={this.login} block>Login</Button>
-
-                                    <Link to="/registerInsured">Als Versicherter registrieren</Link><br></br>
-                                    <Link to="/registerPhysician">Als Arzt registrieren</Link>
     
-                                    <Alert show={this.state.unknownUser} variant="danger" className="mt-3">
-                                        Es existiert kein Account mit diesem Public Key oder der Account wurde noch nicht verifiziert!
+                                    <Alert show={this.state.unverifiedUser} variant="danger" className="mt-3">
+                                        Dieser Account wurde noch nicht verifiziert!
                                     </Alert>
                                     <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                                         Bitte füllen Sie alle Eingabefelder aus!
@@ -165,7 +196,7 @@ class Login extends Component {
                     </Container>
                 </div>            
             )
-        } else {
+        } else if (this.state.status === 'correct_login'){
             return(
                 <div>
                     
@@ -174,6 +205,32 @@ class Login extends Component {
                         <Switch>
                             <Route path="/home">
                                 <Navigation/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            )
+        } else if (this.state.status === 'registration_insured'){
+            return(
+                <div>
+                    <Router>
+                        <Redirect to='/registerInsured'/>
+                        <Switch>
+                            <Route path="/registerInsured">
+                                <RegisterInsured/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            )
+        } else if (this.state.status === 'registration_physician'){
+            return(
+                <div>
+                    <Router>
+                        <Redirect to='/registerPhysician'/>
+                        <Switch>
+                            <Route path="/registerPhysician">
+                                <RegisterPhysician/>
                             </Route>
                         </Switch>
                     </Router>

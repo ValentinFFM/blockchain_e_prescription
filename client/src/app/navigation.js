@@ -2,17 +2,6 @@ import React, { Component } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import Login from './accountManagement/login'
-import RegisterInsured from './accountManagement/registerInsured';
-import RegisterPhysician from './accountManagement/registerPhysician';
-import Administration from './accountManagement/administration';
-import NewPrescription from './newPrescription';
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
 
 class Navigation extends Component {
     render(){

@@ -6,7 +6,7 @@ import * as serviceWorker from './app/serviceWorker';
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Redirect, BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navigation from './app/navigation';
 import Login from './app/accountManagement/login';
 import RegisterInsured from './app/accountManagement/registerInsured';
