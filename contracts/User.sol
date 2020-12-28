@@ -92,20 +92,35 @@ contract User {
     }
 
     // Checks if an insured exists under the given public_key and if he is verified
-    function checkInsuredVerification(address public_key) public view returns (bool){
-        if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
-            return true;
-        } else {
-            return false;
+    function checkVerification(string memory role, address public_key) public view returns (bool){
+        if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
+            if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
+                return true;
+            } else {
+                return false;
+            }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('physician'))){
+            if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    // Checks if an physisician exists under the given public_key and if he is verified
-    function checkPhysicianVerification(address public_key) public view returns (bool){
-        if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
-            return true;
-        } else {
-            return false;
+    function checkExistance(string memory role, address public_key) public view returns (bool){
+        if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
+            if(insureds[public_key].insured_number >0){
+                return true;
+            } else {
+                return false;
+            }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('physician'))){
+            if(physicians[public_key].physician_number >0){
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

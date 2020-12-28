@@ -32,8 +32,8 @@ contract Prescriptions {
     }
 
     function newPrescription(Prescription memory prescription_) public{
-        require(UserContract.checkPhysicianVerification(msg.sender) == true, "You don't have the right to create a prescription!");
-        require(UserContract.checkInsuredVerification(prescription_.patient) == true, "This patient is not registered or verified!");
+        require(UserContract.checkVerification('physician', msg.sender) == true, "You don't have the right to create a prescription!");
+        require(UserContract.checkVerification('insured', prescription_.patient) == true, "This patient is not registered or verified!");
         prescriptions_physician[msg.sender].push(Prescription(prescription_.physician, prescription_.patient, prescription_.medicine_name, prescription_.medicine_amount));
     }
 
