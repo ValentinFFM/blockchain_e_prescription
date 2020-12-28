@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar';
-import Login from './login'
+import Login from './../login'
 import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert'
 

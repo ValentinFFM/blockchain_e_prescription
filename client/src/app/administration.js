@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import UserContract from "../../contracts/User.json";
-import PrescriptionsContract from "../../contracts/Prescriptions.json" 
-import getWeb3 from "../getWeb3";
+import UserContract from "./../contracts/User.json";
+import PrescriptionsContract from "./../contracts/Prescriptions.json" 
+import getWeb3 from "./getWeb3";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'

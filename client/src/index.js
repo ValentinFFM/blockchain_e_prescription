@@ -7,13 +7,13 @@ import * as serviceWorker from './app/serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import LandingInsured from './app/landingPages/landingInsured';
-import LandingPhysician from './app/landingPages/landingPhysician'
-import Login from './app/accountManagement/login';
-import RegisterInsured from './app/accountManagement/registerInsured';
-import RegisterPhysician from './app/accountManagement/registerPhysician';
-import Administration from './app/accountManagement/administration';
-import NewPrescription from './app/newPrescription';
+import LandingInsured from './app/insured/landingInsured';
+import LandingPhysician from './app/physician/landingPhysician'
+import Login from './app/login';
+import RegisterInsured from './app/insured/registerInsured';
+import RegisterPhysician from './app/physician/registerPhysician';
+import Administration from './app/administration';
+import NewPrescription from './app/physician/newPrescription';
 
 ReactDOM.render((
     <Router>
