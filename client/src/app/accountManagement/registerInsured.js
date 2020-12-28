@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Navbar from 'react-bootstrap/Navbar';
 
 
 class RegisterInsured extends Component {
@@ -80,98 +81,103 @@ class RegisterInsured extends Component {
         //   return <div>Loading Web3, accounts, and contract...</div>;
         // }
         return (
-          <Container fluid className="mt-5">
-              <Row> 
-                <Col xs={0} sm={1} md={3} lg={4}>
-                </Col>
-                <Col>
-                  <Form>
-                    
-                    <Form.Group controlId="public_key">
-                        <Form.Control type="text" placeholder="public_key" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                    </Form.Group>
-
-
-                    <div className="pb-3 pt-4">
-                        Allgemeine Angaben:
-                    </div>
-
-                    <Row>
-                        <Col className="pr-1">
-                        <Form.Group controlId="insured_surname">
-                            <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
+            <>
+                <Navbar bg="dark" variant="dark" expand="lg">
+                        <Navbar.Brand>E-Prescription</Navbar.Brand>
+                </Navbar>
+                <Container fluid className="mt-5">
+                    <Row> 
+                        <Col xs={0} sm={1} md={3} lg={4}>
                         </Col>
-                        <Col className="pl-1">
-                        <Form.Group controlId="insured_name">
-                            <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
+                        <Col>
+                        <Form>
+                            
+                            <Form.Group controlId="public_key">
+                                <Form.Control type="text" placeholder="public_key" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                            </Form.Group>
+
+
+                            <div className="pb-3 pt-4">
+                                Allgemeine Angaben:
+                            </div>
+
+                            <Row>
+                                <Col className="pr-1">
+                                <Form.Group controlId="insured_surname">
+                                    <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                </Form.Group>
+                                </Col>
+                                <Col className="pl-1">
+                                <Form.Group controlId="insured_name">
+                                    <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col className="pr-1" sm={9}>
+                                    <Form.Group controlId="insured_street">
+                                        <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" sm={3}>
+                                    <Form.Group controlId="insured_street_number">
+                                        <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col className="pr-1" sm={4}>
+                                    <Form.Group controlId="insured_post_code">
+                                        <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col className="pl-1" sm={8}>
+                                    <Form.Group controlId="insured_city">
+                                        <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Form.Group controlId="insured_birth_date">
+                                <Form.Control type="text" placeholder="Geburtstag" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                            </Form.Group>
+
+                            <div className="pb-3 pt-4">
+                                Angaben zur Krankenversicherung:
+                            </div>
+
+                            <Form.Group controlId="insurance">
+                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
+                            </Form.Group>
+
+                            <Row>
+                                <Col className="pr-1" sm={4}>
+                                <Form.Group controlId="insurance_number">
+                                    <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                </Form.Group>
+                                </Col>
+                                <Col className="px-1" sm={4}>
+                                <Form.Group controlId="insured_number">
+                                    <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                </Form.Group>
+                                </Col>
+                                <Col className="pl-1" sm={4}>
+                                <Form.Group controlId="insured_status">
+                                    <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
+                        </Form>
+                        </Col>
+                        <Col xs={0} sm={1} md={3} lg={4}>
                         </Col>
                     </Row>
-
-                    <Row>
-                        <Col className="pr-1" sm={9}>
-                            <Form.Group controlId="insured_street">
-                                <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col className="pl-1" sm={3}>
-                            <Form.Group controlId="insured_street_number">
-                                <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-
-                    <Row>
-                        <Col className="pr-1" sm={4}>
-                            <Form.Group controlId="insured_post_code">
-                                <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col className="pl-1" sm={8}>
-                            <Form.Group controlId="insured_city">
-                                <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                            </Form.Group>
-                        </Col>
-                    </Row>
-
-                    <Form.Group controlId="insured_birth_date">
-                        <Form.Control type="text" placeholder="Geburtstag" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                    </Form.Group>
-
-                    <div className="pb-3 pt-4">
-                        Angaben zur Krankenversicherung:
-                    </div>
-
-                    <Form.Group controlId="insurance">
-                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
-                    </Form.Group>
-
-                    <Row>
-                        <Col className="pr-1" sm={4}>
-                        <Form.Group controlId="insurance_number">
-                            <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                        <Col className="px-1" sm={4}>
-                        <Form.Group controlId="insured_number">
-                            <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                        <Col className="pl-1" sm={4}>
-                        <Form.Group controlId="insured_status">
-                            <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                        </Form.Group>
-                        </Col>
-                    </Row>
-
-                    <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
-                  </Form>
-                </Col>
-                <Col xs={0} sm={1} md={3} lg={4}>
-                </Col>
-              </Row>
-          </Container>
+                </Container>
+            </>
         );
       }
 }

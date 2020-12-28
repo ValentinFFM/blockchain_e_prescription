@@ -15,8 +15,6 @@ class Login extends Component {
     
     state = {user: {}, web3: null, accounts: null, user_contract: null, missingInput: false, unknownUser: false, login_accepted: false}
 
-    
-
     constructor(props){
         super(props)
         this.handleChange = this.handleChange.bind(this);
@@ -128,14 +126,13 @@ class Login extends Component {
                             <Col xs={0} sm={1} md={3} lg={4}></Col>
     
                             <Col>
-                                
                                 <h2 className="mt-5">Login</h2>
     
                                 <Form className="mt-3">
                                     <Form.Group controlId="role">
                                         <Form.Control as="select" value={this.state.value} onChange={this.handleChange}>
                                             <option>Login als...</option>
-                                            <option>Patient</option>
+                                            <option>Versicherte</option>
                                             <option>Arzt</option>
                                             <option>Apotheker</option>
                                         </Form.Control>
@@ -149,12 +146,15 @@ class Login extends Component {
                                         <Form.Control type="password" placeholder="Private Key" value={this.state.value} onChange={this.handleChange}></Form.Control>
                                     </Form.Group>
     
-                                    <Button variant="success" onClick={this.login} block>Login</Button>
+                                    <Button variant="success" className="mb-3" onClick={this.login} block>Login</Button>
+
+                                    <Link to="/registerInsured">Als Versicherter registrieren</Link><br></br>
+                                    <Link to="/registerPhysician">Als Arzt registrieren</Link>
     
-                                    <Alert show={this.state.unknownUser} variant="danger" className="mt-4">
+                                    <Alert show={this.state.unknownUser} variant="danger" className="mt-3">
                                         Es existiert kein Account mit diesem Public Key oder der Account wurde noch nicht verifiziert!
                                     </Alert>
-                                    <Alert show={this.state.missingInput} variant="danger" className="mt-4">
+                                    <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                                         Bitte füllen Sie alle Eingabefelder aus!
                                     </Alert>
                                 </Form>

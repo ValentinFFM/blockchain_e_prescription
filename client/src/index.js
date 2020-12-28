@@ -21,11 +21,9 @@ ReactDOM.render((
                 <Navigation/>
             </Route>
             <Route path="/registerInsured">
-                <Navigation/>
                 <RegisterInsured/>
             </Route>
             <Route path="/registerPhysician">
-                <Navigation/>
                 <RegisterPhysician/>
             </Route>
             <Route path="/admin">

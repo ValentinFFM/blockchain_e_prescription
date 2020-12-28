@@ -22,8 +22,6 @@ class Navigation extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="/registerInsured">Registration Insured</Nav.Link>
-                        <Nav.Link href="/registerPhysician">Registration Physician</Nav.Link>
                         <Nav.Link href="/admin">Administration</Nav.Link>
                         <Nav.Link href="/newPrescription">New Prescription</Nav.Link>
                     </Nav>
