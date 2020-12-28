@@ -71,9 +71,9 @@ class Login extends Component {
 
         // Checking if all inputs are filled and returning an alert, if not
         if(role !== undefined && role !== "" && public_key !== undefined && public_key !== "" && private_key !== undefined && private_key !== ""){
-            const existance = await this.checkExistance(role, public_key)
+            const existence = await this.checkExistence(role, public_key)
 
-            if(existance === true){
+            if(existence === true){
                 const verified = await this.checkVerification(role, public_key) 
 
                 // Checking if an user exists with the public key and if its verified
@@ -96,34 +96,34 @@ class Login extends Component {
         }
     }
 
-    checkExistance = async (role, public_key) => {
+    checkExistence = async (role, public_key) => {
         const {accounts, user_contract } = this.state;
-        var existanceInsured = false;
-        var existancePhysician = false;
-        var existance = undefined;
+        var existenceInsured = false;
+        var existencePhysician = false;
+        var existence = undefined;
 
 
         if(role === "Versicherte"){
             try{
-                existanceInsured = await user_contract.methods.checkExistance('insured', public_key).call({from: accounts[0], gas: 1000000});
+                existenceInsured = await user_contract.methods.checkExistence('insured', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
-                existanceInsured = false;
+                existenceInsured = false;
             }
         } else if (role === "Arzt"){
             try{
-                existancePhysician =  await user_contract.methods.checkExistance('physician', public_key).call({from: accounts[0], gas: 1000000});
+                existencePhysician =  await user_contract.methods.checkExistence('physician', public_key).call({from: accounts[0], gas: 1000000});
             } catch {
-                existancePhysician = false;
+                existencePhysician = false;
             }
         } 
 
-        if(existanceInsured === true || existancePhysician !== true){
-            existance = true
+        if(existenceInsured === true || existencePhysician !== true){
+            existence = true
         } else {
-            existance = false
+            existence = false
         }
 
-        return existance
+        return existence
     }
 
     // Checks out if the user with the public_key exists in the mapping of the role in the smart contract

@@ -108,7 +108,7 @@ contract User {
         }
     }
 
-    function checkExistance(string memory role, address public_key) public view returns (bool){
+    function checkExistence(string memory role, address public_key) public view returns (bool){
         if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
             if(insureds[public_key].insured_number >0){
                 return true;
