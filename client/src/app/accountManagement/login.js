@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 import UserContract from "../../contracts/User.json";
 import getWeb3 from "../getWeb3";
 import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import Alert from 'react-bootstrap/Alert'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import { Redirect, BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import Navigation from "./../navigation";
-import RegisterInsured from './registerInsured'
 
 class Login extends Component {
     
@@ -72,7 +71,7 @@ class Login extends Component {
         const private_key = user.private_key;
 
         // Checking if all inputs are filled and returning an alert, if not
-        if((role !== undefined || role !== "") && (public_key !== undefined || public_key !== "") && (private_key !== undefined || private_key !== "")){
+        if(role !== undefined && role !== "" && public_key !== undefined && public_key !== "" && private_key !== undefined && private_key !== ""){
 
             // Checking if an user exists with the public key and if its verified
             if(this.checkVerification(role, public_key) === true){
@@ -86,8 +85,6 @@ class Login extends Component {
             this.setState({missingInput: true, unknownUser: false})
             console.log("After missing input", this.state.missingInput, this.state.unknownUser)
         }
-
-        console.log(this.state.alerts)
     }
 
     // Checks out if the user with the public_key exists in the mapping of the role in the smart contract
@@ -96,9 +93,17 @@ class Login extends Component {
         var verified = undefined;
 
         if(role === "Patient"){
-            verified = await user_contract.methods.checkInsuredVerification(public_key).call({from: accounts[0], gas: 1000000});
+            try{
+                verified = await user_contract.methods.checkInsuredVerification(public_key).call({from: accounts[0], gas: 1000000});
+            } catch {
+                verified = false;
+            }
         } else if (role === "Arzt"){
-            verified =  await user_contract.methods.checkPhysicianVerification(public_key).call({from: accounts[0], gas: 1000000});
+            try{
+                verified =  await user_contract.methods.checkPhysicianVerification(public_key).call({from: accounts[0], gas: 1000000});
+            } catch {
+                verified = false;
+            }
         } else if (role === "Apotheker"){
             verified = false;
         } else {
@@ -175,7 +180,6 @@ class Login extends Component {
                 </div>
             )
         }
-        
     }
 }
 export default Login
