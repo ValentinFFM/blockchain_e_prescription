@@ -6,10 +6,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Alert from 'react-bootstrap/Alert';
 
 
 class NewPrescription extends Component {
-  state = {web3: null, prescriptionsContract: null, account: null, formData: {}};
+  state = {web3: null, prescriptionsContract: null, account: null, formData: {}, missingInput: false, sendingError: false};
 
   constructor(props){
     super(props)
@@ -18,16 +19,17 @@ class NewPrescription extends Component {
 
   componentDidMount = async () => {
     const ethereum = await window.ethereum;
-    const public_key = ethereum.selectedAddress
-    this.setState({account: public_key})
+  
+    if(ethereum){
+      const public_key = ethereum.selectedAddress
+      this.setState({account: public_key})
 
-    // if(ethereum){
-    //   ethereum.on('accountsChanged', (public_key) => {
-    //     console.log(public_key)
-    //     this.setState({account: public_key[0]})
-    //     console.log(this.state.account)
-    //   });
-    // }
+      ethereum.on('accountsChanged', (public_key) => {
+        console.log(public_key)
+        this.setState({account: public_key[0]})
+        console.log(this.state.account)
+      });
+    }
 
     try {
       // Get web3 instance and the accounts that are stored 
@@ -65,15 +67,38 @@ class NewPrescription extends Component {
 
   newPrescription = async () => {
     console.log("New Prescription")
+    this.setState({missingInput: false, sendingError: false})
     const { formData, prescriptionsContract } = this.state;
 
+    const physician = this.state.account;
     const patient = formData.public_key_patient;
     const medicine_name = formData.medicine_name;
     const medicine_amount = formData.medicine_amount;
+    
 
-    const physician = this.state.account
-    console.log(physician, patient, medicine_name, medicine_amount)
-    await prescriptionsContract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: this.state.account, gas: 1000000 });
+    if(physician !== ""
+      && physician !== undefined
+      && patient !== ""
+      && patient !== undefined
+      && medicine_name !== ""
+      && medicine_name !== undefined
+      && medicine_amount !== ""
+      && medicine_amount !== undefined
+    ){
+
+      try {
+        await prescriptionsContract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
+      } catch {
+        this.setState({sendingError: true})
+      }
+
+    } else {
+      this.setState({missingInput: true})
+    }
+
+
+    
+    
   }
 
   render() {
@@ -106,6 +131,13 @@ class NewPrescription extends Component {
                 
                 <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
               </Form>
+
+              <Alert show={this.state.sendingError} variant="danger" className="mt-3">
+                  Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
+              </Alert>
+              <Alert show={this.state.missingInput} variant="danger" className="mt-3">
+                  Bitte füllen Sie alle Felder aus!
+              </Alert>
             </Col>
             <Col sm={2}>
             </Col>

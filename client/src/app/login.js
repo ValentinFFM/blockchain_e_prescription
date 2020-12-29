@@ -77,9 +77,6 @@ class NewLogin extends Component {
         const role = formData.role;
         const public_key = this.state.account;
 
-        
-
-
         // Checking if all inputs are filled and returning an alert, if not
         if(role !== undefined && role !== "" && public_key !== undefined && public_key !== ""){
             const existence = await this.checkExistence(role, public_key)

@@ -6,11 +6,22 @@ import Button from 'react-bootstrap/Button'
 
 class PrescriptionList extends Component {
 
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, prescriptions: []}
+    state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, prescriptions: []}
 
     componentDidMount = async () => {
         const ethereum = await window.ethereum;
-        const public_key = ethereum.selectedAddress
+
+        if(ethereum){
+            const public_key = ethereum.selectedAddress;
+            this.setState({account: public_key});
+
+            ethereum.on('accountsChanged', (public_key) => {
+                console.log(public_key)
+                this.setState({account: public_key[0]})
+                console.log(this.state.account)
+            });
+        }
+        
 
         try {
             // Get web3 instance and the accounts that are stored 
@@ -34,13 +45,12 @@ class PrescriptionList extends Component {
             console.error(error);
         }
         
-        await this.getPrescriptions(public_key)
+        await this.getPrescriptions()
     }
 
-    getPrescriptions = async (public_key) => {
-        const { prescriptionsContract } = this.state;
-        const response = await prescriptionsContract.methods.getPatientPrescriptions(public_key).call({ from: public_key, gas: 1000000 });
-        console.log(response)
+    getPrescriptions = async () => {
+        const { account, prescriptionsContract } = this.state;
+        const response = await prescriptionsContract.methods.getPatientPrescriptions(account).call({ from: account, gas: 1000000 });
         this.setState({prescriptions: response});
     }
 
@@ -63,10 +73,6 @@ class PrescriptionList extends Component {
                 )
             })
         }
-
-        
     }
-
-    
 }
 export default PrescriptionList;
