@@ -37,8 +37,8 @@ class NewLogin extends Component {
         try {
             // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
-            const Accounts = await web3.eth.getAccounts();
-            const standardAccount = Accounts[0]
+            const accounts = await web3.eth.getAccounts();
+            const standardAccount = accounts[0]
 
             // Get the contract instance.
             const networkId = await web3.eth.net.getId();

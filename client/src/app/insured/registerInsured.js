@@ -36,6 +36,7 @@ class RegisterInsured extends Component {
             // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
+            const standardAccount = accounts[0]
 
             // Get the contract instance.
             const networkId = await web3.eth.net.getId();
@@ -47,11 +48,9 @@ class RegisterInsured extends Component {
             );
 
             // Save data into the react state
-            this.setState({ web3, accounts, userContract: UserContractInstance });
+            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance });
         } catch (error) {
-            alert(
-            `Failed to load web3, accounts, or contract. Check console for details.`,
-            );
+            alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     };
