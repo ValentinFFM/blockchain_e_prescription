@@ -13,6 +13,8 @@ import RegisterInsured from './insured/registerInsured';
 import RegisterPhysician from './physician/registerPhysician';
 import LandingInsured from './insured/landingInsured';
 import LandingPhysician from './physician/landingPhysician';
+import RegisterPharmacist from './pharmacist/registerPhamacist';
+import LandingPharmacist from './pharmacist/landingPharmacist';
 
 class NewLogin extends Component {
 
@@ -91,7 +93,10 @@ class NewLogin extends Component {
                         this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_insured"})
                     } else if (role === "Arzt"){
                         this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_physician" })
+                    } else if (role === "Apotheker"){
+                        this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_pharmacist" })
                     }
+
                 } else {
                     this.setState({missingInput: false, unknownUser: false, unverifiedUser: true})
                 }
@@ -101,6 +106,8 @@ class NewLogin extends Component {
                     this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "registration_insured"})
                 } else if (role === "Arzt"){
                     this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "registration_physician" })
+                } else if (role === "Apotheker"){
+                    this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "registration_pharmacist" })
                 }
             }
 
@@ -115,24 +122,28 @@ class NewLogin extends Component {
         const {standardAccount, userContract } = this.state;
         var existenceInsured = false;
         var existencePhysician = false;
+        var existencePharmacist = false;
         var existence = undefined;
 
+        try{
+            existenceInsured = await userContract.methods.checkExistence('insured', public_key).call({from: standardAccount, gas: 1000000});
+        } catch {
+            existenceInsured = false;
+        }
+        
+        try{
+            existencePhysician =  await userContract.methods.checkExistence('physician', public_key).call({from: standardAccount, gas: 1000000});
+        } catch {
+            existencePhysician = false;
+        }
+        
+        try{
+            existencePharmacist =  await userContract.methods.checkExistence('pharmacist', public_key).call({from: standardAccount, gas: 1000000});
+        } catch {
+            existencePharmacist = false;
+        }
 
-        if(role === "Versicherte"){
-            try{
-                existenceInsured = await userContract.methods.checkExistence('insured', public_key).call({from: standardAccount, gas: 1000000});
-            } catch {
-                existenceInsured = false;
-            }
-        } else if (role === "Arzt"){
-            try{
-                existencePhysician =  await userContract.methods.checkExistence('physician', public_key).call({from: standardAccount, gas: 1000000});
-            } catch {
-                existencePhysician = false;
-            }
-        } 
-
-        if(existenceInsured === true || existencePhysician === true){
+        if(existenceInsured === true || existencePhysician === true || existencePharmacist === true){
             existence = true
         } else {
             existence = false
@@ -160,7 +171,11 @@ class NewLogin extends Component {
                 verified = false;
             }
         } else if (role === "Apotheker"){
-            verified = false;
+            try{
+                verified =  await userContract.methods.checkVerification('pharmacist', public_key).call({from: standardAccount, gas: 1000000});
+            } catch {
+                verified = false;
+            }
         } else {
             verified = false;
         }
@@ -238,6 +253,19 @@ class NewLogin extends Component {
                         </Router>
                     </div>
                 )
+            } else if (this.state.status === 'login_pharmacist'){
+                return(
+                    <div>
+                        <Router forceRefresh={true}>
+                            <Redirect push to='/pharmacist'/>
+                            <Switch>
+                                <Route path="/pharmacist">
+                                    <LandingPharmacist/>
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </div>
+                )
             } else if (this.state.status === 'registration_insured'){
                 return(
                     <div>
@@ -259,6 +287,19 @@ class NewLogin extends Component {
                             <Switch>
                                 <Route path="/registerPhysician">
                                     <RegisterPhysician/>
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </div>
+                )
+            } else if (this.state.status === 'registration_pharmacist'){
+                return(
+                    <div>
+                        <Router forceRefresh={true}>
+                            <Redirect push to='/registerPharmacist'/>
+                            <Switch>
+                                <Route path="/registerPharmacist">
+                                    <RegisterPharmacist/>
                                 </Route>
                             </Switch>
                         </Router>
