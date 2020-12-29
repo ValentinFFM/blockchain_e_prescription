@@ -21,6 +21,7 @@ class RegisterPhysician extends Component {
 
     componentDidMount = async () => {
         const ethereum = await window.ethereum;
+        
 
         if(ethereum){
             ethereum.on('accountsChanged', (public_key) => {

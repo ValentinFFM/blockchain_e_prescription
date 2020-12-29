@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 
 class NewPrescription extends Component {
-  state = {user: {}, web3: null, accounts: null, prescriptions_contract: null };
+  state = {web3: null, prescriptionsContract: null, account: null, formData: {}};
 
   constructor(props){
     super(props)
@@ -17,29 +17,37 @@ class NewPrescription extends Component {
   }
 
   componentDidMount = async () => {
+    const ethereum = await window.ethereum;
+    const public_key = ethereum.selectedAddress
+    this.setState({account: public_key})
+
+    // if(ethereum){
+    //   ethereum.on('accountsChanged', (public_key) => {
+    //     console.log(public_key)
+    //     this.setState({account: public_key[0]})
+    //     console.log(this.state.account)
+    //   });
+    // }
+
     try {
-        // Get web3 instance and the accounts that are stored 
-        const web3 = await getWeb3();
-        const accounts = await web3.eth.getAccounts();
+      // Get web3 instance and the accounts that are stored 
+      const web3 = await getWeb3();
+      const accounts = await web3.eth.getAccounts();
+      const standardAccount = accounts[0]
 
-        console.log(await web3.eth.accounts)
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
 
-        // Get the contract instance.
-        const networkId = await web3.eth.net.getId();
+      const PrescriptionsContractInstance = new web3.eth.Contract(
+        PrescriptionsContract.abi,
+        PrescriptionContractNetwork && PrescriptionContractNetwork.address,
+      );
 
-        const PrescriptionsContractNetwork = PrescriptionsContract.networks[networkId];
-
-        const PrescriptionsContractInstance = new web3.eth.Contract(
-            PrescriptionsContract.abi,
-            PrescriptionsContractNetwork && PrescriptionsContractNetwork.address,
-        );
-
-        // Save data into the react state
-        this.setState({ web3, accounts, prescriptions_contract: PrescriptionsContractInstance});
+      // Save data into the react state
+      this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance });
     } catch (error) {
-        alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-        );
+        alert(`Failed to load web3, accounts, or contract. Check console for details.`);
         console.error(error);
     }
   };
@@ -50,32 +58,22 @@ class NewPrescription extends Component {
     const event_value = event.target.value
 
     // Setting the value into the user object of the state
-    const { user } = this.state;
-    user[event_id] = event_value
-    this.setState({user: user})
+    const { formData } = this.state;
+    formData[event_id] = event_value
+    this.setState({formData: formData})
   }
 
   newPrescription = async () => {
-    const { user, prescriptions_contract } = this.state;
+    console.log("New Prescription")
+    const { formData, prescriptionsContract } = this.state;
 
-    const physician = user.public_key_physician;
-    const patient = user.public_key_patient;
+    const patient = formData.public_key_patient;
+    const medicine_name = formData.medicine_name;
+    const medicine_amount = formData.medicine_amount;
 
-    const medicine_name = user.medicine_name;
-    const medicine_amount = user.medicine_amount;
-
-    console.log(physician, patient, medicine_amount, medicine_name)
-
-    await prescriptions_contract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
-  }
-
-  getPrescriptions = async () => {
-    const { user, prescriptions_contract } = this.state;
-
-    const physician = user.public_key_physician;
-
-    const response = await prescriptions_contract.methods.getPrescriptions(physician).call({ from: physician, gas: 1000000 });
-    console.log(response)
+    const physician = this.state.account
+    console.log(physician, patient, medicine_name, medicine_amount)
+    await prescriptionsContract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: this.state.account, gas: 1000000 });
   }
 
   render() {
@@ -89,10 +87,6 @@ class NewPrescription extends Component {
             </Col>
             <Col className="">
               <Form>
-
-                <Form.Group controlId="public_key_physician">
-                  <Form.Control type="text" placeholder="public_key_physician" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                </Form.Group>
 
                 <Form.Group controlId="public_key_patient">
                   <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
@@ -111,8 +105,6 @@ class NewPrescription extends Component {
                 </Form.Group>
                 
                 <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
-
-                <Button variant="success" block onClick={this.getPrescriptions}>Get Rezept</Button>
               </Form>
             </Col>
             <Col sm={2}>
