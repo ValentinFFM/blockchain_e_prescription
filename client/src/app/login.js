@@ -24,12 +24,14 @@ class NewLogin extends Component {
     }
 
     componentDidMount = async () => {
-        const ethereum = window.ethereum;
+        const ethereum = await window.ethereum;
 
         if(ethereum){
             ethereum.on('accountsChanged', (public_key) => {
-                this.setState({account: public_key})
-              });
+                console.log(public_key)
+                this.setState({account: public_key[0]})
+                console.log(this.state.account)
+            });
         }
 
         try {
@@ -48,11 +50,9 @@ class NewLogin extends Component {
             );
 
             // Save data into the react state
-            this.setState({ web3, standardAccount: standardAccount, userContract: UserContractInstance });
+            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance });
         } catch (error) {
-            alert(
-            `Failed to load web3, accounts, or contract. Check console for details.`,
-            );
+            alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     };
@@ -73,9 +73,12 @@ class NewLogin extends Component {
         this.setState({missingInput: false, unknownUser: false})
 
         // Reading out the data from the form
-        const { formData, account } = this.state;
+        const { formData } = this.state;
         const role = formData.role;
-        const public_key = account;
+        const public_key = this.state.account;
+
+        
+
 
         // Checking if all inputs are filled and returning an alert, if not
         if(role !== undefined && role !== "" && public_key !== undefined && public_key !== ""){
@@ -110,7 +113,9 @@ class NewLogin extends Component {
     }
 
     checkExistence = async (role, public_key) => {
-        const {accounts, user_contract } = this.state;
+        console.log("Check Existence", role, public_key)
+
+        const {standardAccount, userContract } = this.state;
         var existenceInsured = false;
         var existencePhysician = false;
         var existence = undefined;
@@ -118,13 +123,13 @@ class NewLogin extends Component {
 
         if(role === "Versicherte"){
             try{
-                existenceInsured = await user_contract.methods.checkExistence('insured', public_key).call({from: accounts[0], gas: 1000000});
+                existenceInsured = await userContract.methods.checkExistence('insured', public_key).call({from: standardAccount, gas: 1000000});
             } catch {
                 existenceInsured = false;
             }
         } else if (role === "Arzt"){
             try{
-                existencePhysician =  await user_contract.methods.checkExistence('physician', public_key).call({from: accounts[0], gas: 1000000});
+                existencePhysician =  await userContract.methods.checkExistence('physician', public_key).call({from: standardAccount, gas: 1000000});
             } catch {
                 existencePhysician = false;
             }
@@ -141,18 +146,19 @@ class NewLogin extends Component {
 
     // Checks out if the user with the public_key exists in the mapping of the role in the smart contract
     checkVerification = async (role, public_key) => {
-        const {accounts, user_contract } = this.state;
+        const {standardAccount, userContract } = this.state;
         var verified = undefined;
 
         if(role === "Versicherte"){
             try{
-                verified = await user_contract.methods.checkVerification('insured', public_key).call({from: accounts[0], gas: 1000000});
+                console.log("Versicherte")
+                verified = await userContract.methods.checkVerification('insured', public_key).call({from: standardAccount, gas: 1000000});
             } catch {
                 verified = false;
             }
         } else if (role === "Arzt"){
             try{
-                verified =  await user_contract.methods.checkVerification('physician', public_key).call({from: accounts[0], gas: 1000000});
+                verified =  await userContract.methods.checkVerification('physician', public_key).call({from: standardAccount, gas: 1000000});
             } catch {
                 verified = false;
             }
@@ -196,10 +202,10 @@ class NewLogin extends Component {
                                         <Button variant="success" className="mb-3" onClick={this.login} block>Login</Button>
         
                                         <Alert show={this.state.unverifiedUser} variant="danger" className="mt-3">
-                                            Dieser Account wurde noch nicht verifiziert oder Sie haben sich mit der falschen Rolle angemeldet!
+                                            Dieser Account wurde noch nicht verifiziert oder Sie versuchen sich mit einer falschen Rolle anzumelden!
                                         </Alert>
                                         <Alert show={this.state.missingInput} variant="danger" className="mt-3">
-                                            Bitte füllen Sie alle Eingabefelder aus!
+                                            Bitte wählen Sie Ihre Rolle aus!
                                         </Alert>
                                     </Form>
                                 </Col>

@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert'
 
 
 class RegisterInsured extends Component {
-    state = {user: {}, web3: null, accounts: null, user_contract: null, missingInput: false, registration_accepted: false}
+    state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {} , missingInput: false, registration_accepted: false}
 
     constructor(props){
         super(props)
@@ -21,6 +21,17 @@ class RegisterInsured extends Component {
     }
 
     componentDidMount = async () => {
+        const ethereum = await window.ethereum;
+
+        if(ethereum){
+            ethereum.on('accountsChanged', (public_key) => {
+                console.log(public_key)
+                this.setState({account: public_key[0]})
+                console.log(this.state.account)
+              });
+        }
+
+
         try {
             // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
@@ -36,7 +47,7 @@ class RegisterInsured extends Component {
             );
 
             // Save data into the react state
-            this.setState({ web3, accounts, user_contract: UserContractInstance });
+            this.setState({ web3, accounts, userContract: UserContractInstance });
         } catch (error) {
             alert(
             `Failed to load web3, accounts, or contract. Check console for details.`,
@@ -51,31 +62,28 @@ class RegisterInsured extends Component {
         const event_value = event.target.value
 
         // Setting the value into the user object of the state
-        const { user } = this.state;
-        user[event_id] = event_value
-        this.setState({user: user})
+        const { formData } = this.state;
+        formData[event_id] = event_value
+        this.setState({formData: formData})
     }
 
     addNewUser = async () => {
+        console.log('Add new user', this.state.account)
         this.setState({missingInput: false})
-        const { user, user_contract } = this.state;
+        const { userContract, formData } = this.state;
 
-        console.log(user, user_contract)
+        const surname = formData.insured_surname
+        const name = formData.insured_name
+        const street = formData.insured_street
+        const street_number = formData.insured_street_number
+        const post_code = parseInt(formData.insured_post_code)
+        const city = formData.insured_city
+        const birth_date = formData.insured_birth_date
 
-        const surname = user.insured_surname
-        const name = user.insured_name
-        const street = user.insured_street
-        const street_number = user.insured_street_number
-        const post_code = parseInt(user.insured_post_code)
-        const city = user.insured_city
-        const birth_date = user.insured_birth_date
-
-        const insurance = user.insurance 
-        const insurance_number = user.insurance_number
-        const insured_number = user.insured_number
-        const insured_status = user.insured_status
-
-        const account = user.public_key
+        const insurance = formData.insurance 
+        const insurance_number = formData.insurance_number
+        const insured_number = formData.insured_number
+        const insured_status = formData.insured_status
 
         if(surname !== "" 
             && surname !== undefined 
@@ -99,10 +107,8 @@ class RegisterInsured extends Component {
             && insured_number !== undefined
             && insured_status !== ""
             && insured_status !== undefined
-            && account !== ""
-            && account !== undefined 
         ){
-            await user_contract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: account, gas: 1000000 });
+            await userContract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: this.state.account, gas: 1000000 });
             this.setState({registration_accepted: true})
 
         } else {
@@ -125,11 +131,6 @@ class RegisterInsured extends Component {
                             <Col>
                             <Form>
                                 
-                                <Form.Group controlId="public_key">
-                                    <Form.Control type="text" placeholder="public_key" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
-    
-    
                                 <div className="pb-3 pt-4">
                                     Allgemeine Angaben:
                                 </div>
