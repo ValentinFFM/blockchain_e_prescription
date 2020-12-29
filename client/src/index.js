@@ -5,44 +5,9 @@ import * as serviceWorker from './app/serviceWorker';
 
 // Importing Bootstrap for styling
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './app/app'
 
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import LandingInsured from './app/insured/landingInsured';
-import LandingPhysician from './app/physician/landingPhysician'
-import Login from './app/login';
-import RegisterInsured from './app/insured/registerInsured';
-import RegisterPhysician from './app/physician/registerPhysician';
-import Administration from './app/administration';
-import NewPrescription from './app/physician/newPrescription';
-
-ReactDOM.render((
-    <Router>
-        <Switch>
-            <Route path="/insured">
-                <LandingInsured/>
-            </Route>
-            <Route path="/physician">
-                <LandingPhysician/>
-            </Route>
-            <Route path="/registerInsured">
-                <RegisterInsured/>
-            </Route>
-            <Route path="/registerPhysician">
-                <RegisterPhysician/>
-            </Route>
-            <Route path="/admin">
-                <Administration/>
-            </Route>
-            <Route path="/newPrescription">
-                <NewPrescription/>
-            </Route>
-            <Route path="/">
-                <Login/>
-            </Route>
-        </Switch>
-    </Router>
-    )
-, document.getElementById('root'));
+ReactDOM.render((<App />), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
