@@ -55,6 +55,10 @@ contract Prescriptions {
         // delete prescriptionInsured[msg.sender][prescription_id_];
     }
 
+    function redeemPrescription(uint prescription_id_) public {
+        delete prescriptionPharmacist[msg.sender][prescription_id_];
+    }
+
     function getPrescription(uint prescription_id_) public returns (Prescription memory){
         return prescription[prescription_id_];
     }
