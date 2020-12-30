@@ -47,12 +47,12 @@ contract Prescriptions {
     }
 
     function transferPrescriptionToPharmacist(Prescription memory prescription_, uint prescription_id_) public {
-        require(prescriptionInsured[msg.sender].length < prescription_id_, "There's no prescription under that number");
-        require(UserContract.checkVerification('physician', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
+        // require(prescriptionInsured[msg.sender].length <= prescription_id_, "There's no prescription under that number");
+        // require(UserContract.checkVerification('physician', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
 
         prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
         prescriptionPharmacist[prescription_.pharmacist].push(prescription_id_);
-        delete prescriptionInsured[msg.sender][prescription_id_];
+        // delete prescriptionInsured[msg.sender][prescription_id_];
     }
 
     function getPrescription(uint prescription_id_) public returns (Prescription memory){
@@ -61,5 +61,9 @@ contract Prescriptions {
 
     function getInsuredPrescriptionsIDs(address public_key) public returns (uint[] memory){
         return prescriptionInsured[public_key];
+    }
+
+    function getPharmacistPrescriptionsIDs(address public_key) public returns (uint[] memory){
+        return prescriptionPharmacist[public_key];
     }
 }
