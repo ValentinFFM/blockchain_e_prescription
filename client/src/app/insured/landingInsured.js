@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import PrescriptionList from './prescriptionList';
+import PrescriptionListInsured from './prescriptionListInsured';
 
 class LandingInsured extends Component {
     render(){
@@ -23,12 +23,12 @@ class LandingInsured extends Component {
 
                 <Container fluid className="mt-5">
                     <Row> 
-                        <Col xs={0} sm={1} md={3} lg={4}></Col>
+                        <Col xs={0} sm={1} md={2} lg={3}></Col>
                         <Col>
                             <h1>Aktuelle Rezepte</h1>
-                            <PrescriptionList />
+                            <PrescriptionListInsured />
                         </Col>
-                        <Col xs={0} sm={1} md={3} lg={4}></Col>
+                        <Col xs={0} sm={1} md={2} lg={3}></Col>
                     </Row>
                 </Container>
             </>
