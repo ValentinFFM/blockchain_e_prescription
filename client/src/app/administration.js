@@ -82,10 +82,23 @@ class RegisterInsured extends Component {
     }
     
     verifyPhysician = async () => {
-        console.log("TEst");
         const { user, accounts, user_contract } = this.state;
         const physician_address_ = user.physician_address;
         const returnedValue = await user_contract.methods.verifyPhysician(physician_address_).send({ from: accounts[0], gas: 1000000 });
+        console.log(returnedValue);
+    }
+
+    getPharmacist = async () => {
+        const { user, accounts, user_contract } = this.state;
+        const pharmacist_address_ = user.pharmacist_address;
+        const returnedValue = await user_contract.methods.getPhysician(pharmacist_address_).call({ from: accounts[0], gas: 1000000 });
+        console.log(returnedValue);
+    }
+    
+    verifyPharmacist = async () => {
+        const { user, accounts, user_contract } = this.state;
+        const pharmacist_address_ = user.pharmacist_address;
+        const returnedValue = await user_contract.methods.verifyPharmacist(pharmacist_address_).send({ from: accounts[0], gas: 1000000 });
         console.log(returnedValue);
     }
 
@@ -133,6 +146,21 @@ class RegisterInsured extends Component {
 
                         <Button variant="primary" block onClick={this.getPhysician}>Get</Button>
                         <Button variant="success" block onClick={this.verifyPhysician}>Verify</Button>
+                    </Form>
+                </Col>
+
+                <Col>
+                    <div className="pb-3 pt-4">
+                        Pharmacist:
+                    </div>
+
+                    <Form>
+                        <Form.Group controlId="pharmacist_address">
+                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
+                        </Form.Group>
+
+                        <Button variant="primary" block onClick={this.getPharmacist}>Get</Button>
+                        <Button variant="success" block onClick={this.verifyPharmacist}>Verify</Button>
                     </Form>
                 </Col>
 

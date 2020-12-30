@@ -71,34 +71,34 @@ class NewPrescription extends Component {
     const { formData, prescriptionsContract } = this.state;
 
     const physician = this.state.account;
-    const patient = formData.public_key_patient;
+    const insured = formData.public_key_patient;
+    const pharmacist = formData.public_key_patient;
+    const pharmacistEqualsInsured = true;
     const medicine_name = formData.medicine_name;
     const medicine_amount = formData.medicine_amount;
     
 
     if(physician !== ""
       && physician !== undefined
-      && patient !== ""
-      && patient !== undefined
+      && insured !== ""
+      && insured !== undefined
       && medicine_name !== ""
       && medicine_name !== undefined
       && medicine_amount !== ""
       && medicine_amount !== undefined
     ){
 
-      try {
-        await prescriptionsContract.methods.newPrescription({physician, patient, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
-      } catch {
-        this.setState({sendingError: true})
-      }
+      console.log("Test")
+
+      // try {
+        await prescriptionsContract.methods.newPrescription({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
+      // } catch {
+      //   this.setState({sendingError: true})
+      // }
 
     } else {
       this.setState({missingInput: true})
     }
-
-
-    
-    
   }
 
   render() {

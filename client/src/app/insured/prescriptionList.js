@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 class PrescriptionList extends Component {
 
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, prescriptions: []}
+    state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, prescriptions: [], prescriptionIds: []}
 
     componentDidMount = async () => {
         const ethereum = await window.ethereum;
@@ -49,9 +49,21 @@ class PrescriptionList extends Component {
     }
 
     getPrescriptions = async () => {
-        const { account, prescriptionsContract } = this.state;
-        const response = await prescriptionsContract.methods.getPatientPrescriptions(account).call({ from: account, gas: 1000000 });
-        this.setState({prescriptions: response});
+        var prescriptionsArray = [];
+        const { account, standardAccount, prescriptionsContract } = this.state;
+        const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
+
+        for(var i = 0; i < prescriptionIds_.length; i++){
+            var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 })
+            prescriptionsArray.push(prescription)
+        }
+            
+        this.setState({prescriptions: prescriptionsArray, prescriptionIds: prescriptionIds_});
+        console.log(prescriptionsArray)
+    }
+
+    sendPrescription = async (event) => {
+        console.log(event.target.id)
     }
 
 
@@ -61,17 +73,31 @@ class PrescriptionList extends Component {
                 <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
             )
         } else {
-            return this.state.prescriptions.map(function(prescription){
-                return(
+
+            var items = []
+            var counter = 0;
+
+            for(var prescription of this.state.prescriptions){
+                var prescription_id = this.state.prescriptionIds[counter]
+                items.push(
                     <Card className="mt-5">
                         <Card.Body>
                             <Card.Title>{prescription.medicine_name} ({prescription.medicine_amount})</Card.Title>
                             <Card.Text></Card.Text>
-                            <Button variant="dark">An Apotheke senden</Button>
+                            <Button id={prescription_id} onClick={this.sendPrescription} variant="dark">An Apotheke senden</Button>
                         </Card.Body>
                     </Card>
                 )
-            })
+
+                counter = counter + 1;
+            }
+
+
+            return (
+                <>
+                    {items}
+                </>
+            )
         }
     }
 }
