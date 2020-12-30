@@ -5,8 +5,9 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import PrescriptionListPharmacist from './prescriptionListPharmacist';
 
-class LandingPharmacist extends Component {
+class LandingInsured extends Component {
     render(){
         return(
             <>
@@ -22,14 +23,16 @@ class LandingPharmacist extends Component {
 
                 <Container fluid className="mt-5">
                     <Row> 
-                        <Col xs={0} sm={1} md={3} lg={4}></Col>
+                        <Col xs={0} sm={1} md={2} lg={3}></Col>
                         <Col>
+                            <h1>Aktuelle Rezepte</h1>
+                            <PrescriptionListPharmacist />
                         </Col>
-                        <Col xs={0} sm={1} md={3} lg={4}></Col>
+                        <Col xs={0} sm={1} md={2} lg={3}></Col>
                     </Row>
                 </Container>
             </>
         );
     }
 }
-export default LandingPharmacist;
+export default LandingInsured;
