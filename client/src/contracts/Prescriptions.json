@@ -6212,12 +6212,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x8fc8AE5f7eEc960473FEc90D46cF4c3d4E2c3642",
-      "transactionHash": "0xcd8339a96848a0477ad2e777277d577456074ba618e3ac33630cd1364fa2007a"
+      "address": "0x7474635197f57F374c2a20f5F816BbBE2a428A4D",
+      "transactionHash": "0xb8be2dea7be3d2147766907cc417be43e33a239269186a3c541fd733b6e49dde"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-30T19:56:22.884Z",
+  "updatedAt": "2020-12-31T08:59:28.032Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
