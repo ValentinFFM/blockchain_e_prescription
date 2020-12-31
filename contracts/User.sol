@@ -5,13 +5,16 @@ pragma solidity >=0.4.21 <0.7.0;
 pragma experimental ABIEncoderV2;
 
 contract User {
+
+    // Variable that stores the address of the user who created the smart contract
     address public verifying_institution;
 
+    // Constructor that assigns the creator of the smart contract to the verifying institution
     constructor () public {
         verifying_institution = msg.sender;
     }
 
-    // Defining datatype insured to store all necessary data related to the insured
+    // Defining struct insured to store all necessary data related to the insured
     struct Insured {
         string surname;
         string name;
@@ -30,7 +33,7 @@ contract User {
         bool verified;
     }
 
-    // Defining datatype physician to store all necessary data related to the physician
+    // Defining struct physician to store all necessary data related to the physician
     struct Physician {
         string job_title;
         string surname;
@@ -54,8 +57,6 @@ contract User {
 
         bool verified;
     }
-
-
 
     // Insured Number mapped on the related insured object with all data of the insured
     mapping(address => Insured) public insureds;

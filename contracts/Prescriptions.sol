@@ -2,10 +2,14 @@
 pragma solidity >=0.4.21 <0.7.0;
 pragma experimental ABIEncoderV2;
 
+// Import Smart Contract User to interact and call functions of it
 import "./User.sol";
 
 contract Prescriptions {
+
+    // Variable that stores the address of the user who created the smart contract
     address public verifying_institution;
+
     User UserContract;
     uint prescription_id;
 
@@ -48,7 +52,7 @@ contract Prescriptions {
 
     function transferPrescriptionToPharmacist(Prescription memory prescription_, uint prescription_id_) public {
         // require(prescriptionInsured[msg.sender].length <= prescription_id_, "There's no prescription under that number");
-        // require(UserContract.checkVerification('physician', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
+        // require(UserContract.checkVerification('pharmacist', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
 
         prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
         prescriptionPharmacist[prescription_.pharmacist].push(prescription_id_);
