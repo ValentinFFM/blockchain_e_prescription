@@ -12,7 +12,7 @@ class LandingInsured extends Component {
         return(
             <>
                 <Navbar bg="dark" variant="dark" expand="lg">
-                    <Navbar.Brand>E-Prescription</Navbar.Brand>
+                    <Navbar.Brand>E-Rezept</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">

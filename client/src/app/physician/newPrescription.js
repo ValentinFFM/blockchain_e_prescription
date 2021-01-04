@@ -7,10 +7,14 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import LandingPhysician from './landingPhysician';
 
 
 class NewPrescription extends Component {
-  state = {web3: null, prescriptionsContract: null, account: null, formData: {}, missingInput: false, sendingError: false};
+  state = {web3: null, prescriptionsContract: null, account: null, formData: {}, missingInput: false, sendingError: false, sendingComplete: false};
 
   constructor(props){
     super(props)
@@ -90,11 +94,12 @@ class NewPrescription extends Component {
 
       console.log("Test")
 
-      // try {
+      try {
         await prescriptionsContract.methods.newPrescription({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
-      // } catch {
-      //   this.setState({sendingError: true})
-      // }
+        this.setState({sendingComplete: true})
+      } catch {
+        this.setState({sendingError: true})
+      }
 
     } else {
       this.setState({missingInput: true})
@@ -102,48 +107,74 @@ class NewPrescription extends Component {
   }
 
   render() {
-    // if (!this.state.web3) {
-    //   return <div>Loading Web3, accounts, and contract...</div>;
-    // }
-    return (
-      <Container fluid className="mt-5">
-          <Row> 
-            <Col sm={2}>
-            </Col>
-            <Col className="">
-              <Form>
-
-                <Form.Group controlId="public_key_patient">
-                  <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                </Form.Group>
-
-                <div className="pb-3 pt-4">
-                    Rezept:
-                </div>
-
-                <Form.Group controlId="medicine_name">
-                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Name des Medikaments"></Form.Control>
-                </Form.Group>
-
-                <Form.Group controlId="medicine_amount">
-                  <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
-                </Form.Group>
-                
-                <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
-              </Form>
-
-              <Alert show={this.state.sendingError} variant="danger" className="mt-3">
-                  Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
-              </Alert>
-              <Alert show={this.state.missingInput} variant="danger" className="mt-3">
-                  Bitte füllen Sie alle Felder aus!
-              </Alert>
-            </Col>
-            <Col sm={2}>
-            </Col>
-          </Row>
-      </Container>
-    );
+    if(this.state.sendingComplete){
+      return (
+        <>
+          <Router forceRefresh={true}>
+            <Redirect push to='/physician'/>
+            <Switch>
+                <Route path="/physician">
+                    <LandingPhysician/>
+                </Route>
+            </Switch>
+          </Router>
+        </>
+      )
+       
+    } else {
+      return (
+        <>
+          <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar.Brand href="/physician">E-Rezept</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link active>Neues Rezept</Nav.Link>
+                </Nav>
+                <Button href="/Logout" variant="outline-danger">Logout</Button>
+            </Navbar.Collapse>
+          </Navbar>
+  
+          <Container fluid className="mt-5">
+              <Row> 
+                <Col sm={2}>
+                </Col>
+                <Col className="">
+                  <Form>
+  
+                    <Form.Group controlId="public_key_patient">
+                      <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                    </Form.Group>
+  
+                    <div className="pb-3 pt-4">
+                        Rezept:
+                    </div>
+  
+                    <Form.Group controlId="medicine_name">
+                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Name des Medikaments"></Form.Control>
+                    </Form.Group>
+  
+                    <Form.Group controlId="medicine_amount">
+                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
+                    </Form.Group>
+                    
+                    <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
+                  </Form>
+  
+                  <Alert show={this.state.sendingError} variant="danger" className="mt-3">
+                      Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
+                  </Alert>
+                  <Alert show={this.state.missingInput} variant="danger" className="mt-3">
+                      Bitte füllen Sie alle Felder aus!
+                  </Alert>
+                </Col>
+                <Col sm={2}>
+                </Col>
+              </Row>
+          </Container>
+        </>
+        );
+    }
   }
 }
 

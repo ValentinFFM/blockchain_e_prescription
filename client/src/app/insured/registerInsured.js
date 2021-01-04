@@ -121,7 +121,7 @@ class RegisterInsured extends Component {
             return (
                 <>
                     <Navbar bg="dark" variant="dark" expand="lg">
-                            <Navbar.Brand>E-Prescription</Navbar.Brand>
+                            <Navbar.Brand>E-Rezept</Navbar.Brand>
                     </Navbar>
                     <Container fluid className="mt-5">
                         <Row> 

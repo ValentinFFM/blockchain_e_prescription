@@ -83,7 +83,7 @@ class RegisterPharmacist extends Component {
             return (
                 <>
                     <Navbar bg="dark" variant="dark" expand="lg">
-                            <Navbar.Brand>E-Prescription</Navbar.Brand>
+                            <Navbar.Brand>E-Rezept</Navbar.Brand>
                     </Navbar>
 
                     <Container fluid className="mt-5">
@@ -116,7 +116,7 @@ class RegisterPharmacist extends Component {
             );
         } else {
             return(
-                <div>
+                <>
                     <Router forceRefresh={true}>
                         <Redirect push to='/login'/>
                         <Switch>
@@ -125,7 +125,7 @@ class RegisterPharmacist extends Component {
                             </Route>
                         </Switch>
                     </Router>
-                </div>
+                </>
             )
         }
       }

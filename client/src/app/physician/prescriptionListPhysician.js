@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PrescriptionsContract from '../../contracts/Prescriptions.json'
+import PrescriptionsContract from '../../contracts/Prescriptions.json';
 import getWeb3 from "../getWeb3";
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-class PrescriptionListPharmacist extends Component {
+class PrescriptionListPhysician extends Component {
 
     state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
 
@@ -68,7 +69,7 @@ class PrescriptionListPharmacist extends Component {
     getPrescriptions = async () => {
         var prescriptionsArray = [];
         const { account, standardAccount, prescriptionsContract, formData } = this.state;
-        const prescriptionIds_ = await prescriptionsContract.methods.getPharmacistPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
+        const prescriptionIds_ = await prescriptionsContract.methods.getPhysisicianPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
 
         for(var i = 0; i < prescriptionIds_.length; i++){
             var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
@@ -85,18 +86,10 @@ class PrescriptionListPharmacist extends Component {
         console.log(prescriptionsArray)
     }
 
-    redeem = async (event) => {
-        const { account, prescriptionsContract } = this.state;
-        const prescriptionId_ = event.target.id
-
-        await prescriptionsContract.methods.getPrescription(prescriptionId_).send({ from: account, gas: 1000000 });
-    }
-
-
     render(){
         if(this.state.prescriptions.length === 0){
             return(
-                <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
+                <p>Sie haben noch keine Rezepte ausgestellt. Klicken Sie auf "Neues Rezept", um ihr erstes Rezept zu erstellen!</p>
             )
         } else {
 
@@ -104,14 +97,18 @@ class PrescriptionListPharmacist extends Component {
             var counter = 0;
 
             for(var prescription of this.state.prescriptions){
-                var prescription_id = this.state.prescriptionIds[counter]
-
                 items.push(
                     <Card className="mt-5">
                         <Card.Body>
                             <Card.Title>{prescription.medicine_name} ({prescription.medicine_amount})</Card.Title>
                             <Card.Text></Card.Text>
-                            <Button id={prescription_id} onClick={this.redeem} variant="dark">Einlösen</Button>
+                            <Row>
+                                <Col>
+                                </Col>
+                                <Col>
+                                </Col>
+                            </Row>
+                            
                         </Card.Body>
                     </Card>
                 )
@@ -128,4 +125,4 @@ class PrescriptionListPharmacist extends Component {
         }
     }
 }
-export default PrescriptionListPharmacist;
+export default PrescriptionListPhysician;
