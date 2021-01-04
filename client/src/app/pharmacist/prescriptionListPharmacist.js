@@ -89,7 +89,9 @@ class PrescriptionListPharmacist extends Component {
         const { account, prescriptionsContract } = this.state;
         const prescriptionId_ = event.target.id
 
-        await prescriptionsContract.methods.getPrescription(prescriptionId_).send({ from: account, gas: 1000000 });
+        console.log(prescriptionId_)
+
+        await prescriptionsContract.methods.redeemPrescription(prescriptionId_).send({ from: account, gas: 1000000 });
     }
 
 

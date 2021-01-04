@@ -102,7 +102,13 @@ class PrescriptionListInsured extends Component {
 
         console.log(prescription_id_)
 
-        await prescriptionsContract.methods.transferPrescriptionToPharmacist({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}, 1).send({ from: account, gas: 1000000 });
+        await prescriptionsContract.methods.transferPrescriptionToPharmacist({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}, prescription_id_).send({ from: account, gas: 1000000 });
+    }
+
+    getPrescriptionID = async () => {
+        const { account, standardAccount, prescriptionsContract, formData } = this.state;
+        const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
+        console.log(prescriptionIds_);
     }
 
 
@@ -139,7 +145,9 @@ class PrescriptionListInsured extends Component {
                             </Row>
                             
                         </Card.Body>
+                        <Button onClick={this.getPrescriptionID}>Get PrescriptionID</Button>
                     </Card>
+                    
                 )
 
                 counter = counter + 1;

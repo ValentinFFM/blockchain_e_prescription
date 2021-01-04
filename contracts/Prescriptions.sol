@@ -33,6 +33,7 @@ contract Prescriptions {
     }
 
     mapping(uint => Prescription) public prescription;
+    mapping(address => uint[]) public prescriptionPhysisician;
     mapping(address => uint[]) public prescriptionInsured;
     mapping(address => uint[]) public prescriptionPharmacist;
     
@@ -46,25 +47,59 @@ contract Prescriptions {
         require(UserContract.checkVerification('insured', prescription_.insured) == true, "This insured is not registered or verified!");
 
         prescription[prescription_id] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
+        prescriptionPhysisician[prescription_.physician].push(prescription_id);
         prescriptionInsured[prescription_.insured].push(prescription_id);
         prescription_id = prescription_id + 1;
     }
 
     function transferPrescriptionToPharmacist(Prescription memory prescription_, uint prescription_id_) public {
-        // require(prescriptionInsured[msg.sender].length <= prescription_id_, "There's no prescription under that number");
-        // require(UserContract.checkVerification('pharmacist', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
-
+        require(msg.sender == prescription_.insured, "The prescription you try to transfer is not your prescription!");
+        require(UserContract.checkVerification('insured', prescription_.insured) == true, "You don't have the premission to transfer a prescription!");
+        require(UserContract.checkVerification('pharmacist', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
+    
         prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
         prescriptionPharmacist[prescription_.pharmacist].push(prescription_id_);
-        // delete prescriptionInsured[msg.sender][prescription_id_];
+
+        bool swap = false;
+        uint prescriptionInsuredLength;
+        prescriptionInsuredLength = prescriptionInsured[msg.sender].length;
+
+        for(uint i=0; i < prescriptionInsuredLength; i++){
+            if(prescription_id_ == prescriptionInsured[msg.sender][i]){
+                prescriptionInsured[msg.sender][i] = prescriptionInsured[msg.sender][prescriptionInsuredLength-1];
+                swap = true;
+            }
+        } 
+        
+        if(swap == true){
+            prescriptionInsured[msg.sender].pop();
+        }
     }
 
     function redeemPrescription(uint prescription_id_) public {
-        delete prescriptionPharmacist[msg.sender][prescription_id_];
+        bool swap = false;
+        uint prescriptionPharmacistLength;
+        prescriptionPharmacistLength = prescriptionPharmacist[msg.sender].length;
+
+        for(uint i=0; i < prescriptionPharmacistLength; i++){
+            if(prescription_id_ == prescriptionPharmacist[msg.sender][i]){
+                prescriptionPharmacist[msg.sender][i] = prescriptionPharmacist[msg.sender][prescriptionPharmacistLength-1];
+                prescriptionPharmacist[msg.sender].pop();
+                swap = true;
+            }
+        } 
+
+        if(swap == true){
+            prescriptionPharmacist[msg.sender].pop();
+        }
     }
 
     function getPrescription(uint prescription_id_) public returns (Prescription memory){
         return prescription[prescription_id_];
+    }
+
+    function getPhysisicianPrescriptionsIDs(address public_key) public returns (uint[] memory){
+        return prescriptionPhysisician[public_key];
     }
 
     function getInsuredPrescriptionsIDs(address public_key) public returns (uint[] memory){

@@ -7,7 +7,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PrescriptionListInsured from './prescriptionListInsured';
 
+
+
 class LandingInsured extends Component {
+    
     render(){
         return(
             <>
