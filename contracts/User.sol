@@ -179,6 +179,12 @@ contract User {
             } else {
                 return false;
             }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('verifying_institution'))){
+            if(verifying_institution == public_key){
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

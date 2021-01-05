@@ -9,11 +9,11 @@ import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar';
 import Login from './../login'
 import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
 
 
 class RegisterInsured extends Component {
-    state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {} , missingInput: false, registration_accepted: false}
+    state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {} , missingInput: false, registration_accepted: false, userExistance: null, initialize: false}
 
     constructor(props){
         super(props)
@@ -24,21 +24,22 @@ class RegisterInsured extends Component {
         const ethereum = await window.ethereum;
 
         if(ethereum){
+            const public_key = ethereum.selectedAddress;
+            this.setState({account: public_key});
+
             ethereum.on('accountsChanged', (public_key) => {
-                console.log(public_key)
-                this.setState({account: public_key[0]})
-                console.log(this.state.account)
-              });
+                this.setState({account: public_key[0]});
+                if(this.state.initialize === true){
+                    this.checkExistence();
+                }
+            });
         }
 
 
         try {
-            // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
             const standardAccount = accounts[0]
-
-            // Get the contract instance.
             const networkId = await web3.eth.net.getId();
             const UserContractNetwork = UserContract.networks[networkId];
 
@@ -47,13 +48,28 @@ class RegisterInsured extends Component {
                 UserContractNetwork && UserContractNetwork.address,
             );
 
-            // Save data into the react state
-            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance });
+            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true });
+            this.checkExistence();
+
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     };
+
+    checkExistence = async () => {
+        const { userContract } = this.state;
+        const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+        const existence_physician = await userContract.methods.checkExistence('physician', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+        const existence_pharmacist = await userContract.methods.checkExistence('pharmacist', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+        const existence_verifying_inst = await userContract.methods.checkExistence('verifying_institution', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+
+        if(existence_insured === true || existence_physician === true || existence_pharmacist === true || existence_verifying_inst === true){
+            this.setState({userExistance: true})
+        } else {
+            this.setState({userExistance: false})
+        }
+    }
 
     handleChange(event){
         // Reading out the value and the id of the triggered input
@@ -117,7 +133,20 @@ class RegisterInsured extends Component {
 
     render() {
 
-        if(this.state.registration_accepted === false){
+        if(this.state.userExistance === true || this.state.registration_accepted === true){
+            return(
+                <div>
+                    <Router forceRefresh={true}>
+                        <Redirect push to='/login'/>
+                        <Switch>
+                            <Route path="/login">
+                                <Login/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
+            )
+        } else {
             return (
                 <>
                     <Navbar bg="dark" variant="dark" expand="lg">
@@ -216,20 +245,7 @@ class RegisterInsured extends Component {
                     </Container>
                 </>
             );
-        } else {
-            return(
-                <div>
-                    <Router forceRefresh={true}>
-                        <Redirect push to='/login'/>
-                        <Switch>
-                            <Route path="/login">
-                                <Login/>
-                            </Route>
-                        </Switch>
-                    </Router>
-                </div>
-            )
         }
-      }
+    }
 }
 export default RegisterInsured;
