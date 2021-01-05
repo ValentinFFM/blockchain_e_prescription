@@ -98,7 +98,7 @@ class PrescriptionListPharmacist extends Component {
     render(){
         if(this.state.prescriptions.length === 0){
             return(
-                <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
+                <p>Sie haben derzeit keine offenen Rezepte!</p>
             )
         } else {
 

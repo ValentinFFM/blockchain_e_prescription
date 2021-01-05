@@ -106,7 +106,7 @@ class PrescriptionListInsured extends Component {
     }
 
     getPrescriptionID = async () => {
-        const { account, standardAccount, prescriptionsContract, formData } = this.state;
+        const { account, standardAccount, prescriptionsContract } = this.state;
         const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
         console.log(prescriptionIds_);
     }
