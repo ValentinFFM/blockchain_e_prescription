@@ -18,6 +18,7 @@ import UserContract from "../../contracts/User.json";
 import Login from './../login';
 
 
+
 class RegisterPhysician extends Component {
     state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {}, missingInput: false, registration_accepted: false, userExistance: null, initialize: false}
 

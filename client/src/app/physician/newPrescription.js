@@ -179,7 +179,7 @@ class NewPrescription extends Component {
                     <Form>
     
                       <Form.Group controlId="public_key_patient">
-                        <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                        <Form.Control type="text" placeholder="Public Key des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
                       </Form.Group>
     
                       <div className="pb-3 pt-4">

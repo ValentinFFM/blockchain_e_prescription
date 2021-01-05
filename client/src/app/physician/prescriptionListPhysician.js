@@ -36,12 +36,9 @@ class PrescriptionListPhysician extends Component {
         
 
         try {
-            // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
             const standardAccount = accounts[0]
-      
-            // Get the contract instance.
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
       
