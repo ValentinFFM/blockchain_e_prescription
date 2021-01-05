@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import UserContract from "../contracts/User.json";
 import getWeb3 from "./getWeb3";
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+// React-Bootstrap imports
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,13 +10,19 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import RegisterInsured from './insured/registerInsured';
-import RegisterPhysician from './physician/registerPhysician';
+
+// Smart Contract imports
+import UserContract from "../contracts/User.json";
+
+// Component imports
 import LandingInsured from './insured/landingInsured';
-import LandingPhysician from './physician/landingPhysician';
-import RegisterPharmacist from './pharmacist/registerPhamacist';
+import RegisterInsured from './insured/registerInsured';
 import LandingPharmacist from './pharmacist/landingPharmacist';
+import RegisterPharmacist from './pharmacist/registerPhamacist';
+import LandingPhysician from './physician/landingPhysician';
+import RegisterPhysician from './physician/registerPhysician';
+
+
 
 class NewLogin extends Component {
 

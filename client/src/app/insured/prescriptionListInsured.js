@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import PrescriptionsContract from '../../contracts/Prescriptions.json';
 import getWeb3 from "../getWeb3";
+
+// React-Bootstrap imports
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+
+// Smart Contract imports
+import PrescriptionsContract from '../../contracts/Prescriptions.json';
+
+
 
 class PrescriptionListInsured extends Component {
 

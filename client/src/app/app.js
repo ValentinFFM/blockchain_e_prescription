@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import RegisterInsured from './insured/registerInsured';
-import RegisterPhysician from './physician/registerPhysician';
-import LandingInsured from './insured/landingInsured';
-import LandingPhysician from './physician/landingPhysician';
+
+// Component imports
 import Administration from './administration';
-import NewPrescription from './physician/newPrescription';
 import Login from './login';
-import RegisterPharmacist from './pharmacist/registerPhamacist';
+import LandingInsured from './insured/landingInsured';
+import RegisterInsured from './insured/registerInsured';
 import LandingPharmacist from './pharmacist/landingPharmacist';
+import RegisterPharmacist from './pharmacist/registerPhamacist';
+import LandingPhysician from './physician/landingPhysician';
+import NewPrescription from './physician/newPrescription';
+import RegisterPhysician from './physician/registerPhysician';
+
+
 
 class App extends Component {    
     // Renders page content

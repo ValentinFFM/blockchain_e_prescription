@@ -1,15 +1,21 @@
 import React, { Component } from "react";
+import getWeb3 from "../getWeb3";
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+// React-Bootstrap imports
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import PrescriptionListPhysician from './prescriptionListPhysician'
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+
+// Smart Contract imports
 import UserContract from './../../contracts/User.json';
-import getWeb3 from "../getWeb3";
-import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+// Component imports
 import Login from './../login';
+import PrescriptionListPhysician from './prescriptionListPhysician';
 
 
 class LandingPhysician extends Component {

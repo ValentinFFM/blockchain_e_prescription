@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import PrescriptionsContract from './../../contracts/Prescriptions.json';
 import getWeb3 from "../getWeb3";
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+// React-Bootstrap imports
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,10 +11,15 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import LandingPhysician from './landingPhysician';
+
+// Smart Contract imports
+import PrescriptionsContract from './../../contracts/Prescriptions.json';
 import UserContract from './../../contracts/User.json';
+
+// Component imports
+import LandingPhysician from './landingPhysician';
 import Login from './../login';
+
 
 
 class NewPrescription extends Component {

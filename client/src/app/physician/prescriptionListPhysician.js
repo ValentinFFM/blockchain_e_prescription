@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-import PrescriptionsContract from '../../contracts/Prescriptions.json';
 import getWeb3 from "../getWeb3";
+
+// React-Bootstrap imports
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+
+// Smart Contract imports
+import PrescriptionsContract from '../../contracts/Prescriptions.json';
+
+
 
 class PrescriptionListPhysician extends Component {
 

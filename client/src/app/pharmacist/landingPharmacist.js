@@ -1,19 +1,25 @@
 import React, { Component } from "react";
+import getWeb3 from "../getWeb3";
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+// React-Bootstrap imports
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import PrescriptionListPharmacist from './prescriptionListPharmacist';
+
+// Smart Contract imports
 import UserContract from './../../contracts/User.json';
-import getWeb3 from "../getWeb3";
-import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Login from './../login';
+
+// Component imports 
+import Login from './../login'
+import PrescriptionListPharmacist from './prescriptionListPharmacist';
+
+
 
 class LandingInsured extends Component {
-
-
 
     state = {web3: null, standardAccount: null, userContract: null, account: null, userVerfied: null, initialize: false}
 
