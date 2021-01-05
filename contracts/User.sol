@@ -1,20 +1,23 @@
 // SPDX-License-Identifier: MIT
-
-// Defining the solidity version that is used and allowing experimental functions to allow using structs as datatype within the function call
 pragma solidity >=0.4.21 <0.7.0;
+
+// Experimental function is necessary to allow mappings with structs.
 pragma experimental ABIEncoderV2;
 
+/**
+    The Smart Contract User is responsible for storing the information of all users.
+    Furthermore it provides all necessary functions to interact with users.
+ */
 contract User {
 
-    // Variable that stores the address of the user who created the smart contract
     address public verifying_institution;
 
-    // Constructor that assigns the creator of the smart contract to the verifying institution
+    // Assigns the creator of the smart contract as verifying institution.
     constructor () public {
         verifying_institution = msg.sender;
     }
 
-    // Defining struct insured to store all necessary data related to the insured
+    // Defining struct that contains all variables that are needed for a insured.
     struct Insured {
         string surname;
         string name;
@@ -33,7 +36,7 @@ contract User {
         bool verified;
     }
 
-    // Defining struct physician to store all necessary data related to the physician
+    // Defining struct that contains all variables that are needed for a physician.
     struct Physician {
         string job_title;
         string surname;
@@ -50,7 +53,7 @@ contract User {
         bool verified;
     }
 
-    // Defining datatype pharmacist to store all necessary data related to the pharmacist
+    // Defining struct that contains all variables that are needed for a pharmacist.
     struct Pharmacist {
         uint pharmacy_number;
         string name;
@@ -58,108 +61,67 @@ contract User {
         bool verified;
     }
 
-    // Insured Number mapped on the related insured object with all data of the insured
+    // For every user group the public keys of the users are mapped to the corresponding user struct.
     mapping(address => Insured) public insureds;
-
-    // Physician Number mapped on the related physician object with all data of the physician
     mapping(address => Physician) public physicians;
-
-    // Pharmacist Number mapped on the related pharmacist object with all data of the pharmacist
     mapping(address => Pharmacist) public pharmacists;
 
 
 
-    // Function to add a new Insured
     function addNewInsured(Insured memory insured_)  public{
         insureds[msg.sender] = Insured(insured_.surname, insured_.name, insured_.street, insured_.street_number, insured_.post_code, insured_.city, insured_.birth_date, insured_.insurance, insured_.insurance_number, insured_.insured_number, insured_.insured_status, false);
     }
 
-    // From the address of the veryifying_institution every insured can be verified
+    function addNewPhysician(Physician memory physician_) public{
+        physicians[msg.sender] = Physician(physician_.job_title, physician_.surname, physician_.name, physician_.physician_number, physician_.street, physician_.street_number, physician_.post_code, physician_.city, physician_.telephone_number, physician_.business_number, false);
+    }
+
+    function addNewPharmacist(Pharmacist memory pharmacist_) public{
+        pharmacists[msg.sender] = Pharmacist(pharmacist_.pharmacy_number, pharmacist_.name, false);
+    }
+
+
+
     function verifyInsured(address public_key) public returns (bool){
         require(msg.sender == verifying_institution, "Only the verify institution has the right to verify insured!");
         require(insureds[public_key].insured_number > 0, "No insured exists under this address!");
         insureds[public_key].verified = true;
     }
 
-    // Function returns true, if insured with the public_key exists
-    function getInsured(address public_key) public view returns(Insured memory){
-        if(insureds[public_key].insured_number > 0){
-            return insureds[public_key];
-        } 
-    }
-
-
-
-    // Function to add a new Physician
-    function addNewPhysician(Physician memory physician_) public{
-        physicians[msg.sender] = Physician(physician_.job_title, physician_.surname, physician_.name, physician_.physician_number, physician_.street, physician_.street_number, physician_.post_code, physician_.city, physician_.telephone_number, physician_.business_number, false);
-    }
-
-    // From the address of the veryifying_institution every physician can be verified
     function verifyPhysician(address public_key) public returns (bool){
         require(msg.sender == verifying_institution, "Only the verify institution has the right to verify physician!");
         require(physicians[public_key].physician_number > 0, "No physician exists under this address!");
         physicians[public_key].verified = true;
     }
 
-    // Function returns true, if physician with the public_key exists
-    function getPhysician(address public_key) public view returns(Physician memory){
-        if(physicians[public_key].physician_number > 0){
-            return physicians[public_key];
-        } 
-    }
-
-
-
-    // Function to add a new Physician
-    function addNewPharmacist(Pharmacist memory pharmacist_) public{
-        pharmacists[msg.sender] = Pharmacist(pharmacist_.pharmacy_number, pharmacist_.name, false);
-    }
-
-    // From the address of the veryifying_institution every pharmacist can be verified
     function verifyPharmacist(address public_key) public returns (bool){
         require(msg.sender == verifying_institution, "Only the verify institution has the right to verify pharmacist!");
         require(pharmacists[public_key].pharmacy_number > 0, "No pharmacist exists under this address!");
         pharmacists[public_key].verified = true;
     }
 
-    // Function returns true, if pharmacist with the public_key exists
+
+
+    function getInsured(address public_key) public view returns(Insured memory){
+        if(insureds[public_key].insured_number > 0){
+            return insureds[public_key];
+        } 
+    }
+
+    function getPhysician(address public_key) public view returns(Physician memory){
+        if(physicians[public_key].physician_number > 0){
+            return physicians[public_key];
+        } 
+    }
+
     function getPharmacist(address public_key) public view returns(Pharmacist memory){
         if(pharmacists[public_key].pharmacy_number > 0){
             return pharmacists[public_key];
         } 
     }
 
-    // Checks if an user exists under the given public_key and if he's is verified
-    function checkVerification(string memory role, address public_key) public view returns (bool){
-        if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
-            if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
-                return true;
-            } else {
-                return false;
-            }
-        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('physician'))){
-            if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
-                return true;
-            } else {
-                return false;
-            }
-        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('pharmacist'))){
-            if(pharmacists[public_key].pharmacy_number >0 && pharmacists[public_key].verified == true){
-                return true;
-            } else {
-                return false;
-            }
-        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('verifying_institution'))){
-            if(verifying_institution == public_key){
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
 
-    // Checks if an user exists under the given public_key
+    // Returns true, if the user exists.
     function checkExistence(string memory role, address public_key) public view returns (bool){
         if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
             if(insureds[public_key].insured_number >0){
@@ -187,4 +149,33 @@ contract User {
             }
         }
     }
+
+    // Returns true, if the user exists and is verified by the verifying institution.
+    function checkVerification(string memory role, address public_key) public view returns (bool){
+        if(keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('insured'))){
+            if(insureds[public_key].insured_number > 0 && insureds[public_key].verified == true){
+                return true;
+            } else {
+                return false;
+            }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('physician'))){
+            if(physicians[public_key].physician_number > 0 && physicians[public_key].verified == true){
+                return true;
+            } else {
+                return false;
+            }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('pharmacist'))){
+            if(pharmacists[public_key].pharmacy_number >0 && pharmacists[public_key].verified == true){
+                return true;
+            } else {
+                return false;
+            }
+        } else if (keccak256(abi.encodePacked(role)) == keccak256(abi.encodePacked('verifying_institution'))){
+            if(verifying_institution == public_key){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }    
 }

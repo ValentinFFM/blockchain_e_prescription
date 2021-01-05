@@ -1,23 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.21 <0.7.0;
+
+// Experimental function is necessary to allow mappings with structs.
 pragma experimental ABIEncoderV2;
 
-// Import Smart Contract User to interact and call functions of it
+// Import of Smart Contract "User" to interact with the functionalities of it
 import "./User.sol";
 
+/**
+    The Smart Contract Prescriptions is responsible for storing the information of all prescriptions.
+    Furthermore it provides all necessary functions to interact with prescriptions.
+ */
 contract Prescriptions {
 
-    // Variable that stores the address of the user who created the smart contract
     address public verifying_institution;
-
     User UserContract;
     uint prescription_id;
 
+    // Assigns the creator of the smart contract as verifying institution and sets the first prescription_id.
     constructor () public {
         verifying_institution = msg.sender;
         prescription_id = 0;
     }
 
+    // Defining struct that contains all variables that are needed for a prescription.
     struct Prescription {
         address physician;
         address insured;
@@ -32,11 +38,15 @@ contract Prescriptions {
         // bool charges_mandatory;
     }
 
-    mapping(uint => Prescription) public prescription;
+    // For every user group the public keys of the users are mapped to an array containing prescription-ids.
     mapping(address => uint[]) public prescriptionPhysisician;
     mapping(address => uint[]) public prescriptionInsured;
     mapping(address => uint[]) public prescriptionPharmacist;
-    
+
+    // Mapping prescription-ids to the corresponding prescription struct.
+    mapping(uint => Prescription) public prescription;
+
+    // Function for connecting the Smart Contract user to the Smart Contract prescription.
     function establishConnectionToUserSmartContract(address smart_contract_key) public {
         require(msg.sender == verifying_institution, "Only the verify institution has the premission to connect prescription to user!");
         UserContract = User(smart_contract_key);
@@ -64,6 +74,7 @@ contract Prescriptions {
         uint prescriptionInsuredLength;
         prescriptionInsuredLength = prescriptionInsured[msg.sender].length;
 
+        // Swaps the last prescription from the array of the insured with the prescription, that should be deleted.
         for(uint i=0; i < prescriptionInsuredLength; i++){
             if(prescription_id_ == prescriptionInsured[msg.sender][i]){
                 prescriptionInsured[msg.sender][i] = prescriptionInsured[msg.sender][prescriptionInsuredLength-1];
@@ -71,6 +82,7 @@ contract Prescriptions {
             }
         } 
         
+        // Last prescription (which was previously swapped) gets deleted from the array of the insured to prevent that the insured can send a prescription twice.
         if(swap == true){
             prescriptionInsured[msg.sender].pop();
         }
@@ -81,6 +93,7 @@ contract Prescriptions {
         uint prescriptionPharmacistLength;
         prescriptionPharmacistLength = prescriptionPharmacist[msg.sender].length;
 
+        // Swaps the last prescription from the array of the pharmacist with the prescription, that should be deleted.
         for(uint i=0; i < prescriptionPharmacistLength; i++){
             if(prescription_id_ == prescriptionPharmacist[msg.sender][i]){
                 prescriptionPharmacist[msg.sender][i] = prescriptionPharmacist[msg.sender][prescriptionPharmacistLength-1];
@@ -89,6 +102,7 @@ contract Prescriptions {
             }
         } 
 
+        // Last prescription (which was previously swapped) gets deleted from the array of the pharmacist to prevent that the pharmacist can redeem a prescription twice.
         if(swap == true){
             prescriptionPharmacist[msg.sender].pop();
         }
