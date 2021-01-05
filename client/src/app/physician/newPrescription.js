@@ -11,10 +11,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import LandingPhysician from './landingPhysician';
+import UserContract from './../../contracts/User.json';
+import Login from './../login';
 
 
 class NewPrescription extends Component {
-  state = {web3: null, prescriptionsContract: null, account: null, formData: {}, missingInput: false, sendingError: false, sendingComplete: false};
+  state = {web3: null, standardAccount: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, missingInput: false, sendingError: false, sendingComplete: false};
 
   constructor(props){
     super(props)
@@ -29,9 +31,10 @@ class NewPrescription extends Component {
       this.setState({account: public_key})
 
       ethereum.on('accountsChanged', (public_key) => {
-        console.log(public_key)
         this.setState({account: public_key[0]})
-        console.log(this.state.account)
+        if(this.state.initialize === true){
+          this.checkVerification();
+        }
       });
     }
 
@@ -44,19 +47,32 @@ class NewPrescription extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
+      const UserContractNetwork = UserContract.networks[networkId];
 
       const PrescriptionsContractInstance = new web3.eth.Contract(
         PrescriptionsContract.abi,
         PrescriptionContractNetwork && PrescriptionContractNetwork.address,
       );
 
+      const UserContractInstance = new web3.eth.Contract(
+        UserContract.abi,
+        UserContractNetwork && UserContractNetwork.address,
+      );
+
       // Save data into the react state
-      this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance });
+      this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true, prescriptionsContract: PrescriptionsContractInstance });
+      this.checkVerification();
     } catch (error) {
         alert(`Failed to load web3, accounts, or contract. Check console for details.`);
         console.error(error);
     }
   };
+
+  checkVerification = async () => {
+    const { userContract } = this.state;
+    const verfied = await userContract.methods.checkVerification('physician', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+    this.setState({userVerfied: verfied})
+  } 
 
   handleChange(event){
     // Reading out the value and the id of the triggered input
@@ -107,73 +123,87 @@ class NewPrescription extends Component {
   }
 
   render() {
-    if(this.state.sendingComplete){
+    if(this.state.userVerfied === false){
       return (
         <>
           <Router forceRefresh={true}>
-            <Redirect push to='/physician'/>
+            <Redirect push to='/login'/>
             <Switch>
-                <Route path="/physician">
-                    <LandingPhysician/>
+                <Route path="/login">
+                    <Login/>
                 </Route>
             </Switch>
           </Router>
         </>
       )
-       
     } else {
-      return (
-        <>
-          <Navbar bg="dark" variant="dark" expand="lg">
-            <Navbar.Brand href="/physician">E-Rezept</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link active>Neues Rezept</Nav.Link>
-                </Nav>
-                <Button href="/Logout" variant="outline-danger">Logout</Button>
-            </Navbar.Collapse>
-          </Navbar>
-  
-          <Container fluid className="mt-5">
-              <Row> 
-                <Col sm={2}>
-                </Col>
-                <Col className="">
-                  <Form>
-  
-                    <Form.Group controlId="public_key_patient">
-                      <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                    </Form.Group>
-  
-                    <div className="pb-3 pt-4">
-                        Rezept:
-                    </div>
-  
-                    <Form.Group controlId="medicine_name">
-                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Name des Medikaments"></Form.Control>
-                    </Form.Group>
-  
-                    <Form.Group controlId="medicine_amount">
-                      <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
-                    </Form.Group>
-                    
-                    <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
-                  </Form>
-  
-                  <Alert show={this.state.sendingError} variant="danger" className="mt-3">
-                      Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
-                  </Alert>
-                  <Alert show={this.state.missingInput} variant="danger" className="mt-3">
-                      Bitte füllen Sie alle Felder aus!
-                  </Alert>
-                </Col>
-                <Col sm={2}>
-                </Col>
-              </Row>
-          </Container>
-        </>
+      if(this.state.sendingComplete){
+        return (
+          <>
+            <Router forceRefresh={true}>
+              <Redirect push to='/physician'/>
+              <Switch>
+                  <Route path="/physician">
+                      <LandingPhysician/>
+                  </Route>
+              </Switch>
+            </Router>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <Navbar bg="dark" variant="dark" expand="lg">
+              <Navbar.Brand href="/physician">E-Rezept</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="mr-auto">
+                      <Nav.Link active>Neues Rezept</Nav.Link>
+                  </Nav>
+                  <Button href="/Logout" variant="outline-danger">Logout</Button>
+              </Navbar.Collapse>
+            </Navbar>
+    
+            <Container fluid className="mt-5">
+                <Row> 
+                  <Col sm={2}>
+                  </Col>
+                  <Col className="">
+                    <Form>
+    
+                      <Form.Group controlId="public_key_patient">
+                        <Form.Control type="text" placeholder="public_key_patient" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                      </Form.Group>
+    
+                      <div className="pb-3 pt-4">
+                          Rezept:
+                      </div>
+    
+                      <Form.Group controlId="medicine_name">
+                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Name des Medikaments"></Form.Control>
+                      </Form.Group>
+    
+                      <Form.Group controlId="medicine_amount">
+                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
+                      </Form.Group>
+                      
+                      <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
+                    </Form>
+    
+                    <Alert show={this.state.sendingError} variant="danger" className="mt-3">
+                        Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
+                    </Alert>
+                    <Alert show={this.state.missingInput} variant="danger" className="mt-3">
+                        Bitte füllen Sie alle Felder aus!
+                    </Alert>
+                  </Col>
+                  <Col sm={2}>
+                  </Col>
+                </Row>
+            </Container>
+          </>
         );
+      }
     }
   }
 }

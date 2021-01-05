@@ -3,10 +3,10 @@ import UserContract from "./../contracts/User.json";
 import PrescriptionsContract from "./../contracts/Prescriptions.json" 
 import getWeb3 from "./getWeb3";
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 
 class RegisterInsured extends Component {
@@ -19,13 +19,9 @@ class RegisterInsured extends Component {
 
     componentDidMount = async () => {
         try {
-            // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
-
-            // Get the contract instance.
             const networkId = await web3.eth.net.getId();
-
             const UserContractNetwork = UserContract.networks[networkId];
             const PrescriptionsContractNetwork = PrescriptionsContract.networks[networkId];
 
@@ -39,12 +35,9 @@ class RegisterInsured extends Component {
                 PrescriptionsContractNetwork && PrescriptionsContractNetwork.address,
             );
 
-            // Save data into the react state
             this.setState({ web3, accounts, user_contract: UserContractInstance, prescriptions_contract: PrescriptionsContractInstance});
         } catch (error) {
-            alert(
-            `Failed to load web3, accounts, or contract. Check console for details.`,
-            );
+            alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     };

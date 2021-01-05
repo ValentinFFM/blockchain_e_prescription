@@ -24,9 +24,7 @@ class LandingPhysician extends Component {
             this.setState({account: public_key});
 
             ethereum.on('accountsChanged', (public_key) => {
-
                 this.setState({account: public_key[0]});
-
                 if(this.state.initialize === true){
                     this.checkVerification();
                 }
