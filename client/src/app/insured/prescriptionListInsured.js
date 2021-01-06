@@ -111,13 +111,6 @@ class PrescriptionListInsured extends Component {
         await prescriptionsContract.methods.transferPrescriptionToPharmacist({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}, prescription_id_).send({ from: account, gas: 1000000 });
     }
 
-    getPrescriptionID = async () => {
-        const { account, standardAccount, prescriptionsContract } = this.state;
-        const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
-        console.log(prescriptionIds_);
-    }
-
-
     render(){
         if(this.state.prescriptions.length === 0){
             return(
@@ -151,7 +144,6 @@ class PrescriptionListInsured extends Component {
                             </Row>
                             
                         </Card.Body>
-                        <Button onClick={this.getPrescriptionID}>Get PrescriptionID</Button>
                     </Card>
                     
                 )
