@@ -5,6 +5,7 @@
   - [Prerequisites for the installation](#prerequisites-for-the-installation)
   - [Installation](#installation)
   - [First start](#first-start)
+  - [Used technologies](#used-technologies)
 
 ---
 
@@ -85,5 +86,39 @@ $ npm run start
   ➔ Now you can use the application!
 
 ---
+
+## Used technologies
+
+- **Ethereum:**
+  - Open-Access Blockchain
+  - Documentation: https://ethereum.org/en/developers/docs/
+
+- **Ganache:**
+  - Local Ethereum Blockchain
+  - Download: https://www.trufflesuite.com/ganache
+
+- **React:**
+  - JavaScript Library for building user interfaces
+  - Documentation: https://reactjs.org/docs/getting-started.html
+
+- **React-Bootstrap:**
+  - Front-End Framework
+  - Documentation: https://react-bootstrap.github.io
+
+- **React-Router:**
+  - Library for implementing routing functionality in react
+  - Documentation: https://reactrouter.com/web/guides/quick-start
+
+- **Solidity:**
+  - Programming language for Smart Contracts using Ethereum Virtual Machine
+  - Documentation: https://docs.soliditylang.org/en/latest/
+
+- **Truffle:**
+  - Development and Testing Environment for Smart Contracts using Ethereum Virtual Machine
+  - Download: https://www.trufflesuite.com/truffle
+
+- **Web3.js:**
+  - Collection of libraries to interact with Ethereum
+  - Documentation: https://web3js.readthedocs.io/en/v1.3.0/
 
 
