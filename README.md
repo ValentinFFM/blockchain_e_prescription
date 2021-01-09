@@ -2,27 +2,40 @@
 
 **Table of Contents:**
 - [E-Prescription-Application build on Ethereum Blockchain](#e-prescription-application-build-on-ethereum-blockchain)
-  - [Disclaimer](#disclaimer)
+  - [Message from the project team](#message-from-the-project-team)
+    - [Introduction](#introduction)
+    - [Stage of the project](#stage-of-the-project)
   - [Prerequisites for the installation](#prerequisites-for-the-installation)
-  - [Installation](#installation)
-  - [First start](#first-start)
-  - [Used technologies](#used-technologies)
+  - [How to install!](#how-to-install)
+  - [How to start the application!](#how-to-start-the-application)
+  - [How to interact with the application!](#how-to-interact-with-the-application)
+  - [How it works](#how-it-works)
 
 
 ---
 
-## Disclaimer
+## Message from the project team
+<br>
+
+### Introduction
+
+Please read the readme carefully before you use the application and dive deeper into it!
+
+The sections [Prerequisites for the installation](#prerequisites-for-the-installation), [How to install!](#how-to-install) and [How to start the application!](#how-to-start-the-application) guide you step-for-step through the first installation process. Afterwards we recommend you to read the section [How to interact with the application!](#how-to-interact-with-the-application) to learn more about the possibilities of the application and how to work with different accounts. If you want to know which technologies where used, checkout the [How it works](#how-it-works) section.<br><br>
+
+### Stage of the project
 
 The project is in an early stage of development. This means that you might come across bugs or individual problems during the usage of the project. Therefore we would like to ask you for your help to support our work. 
 
 On one hand if you find a bug, just simply raise an issue in our repository and describe the steps to reproduce it. 
 On the other hand if you also have a solution for it just purpose it by sending a pull request.
 
-Thanks a lot! ❤️
+Thanks a lot! ❤️<br><br>
 
 ---
 
 ## Prerequisites for the installation
+<br>
 
 1. Download and install Ganache 
    - Download Link: https://www.trufflesuite.com/ganache
@@ -31,12 +44,13 @@ Thanks a lot! ❤️
    - Download Link: https://www.google.com/intl/de_de/chrome/
 
 3. Download and install the browser extension MetaMask for your browser:
-   - Download Link: https://metamask.io/download.html
+   - Download Link: https://metamask.io/download.html <br><br>
 
 
 ---
 
-## Installation
+## How to install!
+<br>
 
 1. Clone the repository:
 ```
@@ -53,10 +67,12 @@ $ npm install -g truffle
 $ cd client
 $ npm install
 ```
+<br>
 
 ---
 
-## First start
+## How to start the application!
+<br>
 
 1. Open Ganache and create a new workspace:
    1. Click on "New workspace".
@@ -97,10 +113,17 @@ $ npm run start
    4. Insert the address in the form in the browser and click on "Connect".
 
   ➔ Now you can use the application!
+<br><br>
 
 ---
 
-## Used technologies
+## How to interact with the application!
+<br>
+
+---
+
+## How it works
+<br>
 
 - **Ethereum:**
   - Open-Access Blockchain
@@ -134,4 +157,6 @@ $ npm run start
   - Collection of libraries to interact with Ethereum
   - Documentation: https://web3js.readthedocs.io/en/v1.3.0/
 
+<br>
 
+---
