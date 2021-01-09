@@ -15,7 +15,6 @@
 ---
 
 ## Message from the project team
-<br>
 
 ### Introduction
 
@@ -35,7 +34,6 @@ Thanks a lot! ❤️<br><br>
 ---
 
 ## Prerequisites for the installation
-<br>
 
 1. Download and install Ganache 
    - Download Link: https://www.trufflesuite.com/ganache
@@ -50,7 +48,6 @@ Thanks a lot! ❤️<br><br>
 ---
 
 ## How to install!
-<br>
 
 1. Clone the repository:
 ```
@@ -72,7 +69,6 @@ $ npm install
 ---
 
 ## How to start the application!
-<br>
 
 1. Open Ganache and create a new workspace:
    1. Click on "New workspace".
@@ -118,12 +114,10 @@ $ npm run start
 ---
 
 ## How to interact with the application!
-<br>
 
 ---
 
 ## How it works
-<br>
 
 - **Ethereum:**
   - Open-Access Blockchain
