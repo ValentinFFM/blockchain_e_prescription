@@ -27,27 +27,24 @@ class PrescriptionListInsured extends Component {
     }
 
     componentDidMount = async () => {
+
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
-
-            ethereum.on('accountsChanged', (public_key) => {
-                console.log(public_key)
-                this.setState({account: public_key[0]})
-                console.log(this.state.account)
-            });
-        }
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            console.log(public_key)
+            this.setState({account: public_key[0]})
+            console.log(this.state.account)
+        });
         
-
+        // Establishing the connection to the blockchain and the smart contracts
         try {
-            // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
             const standardAccount = accounts[0]
-      
-            // Get the contract instance.
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
       
@@ -56,13 +53,12 @@ class PrescriptionListInsured extends Component {
               PrescriptionContractNetwork && PrescriptionContractNetwork.address,
             );
       
-            // Save data into the react state
             this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
-        
+
         await this.getPrescriptions()
     }
 
@@ -77,7 +73,7 @@ class PrescriptionListInsured extends Component {
         this.setState({formData: formData})
     }
     
-
+    // Returns all prescriptions that were filled for the patient.
     getPrescriptions = async () => {
         var prescriptionsArray = [];
         const { account, standardAccount, prescriptionsContract, formData } = this.state;
@@ -95,14 +91,13 @@ class PrescriptionListInsured extends Component {
         }
             
         this.setState({prescriptions: prescriptionsArray, prescriptionIds: prescriptionIds_, formData: formData});
-        console.log(prescriptionsArray)
     }
 
+    // Sends the prescription to the pharmacist, whichs address was entered by the user
     sendPrescription = async (event) => {
         const { formData, account, prescriptionsContract } = this.state
 
         const prescription_id_ = event.target.id
-
         const physician = formData['physician_' + prescription_id_];
         const insured = formData['insured_' + prescription_id_];
         const pharmacist = formData['public_key_pharmacist_' + prescription_id_];
@@ -110,18 +105,16 @@ class PrescriptionListInsured extends Component {
         const medicine_name = formData['medicine_name_' + prescription_id_];
         const medicine_amount = formData['medicine_amount_' + prescription_id_];
 
-        console.log(prescription_id_)
-
         await prescriptionsContract.methods.transferPrescriptionToPharmacist({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}, prescription_id_).send({ from: account, gas: 1000000 });
     }
 
     render(){
+        // If the insured has no prescription in his list, then a message is shown. Otherwise the prescriptions are shown.
         if(this.state.prescriptions.length === 0){
             return(
                 <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
             )
         } else {
-
             var items = []
             var counter = 0;
 
@@ -146,15 +139,11 @@ class PrescriptionListInsured extends Component {
                                     <Button id={prescription_id} onClick={this.sendPrescription} variant="dark">An Apotheke senden</Button>
                                 </Col>
                             </Row>
-                            
                         </Card.Body>
                     </Card>
-                    
                 )
-
                 counter = counter + 1;
             }
-
 
             return (
                 <>

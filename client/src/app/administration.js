@@ -33,21 +33,20 @@ class RegisterInsured extends Component {
 
     componentDidMount = async () => {
 
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            this.setState({account: public_key[0]});
+            if(this.state.initialize === true){
+                this.checkVerification();
+            }
+        });
 
-            ethereum.on('accountsChanged', (public_key) => {
-                console.log('accountsChanged')
-                this.setState({account: public_key[0]});
-                if(this.state.initialize === true){
-                    this.checkVerification();
-                }
-            });
-        }
-
+        // Establishing the connection to the blockchain and the smart contracts.
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
@@ -73,6 +72,15 @@ class RegisterInsured extends Component {
         }
     };
 
+    // Function which connects the Smart Contract Prescription with the Smart Contract User. 
+    connectSmartContractUser = async () => {
+        const { formData, accounts, prescriptions_contract } = this.state;
+        console.log(this.state)
+        const smart_contract_key = formData.user_smart_contract;
+        await prescriptions_contract.methods.establishConnectionToUserSmartContract(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
+    }
+
+    // Checks if the user, that is logged in in MetaMask, is the verifying institution.
     checkVerification = async () => {
         console.log('checkVerification')
         const { userContract } = this.state;
@@ -91,6 +99,7 @@ class RegisterInsured extends Component {
         this.setState({formData: formData})
     }
 
+    // Returns the data of the insured who is belonging to the address that was entered
     getInsured = async () => {
         const { formData, accounts, userContract } = this.state;
         const insured_address_ = formData.insured_address;
@@ -98,6 +107,7 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
 
+    // Sets the verification in the struct Insured in the Smart Contract User to true, so that the insured is able to access the application
     verifyInsured = async () => {
         const { formData, accounts, userContract } = this.state;
         const insured_address_ = formData.insured_address;
@@ -105,6 +115,7 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
 
+    // Returns the data of the physician who is belonging to the address that was entered
     getPhysician = async () => {
         const { formData, accounts, userContract } = this.state;
         const physician_address_ = formData.physician_address;
@@ -112,6 +123,7 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
     
+    // Sets the verification in the struct Physisican in the Smart Contract User to true, so that the physician is able to access the application
     verifyPhysician = async () => {
         const { formData, accounts, userContract } = this.state;
         const physician_address_ = formData.physician_address;
@@ -119,6 +131,7 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
 
+    // Returns the data of the pharmacist who is belonging to the address that was entered
     getPharmacist = async () => {
         const { formData, accounts, userContract } = this.state;
         const pharmacist_address_ = formData.pharmacist_address;
@@ -126,6 +139,7 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
     
+    // Sets the verification in the struct Pharmacist in the Smart Contract User to true, so that the pharmacist is able to access the application
     verifyPharmacist = async () => {
         const { formData, accounts, userContract } = this.state;
         const pharmacist_address_ = formData.pharmacist_address;
@@ -133,14 +147,8 @@ class RegisterInsured extends Component {
         console.log(returnedValue);
     }
 
-    connectSmartContractUser = async () => {
-        const { formData, accounts, prescriptions_contract } = this.state;
-        console.log(this.state)
-        const smart_contract_key = formData.user_smart_contract;
-        await prescriptions_contract.methods.establishConnectionToUserSmartContract(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
-    }
-
     render() {
+        // If user is not allowed to access the page he is redirected to the login page. Otherwise the page is rendered.
         if(this.state.userVerfied === false){
             return(
                 <div>
@@ -158,7 +166,7 @@ class RegisterInsured extends Component {
             return (
                 <>
                     <Navbar bg="dark" variant="dark" expand="lg">
-                        <Navbar.Brand>E-Rezept</Navbar.Brand>
+                        <Navbar.Brand href="/login">E-Rezept</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Button href="/Logout" variant="outline-danger">Logout</Button>
@@ -167,8 +175,7 @@ class RegisterInsured extends Component {
 
                     <Container fluid className="mt-5">
                         <Row> 
-                            <Col xs={0} sm={0} md={1} lg={2}>
-                            </Col>
+                            <Col xs={0} sm={0} md={1} lg={2}></Col>
 
                             <Col>
                                 <div className="pb-3 pt-4">
@@ -179,10 +186,10 @@ class RegisterInsured extends Component {
                                     <Form.Group controlId="insured_address">
                                         <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
                                     </Form.Group>
-
-                                    <Button variant="primary" block onClick={this.getInsured}>Get</Button>
-                                    <Button variant="success" block onClick={this.verifyInsured}>Verify</Button>
                                 </Form>
+
+                                <Button variant="primary" block onClick={this.getInsured}>Get</Button>
+                                <Button variant="success" block onClick={this.verifyInsured}>Verify</Button>                                
                             </Col>
 
                             <Col>
@@ -194,10 +201,10 @@ class RegisterInsured extends Component {
                                     <Form.Group controlId="physician_address">
                                         <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
                                     </Form.Group>
-
-                                    <Button variant="primary" block onClick={this.getPhysician}>Get</Button>
-                                    <Button variant="success" block onClick={this.verifyPhysician}>Verify</Button>
                                 </Form>
+
+                                <Button variant="primary" block onClick={this.getPhysician}>Get</Button>
+                                <Button variant="success" block onClick={this.verifyPhysician}>Verify</Button>
                             </Col>
 
                             <Col>
@@ -209,18 +216,16 @@ class RegisterInsured extends Component {
                                     <Form.Group controlId="pharmacist_address">
                                         <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
                                     </Form.Group>
-
-                                    <Button variant="primary" block onClick={this.getPharmacist}>Get</Button>
-                                    <Button variant="success" block onClick={this.verifyPharmacist}>Verify</Button>
                                 </Form>
+
+                                <Button variant="primary" block onClick={this.getPharmacist}>Get</Button>
+                                <Button variant="success" block onClick={this.verifyPharmacist}>Verify</Button>
                             </Col>
 
-                            <Col xs={0} sm={0} md={1} lg={2}>
-                            </Col>
+                            <Col xs={0} sm={0} md={1} lg={2}></Col>
                         </Row>
                         <Row>
-                            <Col xs={0} sm={0} md={1} lg={2}>
-                            </Col>
+                            <Col xs={0} sm={0} md={1} lg={2}></Col>
 
                             <Col>
                                 <div className="pb-3 pt-4">
@@ -231,13 +236,12 @@ class RegisterInsured extends Component {
                                     <Form.Group controlId="user_smart_contract">
                                         <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
                                     </Form.Group>
-
-                                    <Button variant="primary" block onClick={this.connectSmartContractUser}>Connect</Button>
                                 </Form>
+
+                                <Button variant="primary" block onClick={this.connectSmartContractUser}>Connect</Button>
                             </Col>
 
-                            <Col xs={0} sm={0} md={1} lg={2}>
-                            </Col>
+                            <Col xs={0} sm={0} md={1} lg={2}></Col>
                         </Row>
                     </Container>
                 </>

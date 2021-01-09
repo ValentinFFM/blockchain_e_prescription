@@ -23,24 +23,24 @@ import PrescriptionListInsured from './prescriptionListInsured';
 
 
 class LandingInsured extends Component {
-
     state = {web3: null, standardAccount: null, userContract: null, account: null, userVerfied: null, initialize: false}
 
     componentDidMount = async () => {
+
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
-
-            ethereum.on('accountsChanged', (public_key) => {
-                this.setState({account: public_key[0]});
-                if(this.state.initialize === true){
-                    this.checkVerification();
-                }
-            });
-        }
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            this.setState({account: public_key[0]});
+            if(this.state.initialize === true){
+                this.checkVerification();
+            }
+        });
         
+        // Establishing the connection to the blockchain and the smart contracts.
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
@@ -55,13 +55,13 @@ class LandingInsured extends Component {
 
             this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true });
             this.checkVerification();
-            
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     }
 
+    // Checks if the user, that is logged in in MetaMask, is a verified insured.
     checkVerification = async () => {
         const { userContract } = this.state;
         const verfied = await userContract.methods.checkVerification('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
@@ -69,7 +69,7 @@ class LandingInsured extends Component {
     }
     
     render(){
-
+        // If user is not allowed to access the page he is redirected to the login page. Otherwise the page is rendered.
         if(this.state.userVerfied === false){
             return(
                 <div>

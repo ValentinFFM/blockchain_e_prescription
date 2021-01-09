@@ -24,7 +24,6 @@ import Login from './../login';
 
 
 class RegisterPharmacist extends Component {
-
     state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {}, missingInput: false, registration_accepted: false, userExistance: null, initialize: false}
 
     constructor(props){
@@ -33,21 +32,21 @@ class RegisterPharmacist extends Component {
     }
 
     componentDidMount = async () => {
+
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            this.setState({account: public_key[0]});
+            if(this.state.initialize === true){
+                this.checkExistence();
+            }
+        });
 
-            ethereum.on('accountsChanged', (public_key) => {
-                this.setState({account: public_key[0]});
-                if(this.state.initialize === true){
-                    this.checkExistence();
-                }
-            });
-        }
-
-
+        // Establishing the connection to the blockchain and the smart contracts
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
@@ -68,6 +67,7 @@ class RegisterPharmacist extends Component {
         }
     };
 
+    // Checks if the user, that is logged in in MetaMask, is already registered as any role.
     checkExistence = async () => {
         const { userContract } = this.state;
         const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
@@ -93,6 +93,7 @@ class RegisterPharmacist extends Component {
         this.setState({formData: formData})
     }
 
+    // If all inputs are filled, a new physician is added with the Smart Contract User
     addNewUser = async () => {
         const { userContract, formData } = this.state;
 
@@ -112,6 +113,7 @@ class RegisterPharmacist extends Component {
     };
 
     render() {
+        // If user is already existing or the registration is done, then the user is redirected to the login. Otherwise the page is rendered.
         if(this.state.userExistance === true || this.state.registration_accepted === true){
             return(
                 <div>
@@ -134,11 +136,10 @@ class RegisterPharmacist extends Component {
 
                     <Container fluid className="mt-5">
                         <Row> 
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
+
                             <Col>
                                 <Form>
-
                                     <div className="pb-3 pt-4">
                                         Angaben zur Apotheke:
                                     </div>
@@ -150,16 +151,16 @@ class RegisterPharmacist extends Component {
                                     <Form.Group controlId="pharmacy_number">
                                         <Form.Control type="number" placeholder="Apotheken - Nummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
                                     </Form.Group>
-
-                                    <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
-
-                                    <Alert show={this.state.missingInput} variant="danger" className="mt-3">
-                                        Bitte füllen Sie alle Eingabefelder aus!
-                                    </Alert>
                                 </Form>
+
+                                <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
+
+                                <Alert show={this.state.missingInput} variant="danger" className="mt-3">
+                                    Bitte füllen Sie alle Eingabefelder aus!
+                                </Alert>
                             </Col>
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
+
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
                         </Row>
                     </Container>
                 </>

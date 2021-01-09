@@ -35,27 +35,25 @@ class NewPrescription extends Component {
   }
 
   componentDidMount = async () => {
+
+    // Reads out the selected account from the user in MetaMask and stores it in the react state
     const ethereum = await window.ethereum;
-  
-    if(ethereum){
-      const public_key = ethereum.selectedAddress
-      this.setState({account: public_key})
+    const public_key = ethereum.selectedAddress
+    this.setState({account: public_key})
 
-      ethereum.on('accountsChanged', (public_key) => {
-        this.setState({account: public_key[0]})
-        if(this.state.initialize === true){
-          this.checkVerification();
-        }
-      });
-    }
+    // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+    ethereum.on('accountsChanged', (public_key) => {
+      this.setState({account: public_key[0]})
+      if(this.state.initialize === true){
+        this.checkVerification();
+      }
+    });
 
+    // Establishing the connection to the blockchain and the smart contracts.
     try {
-      // Get web3 instance and the accounts that are stored 
       const web3 = await getWeb3();
       const accounts = await web3.eth.getAccounts();
       const standardAccount = accounts[0]
-
-      // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
       const UserContractNetwork = UserContract.networks[networkId];
@@ -70,7 +68,6 @@ class NewPrescription extends Component {
         UserContractNetwork && UserContractNetwork.address,
       );
 
-      // Save data into the react state
       this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true, prescriptionsContract: PrescriptionsContractInstance });
       this.checkVerification();
     } catch (error) {
@@ -79,6 +76,7 @@ class NewPrescription extends Component {
     }
   };
 
+  // Checks if the user, that is logged in in MetaMask, is a verified physician.
   checkVerification = async () => {
     const { userContract } = this.state;
     const verfied = await userContract.methods.checkVerification('physician', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
@@ -96,8 +94,8 @@ class NewPrescription extends Component {
     this.setState({formData: formData})
   }
 
+  // If all inputs are filled in, then a new prescription is created.
   newPrescription = async () => {
-    console.log("New Prescription")
     this.setState({missingInput: false, sendingError: false})
     const { formData, prescriptionsContract } = this.state;
 
@@ -108,7 +106,6 @@ class NewPrescription extends Component {
     const medicine_name = formData.medicine_name;
     const medicine_amount = formData.medicine_amount;
     
-
     if(physician !== ""
       && physician !== undefined
       && insured !== ""
@@ -118,22 +115,19 @@ class NewPrescription extends Component {
       && medicine_amount !== ""
       && medicine_amount !== undefined
     ){
-
-      console.log("Test")
-
       try {
         await prescriptionsContract.methods.newPrescription({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
         this.setState({sendingComplete: true})
       } catch {
         this.setState({sendingError: true})
       }
-
     } else {
       this.setState({missingInput: true})
     }
   }
 
   render() {
+    // If user is not allowed to access the page he is redirected to the login page. Otherwise the page is rendered.
     if(this.state.userVerfied === false){
       return (
         <>
@@ -148,6 +142,7 @@ class NewPrescription extends Component {
         </>
       )
     } else {
+      // If sending the prescription is completed, the user is redirected to the landing page of the physician
       if(this.state.sendingComplete){
         return (
           <>
@@ -177,11 +172,10 @@ class NewPrescription extends Component {
     
             <Container fluid className="mt-5">
                 <Row> 
-                  <Col sm={2}>
-                  </Col>
-                  <Col className="">
+                  <Col sm={2}></Col>
+
+                  <Col>
                     <Form>
-    
                       <Form.Group controlId="public_key_patient">
                         <Form.Control type="text" placeholder="Public Key des Versicherten" value={this.state.value} onChange={this.handleChange}></Form.Control>
                       </Form.Group>
@@ -197,19 +191,20 @@ class NewPrescription extends Component {
                       <Form.Group controlId="medicine_amount">
                         <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Menge des Medikaments"></Form.Control>
                       </Form.Group>
-                      
-                      <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
                     </Form>
+
+                    <Button variant="success" block onClick={this.newPrescription}>Neues Rezept erstellen</Button>
     
                     <Alert show={this.state.sendingError} variant="danger" className="mt-3">
                         Fehler bei der Übertragung. Bitte überprüfen Sie Ihre Angaben!
                     </Alert>
+
                     <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                         Bitte füllen Sie alle Felder aus!
                     </Alert>
                   </Col>
-                  <Col sm={2}>
-                  </Col>
+
+                  <Col sm={2}></Col>
                 </Row>
             </Container>
           </>

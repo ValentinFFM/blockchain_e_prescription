@@ -32,21 +32,21 @@ class RegisterPhysician extends Component {
     }
 
     componentDidMount = async () => {
+
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            this.setState({account: public_key[0]});
+            if(this.state.initialize === true){
+                this.checkExistence();
+            }
+        });
 
-            ethereum.on('accountsChanged', (public_key) => {
-                this.setState({account: public_key[0]});
-                if(this.state.initialize === true){
-                    this.checkExistence();
-                }
-            });
-        }
-
-
+        // Establishing the connection to the blockchain and the smart contracts
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
@@ -67,6 +67,7 @@ class RegisterPhysician extends Component {
         }
     };
 
+    // Checks if the user, that is logged in in MetaMask, is already registered as any role.
     checkExistence = async () => {
         const { userContract } = this.state;
         const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
@@ -92,6 +93,7 @@ class RegisterPhysician extends Component {
         this.setState({formData: formData})
     }
 
+    // If all inputs are filled, a new physician is added with the Smart Contract User
     addNewUser = async () => {
         const { userContract, formData } = this.state;
 
@@ -133,10 +135,10 @@ class RegisterPhysician extends Component {
         } else {
             this.setState({missingInput: true})
         }
-        
     };
 
     render() {
+        // If user is already existing or the registration is done, then the user is redirected to the login. Otherwise the page is rendered.
         if(this.state.userExistance === true || this.state.registration_accepted === true){
             return(
                 <div>
@@ -154,95 +156,92 @@ class RegisterPhysician extends Component {
             return (
                 <>
                     <Navbar bg="dark" variant="dark" expand="lg">
-                            <Navbar.Brand>E-Rezept</Navbar.Brand>
+                            <Navbar.Brand href="/login">E-Rezept</Navbar.Brand>
                     </Navbar>
+
                     <Container fluid className="mt-5">
                         <Row> 
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
-                            <Col className="">
-                            <Form>
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
 
-                                <div className="pb-3 pt-4">
-                                    Angaben zum Arzt:
-                                </div>
-                                
-                                <Form.Group controlId="physician_job_title">
-                                    <Form.Control type="text" placeholder="Berufsbezeichnung" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
+                            <Col>
+                                <Form>
+                                    <div className="pb-3 pt-4">
+                                        Angaben zum Arzt:
+                                    </div>
 
-                                <Row>
-                                    <Col className="pr-1">
-                                    <Form.Group controlId="physician_surname">
-                                        <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    <Form.Group controlId="physician_job_title">
+                                        <Form.Control type="text" placeholder="Berufsbezeichnung" value={this.state.value} onChange={this.handleChange}></Form.Control>
                                     </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1">
-                                    <Form.Group controlId="physician_name">
-                                        <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
+
+                                    <Row>
+                                        <Col className="pr-1">
+                                        <Form.Group controlId="physician_surname">
+                                            <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Form.Group>
+                                        </Col>
+                                        <Col className="pl-1">
+                                        <Form.Group controlId="physician_name">
+                                            <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Form.Group>
+                                        </Col>
+                                    </Row>
+
+                                    <Form.Group controlId="physician_number">
+                                        <Form.Control type="number" placeholder="Arzt-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
                                     </Form.Group>
-                                    </Col>
-                                </Row>
 
-                                <Form.Group controlId="physician_number">
-                                    <Form.Control type="number" placeholder="Arzt-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
+                                    <div className="pb-3 pt-4">
+                                        Angaben zur Betriebsstätte:
+                                    </div>
 
-                                <div className="pb-3 pt-4">
-                                    Angaben zur Betriebsstätte:
-                                </div>
+                                    <Row>
+                                        <Col className="pr-1" sm={9}>
+                                            <Form.Group controlId="physician_street">
+                                                <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col className="pl-1" sm={3}>
+                                            <Form.Group controlId="physician_street_number">
+                                                <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
 
-                                <Row>
-                                    <Col className="pr-1" sm={9}>
-                                        <Form.Group controlId="physician_street">
-                                            <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" sm={3}>
-                                        <Form.Group controlId="physician_street_number">
-                                            <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
+                                    <Row>
+                                        <Col className="pr-1" sm={4}>
+                                            <Form.Group controlId="physician_post_code">
+                                                <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col className="pl-1" sm={8}>
+                                            <Form.Group controlId="physician_city">
+                                                <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
 
-                                <Row>
-                                    <Col className="pr-1" sm={4}>
-                                        <Form.Group controlId="physician_post_code">
-                                            <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" sm={8}>
-                                        <Form.Group controlId="physician_city">
-                                            <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
+                                    <Form.Group controlId="telephone_number">
+                                        <Form.Control type="text" placeholder="Telefon-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
 
-                                <Form.Group controlId="telephone_number">
-                                    <Form.Control type="text" placeholder="Telefon-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
-
-                                <Form.Group controlId="business_number">
-                                    <Form.Control type="number" placeholder="Betriebsstätten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
-                                    
-                                <div className="pb-3"></div>
+                                    <Form.Group controlId="business_number" className="pb-3">
+                                        <Form.Control type="number" placeholder="Betriebsstätten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>                           
+                                </Form>
 
                                 <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
 
                                 <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                                     Bitte füllen Sie alle Eingabefelder aus!
                                 </Alert>
-                            </Form>
                             </Col>
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
+
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
                         </Row>
                     </Container>
                 </>
             );
-        
         }
-      }
+    }
 }
 export default RegisterPhysician;

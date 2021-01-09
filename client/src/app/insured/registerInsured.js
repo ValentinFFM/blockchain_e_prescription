@@ -31,21 +31,21 @@ class RegisterInsured extends Component {
     }
 
     componentDidMount = async () => {
+
+        // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
+        const public_key = ethereum.selectedAddress;
+        this.setState({account: public_key});
 
-        if(ethereum){
-            const public_key = ethereum.selectedAddress;
-            this.setState({account: public_key});
+        // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
+        ethereum.on('accountsChanged', (public_key) => {
+            this.setState({account: public_key[0]});
+            if(this.state.initialize === true){
+                this.checkExistence();
+            }
+        });
 
-            ethereum.on('accountsChanged', (public_key) => {
-                this.setState({account: public_key[0]});
-                if(this.state.initialize === true){
-                    this.checkExistence();
-                }
-            });
-        }
-
-
+        // Establishing the connection to the blockchain and the smart contracts
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
@@ -60,13 +60,13 @@ class RegisterInsured extends Component {
 
             this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true });
             this.checkExistence();
-
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
         }
     };
 
+    // Checks if the user, that is logged in in MetaMask, is already registered as any role.
     checkExistence = async () => {
         const { userContract } = this.state;
         const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
@@ -92,8 +92,8 @@ class RegisterInsured extends Component {
         this.setState({formData: formData})
     }
 
+    // If all inputs are filled, a new insured is added with the Smart Contract User
     addNewUser = async () => {
-        console.log('Add new user', this.state.account)
         this.setState({missingInput: false})
         const { userContract, formData } = this.state;
 
@@ -135,14 +135,13 @@ class RegisterInsured extends Component {
         ){
             await userContract.methods.addNewInsured({surname, name, street, street_number, post_code, city, birth_date, insurance, insurance_number, insured_number, insured_status}).send({ from: this.state.account, gas: 1000000 });
             this.setState({registration_accepted: true})
-
         } else {
             this.setState({missingInput: true})
         }
     };
 
     render() {
-
+        // If user is already existing or the registration is done, then the user is redirected to the login. Otherwise the page is rendered.
         if(this.state.userExistance === true || this.state.registration_accepted === true){
             return(
                 <div>
@@ -164,93 +163,92 @@ class RegisterInsured extends Component {
                     </Navbar>
                     <Container fluid className="mt-5">
                         <Row> 
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
+
                             <Col>
-                            <Form>
-                                
-                                <div className="pb-3 pt-4">
-                                    Allgemeine Angaben:
-                                </div>
-    
-                                <Row>
-                                    <Col className="pr-1">
-                                    <Form.Group controlId="insured_surname">
-                                        <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                    </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1">
-                                    <Form.Group controlId="insured_name">
-                                        <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                    </Form.Group>
-                                    </Col>
-                                </Row>
-    
-                                <Row>
-                                    <Col className="pr-1" sm={9}>
-                                        <Form.Group controlId="insured_street">
-                                            <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                <Form>
+                                    <div className="pb-3 pt-4">
+                                        Allgemeine Angaben:
+                                    </div>
+        
+                                    <Row>
+                                        <Col className="pr-1">
+                                        <Form.Group controlId="insured_surname">
+                                            <Form.Control type="text" placeholder="Vorname" value={this.state.value} onChange={this.handleChange}></Form.Control>
                                         </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" sm={3}>
-                                        <Form.Group controlId="insured_street_number">
-                                            <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Col>
+                                        <Col className="pl-1">
+                                        <Form.Group controlId="insured_name">
+                                            <Form.Control type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange}></Form.Control>
                                         </Form.Group>
-                                    </Col>
-                                </Row>
-    
-                                <Row>
-                                    <Col className="pr-1" sm={4}>
-                                        <Form.Group controlId="insured_post_code">
-                                            <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Col>
+                                    </Row>
+        
+                                    <Row>
+                                        <Col className="pr-1" sm={9}>
+                                            <Form.Group controlId="insured_street">
+                                                <Form.Control type="text" placeholder="Straße" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col className="pl-1" sm={3}>
+                                            <Form.Group controlId="insured_street_number">
+                                                <Form.Control type="text" placeholder="Hausnummer" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+        
+                                    <Row>
+                                        <Col className="pr-1" sm={4}>
+                                            <Form.Group controlId="insured_post_code">
+                                                <Form.Control type="number" placeholder="Postleitzahl" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                        <Col className="pl-1" sm={8}>
+                                            <Form.Group controlId="insured_city">
+                                                <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+        
+                                    <Form.Group controlId="insured_birth_date">
+                                        <Form.Control type="text" placeholder="Geburtstag" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                    </Form.Group>
+        
+                                    <div className="pb-3 pt-4">
+                                        Angaben zur Krankenversicherung:
+                                    </div>
+        
+                                    <Form.Group controlId="insurance">
+                                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
+                                    </Form.Group>
+        
+                                    <Row>
+                                        <Col className="pr-1" sm={4}>
+                                        <Form.Group controlId="insurance_number">
+                                            <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
                                         </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" sm={8}>
-                                        <Form.Group controlId="insured_city">
-                                            <Form.Control type="text" placeholder="Stadt" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Col>
+                                        <Col className="px-1" sm={4}>
+                                        <Form.Group controlId="insured_number">
+                                            <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
                                         </Form.Group>
-                                    </Col>
-                                </Row>
-    
-                                <Form.Group controlId="insured_birth_date">
-                                    <Form.Control type="text" placeholder="Geburtstag" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                </Form.Group>
-    
-                                <div className="pb-3 pt-4">
-                                    Angaben zur Krankenversicherung:
-                                </div>
-    
-                                <Form.Group controlId="insurance">
-                                <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Krankenkasse bzw. Kostenträger"></Form.Control>
-                                </Form.Group>
-    
-                                <Row>
-                                    <Col className="pr-1" sm={4}>
-                                    <Form.Group controlId="insurance_number">
-                                        <Form.Control type="number" placeholder="Kassen-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                    </Form.Group>
-                                    </Col>
-                                    <Col className="px-1" sm={4}>
-                                    <Form.Group controlId="insured_number">
-                                        <Form.Control type="number" placeholder="Versicherten-Nr." value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                    </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" sm={4}>
-                                    <Form.Group controlId="insured_status">
-                                        <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                    </Form.Group>
-                                    </Col>
-                                </Row>
-    
+                                        </Col>
+                                        <Col className="pl-1" sm={4}>
+                                        <Form.Group controlId="insured_status">
+                                            <Form.Control type="number" placeholder="Status" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                        </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Form>
+
                                 <Button variant="success" block onClick={this.addNewUser}>Registrieren</Button>
 
                                 <Alert show={this.state.missingInput} variant="danger" className="mt-3">
                                     Bitte füllen Sie alle Eingabefelder aus!
                                 </Alert>
-                            </Form>
                             </Col>
-                            <Col xs={0} sm={1} md={3} lg={4}>
-                            </Col>
+
+                            <Col xs={0} sm={1} md={3} lg={4}></Col>
                         </Row>
                     </Container>
                 </>
