@@ -15,8 +15,8 @@
 
 The project is in an early stage of development. This means that you might come across bugs or individual problems during the usage of the project. Therefore we would like to ask you for your help to support our work. 
 
-On one hand if you find a bug, just simply raise an issue in our repository and describe the steps to reproduce it. 
-On the other hand if you also have a solution for it just purpose it by sending a pull request.
+On one hand, if you find a bug, just simply raise an issue in our repository and describe the steps to reproduce it. 
+On the other hand, if you also have a solution for the bug, then just propose it by sending a pull request.
 
 Thanks a lot! ❤️
 
