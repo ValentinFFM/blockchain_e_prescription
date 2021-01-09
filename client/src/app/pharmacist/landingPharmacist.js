@@ -1,3 +1,7 @@
+/**
+ * @author Valentin Mueller <https://github.com/ValentinFFM>
+ */
+
 import React, { Component } from "react";
 import getWeb3 from "../getWeb3";
 import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
