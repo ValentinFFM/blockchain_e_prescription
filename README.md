@@ -18,7 +18,7 @@
 
 ### Introduction
 
-Please read the readme carefully before you use the application and dive deeper into it!
+⚠️ Please read the readme carefully before you use the application and dive deeper into it!
 
 The sections [Prerequisites for the installation](#prerequisites-for-the-installation), [How to install!](#how-to-install) and [How to start the application!](#how-to-start-the-application) guide you step-for-step through the first installation process. Afterwards we recommend you to read the section [How to interact with the application!](#how-to-interact-with-the-application) to learn more about the possibilities of the application and how to work with different accounts. If you want to know which technologies where used, checkout the [How it works](#how-it-works) section.<br><br>
 
@@ -114,6 +114,16 @@ $ npm run start
 ---
 
 ## How to interact with the application!
+
+⚠️ Before you read this section, make sure you that you followed all steps in the sections before to make the application work properly!
+
+As already described in the section before you interact with the application by using the browser-extension MetaMask. Within MetaMask you can import different private keys to have different accounts for the interaction with the blockchain. We recommend you to import at least four keys for every user group (admin, patient, physician, pharmacist). In any case you should import the first account from Ganache, which is automatically the admin account. All other accounts can be registered like this:
+
+1. Choose the user role in the application interface and click on "login".
+2. Enter all the information and click on register.
+3. Change the account in MetaMask to the address for the admin and navigate to "localhost:3000/admin" .
+4. Enter the public key of the user into the input of the user role, that you wanted to register and click on verify.
+5. Change again the role to the user you wanted to register and go back to the login page. Now you should be able to login and get redirected to the landing page of the choosen role.<br><br>
 
 ---
 
