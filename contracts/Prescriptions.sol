@@ -43,7 +43,7 @@ contract Prescriptions {
     }
 
     // For every user group the public keys of the users are mapped to an array containing prescription-ids.
-    mapping(address => uint[]) public prescriptionPhysisician;
+    mapping(address => uint[]) public prescriptionPhysician;
     mapping(address => uint[]) public prescriptionInsured;
     mapping(address => uint[]) public prescriptionPharmacist;
 
@@ -61,7 +61,7 @@ contract Prescriptions {
         require(UserContract.checkVerification('insured', prescription_.insured) == true, "This insured is not registered or verified!");
 
         prescription[prescription_id] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
-        prescriptionPhysisician[prescription_.physician].push(prescription_id);
+        prescriptionPhysician[prescription_.physician].push(prescription_id);
         prescriptionInsured[prescription_.insured].push(prescription_id);
         prescription_id = prescription_id + 1;
     }
@@ -116,8 +116,8 @@ contract Prescriptions {
         return prescription[prescription_id_];
     }
 
-    function getPhysisicianPrescriptionsIDs(address public_key) public returns (uint[] memory){
-        return prescriptionPhysisician[public_key];
+    function getPhysicianPrescriptionsIDs(address public_key) public returns (uint[] memory){
+        return prescriptionPhysician[public_key];
     }
 
     function getInsuredPrescriptionsIDs(address public_key) public returns (uint[] memory){

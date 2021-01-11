@@ -74,7 +74,7 @@ class PrescriptionListPhysician extends Component {
     getPrescriptions = async () => {
         var prescriptionsArray = [];
         const { account, standardAccount, prescriptionsContract, formData } = this.state;
-        const prescriptionIds_ = await prescriptionsContract.methods.getPhysisicianPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
+        const prescriptionIds_ = await prescriptionsContract.methods.getPhysicianPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
 
         for(var i = 0; i < prescriptionIds_.length; i++){
             var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
