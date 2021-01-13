@@ -25,6 +25,7 @@ import LandingPharmacist from './pharmacist/landingPharmacist';
 import RegisterPharmacist from './pharmacist/registerPhamacist';
 import LandingPhysician from './physician/landingPhysician';
 import RegisterPhysician from './physician/registerPhysician';
+import Administration from './administration';
 
 
 
@@ -107,6 +108,8 @@ class NewLogin extends Component {
                         this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_physician" })
                     } else if (role === "Apotheker"){
                         this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_pharmacist" })
+                    } else if (role === "Admin"){
+                        this.setState({missingInput: false, unknownUser: true, unverifiedUser: false, status: "login_admin" })
                     }
 
                 } else {
@@ -135,6 +138,7 @@ class NewLogin extends Component {
         var existenceInsured = false;
         var existencePhysician = false;
         var existencePharmacist = false;
+        var existenceVerifyingInstitution = false;
         var existence = undefined;
 
         try{
@@ -155,7 +159,13 @@ class NewLogin extends Component {
             existencePharmacist = false;
         }
 
-        if(existenceInsured === true || existencePhysician === true || existencePharmacist === true){
+        try{
+            existenceVerifyingInstitution =  await userContract.methods.checkExistence('verifying_institution', public_key).call({from: standardAccount, gas: 1000000});
+        } catch {
+            existenceVerifyingInstitution = false;
+        }
+
+        if(existenceInsured === true || existencePhysician === true || existencePharmacist === true || existenceVerifyingInstitution === true){
             existence = true
         } else {
             existence = false
@@ -188,6 +198,12 @@ class NewLogin extends Component {
             } catch {
                 verified = false;
             }
+        } else if (role === "Admin"){
+            try{
+                verified =  await userContract.methods.checkVerification('verifying_institution', public_key).call({from: standardAccount, gas: 1000000});
+            } catch {
+                verified = false;
+            }
         } else {
             verified = false;
         }
@@ -202,7 +218,7 @@ class NewLogin extends Component {
             if(this.state.status === 'default'){
                 return(
                     <div>
-                        <Navbar bg="dark" variant="dark" expand="lg">
+                        <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
                             <Navbar.Brand>E-Rezept</Navbar.Brand>
                         </Navbar>
         
@@ -220,6 +236,7 @@ class NewLogin extends Component {
                                                 <option>Versicherte</option>
                                                 <option>Arzt</option>
                                                 <option>Apotheker</option>
+                                                <option>Admin</option>
                                             </Form.Control>
                                         </Form.Group>
         
@@ -273,6 +290,19 @@ class NewLogin extends Component {
                             <Switch>
                                 <Route path="/pharmacist">
                                     <LandingPharmacist/>
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </div>
+                )
+            } else if (this.state.status === 'login_admin'){
+                return(
+                    <div>
+                        <Router forceRefresh={true}>
+                            <Redirect push to='/admin'/>
+                            <Switch>
+                                <Route path="/admin">
+                                    <Administration/>
                                 </Route>
                             </Switch>
                         </Router>

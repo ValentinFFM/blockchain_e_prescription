@@ -160,14 +160,14 @@ class NewPrescription extends Component {
       } else {
         return (
           <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
               <Navbar.Brand href="/physician">E-Rezept</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto">
                       <Nav.Link active>Neues Rezept</Nav.Link>
                   </Nav>
-                  <Button href="/Logout" variant="outline-danger">Logout</Button>
+                  <Button href="/" variant="outline-danger">Hauptmenü</Button>
               </Navbar.Collapse>
             </Navbar>
     

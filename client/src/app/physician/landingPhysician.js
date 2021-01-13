@@ -94,7 +94,7 @@ class LandingPhysician extends Component {
                             <Nav className="mr-auto">
                                 <Nav.Link href="/newPrescription">Neues Rezept</Nav.Link>
                             </Nav>
-                            <Button href="/Logout" variant="outline-danger">Logout</Button>
+                            <Button href="/" variant="outline-danger">Hauptmenü</Button>
                         </Navbar.Collapse>
                     </Navbar>
 

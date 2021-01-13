@@ -130,7 +130,7 @@ class RegisterPharmacist extends Component {
         } else {
             return (
                 <>
-                    <Navbar bg="dark" variant="dark" expand="lg">
+                    <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
                             <Navbar.Brand>E-Rezept</Navbar.Brand>
                     </Navbar>
 

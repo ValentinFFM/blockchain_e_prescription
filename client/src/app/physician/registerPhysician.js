@@ -155,7 +155,7 @@ class RegisterPhysician extends Component {
         } else {
             return (
                 <>
-                    <Navbar bg="dark" variant="dark" expand="lg">
+                    <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
                             <Navbar.Brand href="/login">E-Rezept</Navbar.Brand>
                     </Navbar>
 
