@@ -34,6 +34,7 @@ contract Prescriptions {
         address pharmacist;
 
         bool pharmacistEqualsInsured;
+        string status;
 
         string medicine_name;
         string medicine_amount;
@@ -60,56 +61,63 @@ contract Prescriptions {
         require(UserContract.checkVerification('physician', msg.sender) == true, "You don't have the premission to create a prescription!");
         require(UserContract.checkVerification('insured', prescription_.insured) == true, "This insured is not registered or verified!");
 
-        prescription[prescription_id] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
+        prescription[prescription_id] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, 'Patient', prescription_.medicine_name, prescription_.medicine_amount);
         prescriptionPhysician[prescription_.physician].push(prescription_id);
         prescriptionInsured[prescription_.insured].push(prescription_id);
         prescription_id = prescription_id + 1;
     }
 
-    function transferPrescriptionToPharmacist(Prescription memory prescription_, uint prescription_id_) public {
+    function transferPrescriptionToPharmacist(uint prescription_id_, address pharmacist) public {
+        Prescription memory prescription_ = prescription[prescription_id_];
+
         require(msg.sender == prescription_.insured, "The prescription you try to transfer is not your prescription!");
         require(UserContract.checkVerification('insured', prescription_.insured) == true, "You don't have the premission to transfer a prescription!");
-        require(UserContract.checkVerification('pharmacist', prescription_.pharmacist) == true, "This pharmacist is not registered or verified!");
+        require(UserContract.checkVerification('pharmacist', pharmacist) == true, "This pharmacist is not registered or verified!");
     
-        prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, prescription_.medicine_name, prescription_.medicine_amount);
-        prescriptionPharmacist[prescription_.pharmacist].push(prescription_id_);
+        prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, pharmacist, prescription_.pharmacistEqualsInsured, 'Pharmacist', prescription_.medicine_name, prescription_.medicine_amount);
+        prescriptionPharmacist[pharmacist].push(prescription_id_);
 
-        bool swap = false;
-        uint prescriptionInsuredLength;
-        prescriptionInsuredLength = prescriptionInsured[msg.sender].length;
+        // bool swap = false;
+        // uint prescriptionInsuredLength;
+        // prescriptionInsuredLength = prescriptionInsured[msg.sender].length;
 
-        // Swaps the last prescription from the array of the insured with the prescription, that should be deleted.
-        for(uint i=0; i < prescriptionInsuredLength; i++){
-            if(prescription_id_ == prescriptionInsured[msg.sender][i]){
-                prescriptionInsured[msg.sender][i] = prescriptionInsured[msg.sender][prescriptionInsuredLength-1];
-                swap = true;
-            }
-        } 
+        // Swaps the last prescription from the array of the insured with the prescription, that is sent to the pharmacist.
+        // for(uint i=0; i < prescriptionInsuredLength; i++){
+        //     if(prescription_id_ == prescriptionInsured[msg.sender][i]){
+        //         uint transferedPrescription = prescriptionInsured[msg.sender][i];
+        //         prescriptionInsured[msg.sender][i] = prescriptionInsured[msg.sender][prescriptionInsuredLength-1];
+        //         prescriptionInsured[msg.sender][prescriptionInsuredLength-1] = transferedPrescription;
+        //         swap = true;
+        //     }
+        // } 
         
         // Last prescription (which was previously swapped) gets deleted from the array of the insured to prevent that the insured can send a prescription twice.
-        if(swap == true){
-            prescriptionInsured[msg.sender].pop();
-        }
+        // if(swap == true){
+        //     prescriptionInsured[msg.sender].pop();
+        // }
     }
 
     function redeemPrescription(uint prescription_id_) public {
-        bool swap = false;
-        uint prescriptionPharmacistLength;
-        prescriptionPharmacistLength = prescriptionPharmacist[msg.sender].length;
+        Prescription memory prescription_ = prescription[prescription_id_];
+        prescription[prescription_id_] = Prescription(prescription_.physician, prescription_.insured, prescription_.pharmacist, prescription_.pharmacistEqualsInsured, 'Redeemed', prescription_.medicine_name, prescription_.medicine_amount);
+
+        // bool swap = false;
+        // uint prescriptionPharmacistLength;
+        // prescriptionPharmacistLength = prescriptionPharmacist[msg.sender].length;
 
         // Swaps the last prescription from the array of the pharmacist with the prescription, that should be deleted.
-        for(uint i=0; i < prescriptionPharmacistLength; i++){
-            if(prescription_id_ == prescriptionPharmacist[msg.sender][i]){
-                prescriptionPharmacist[msg.sender][i] = prescriptionPharmacist[msg.sender][prescriptionPharmacistLength-1];
-                prescriptionPharmacist[msg.sender].pop();
-                swap = true;
-            }
-        } 
+        // for(uint i=0; i < prescriptionPharmacistLength; i++){
+        //     if(prescription_id_ == prescriptionPharmacist[msg.sender][i]){
+        //         prescriptionPharmacist[msg.sender][i] = prescriptionPharmacist[msg.sender][prescriptionPharmacistLength-1];
+        //         prescriptionPharmacist[msg.sender].pop();
+        //         swap = true;
+        //     }
+        // } 
 
         // Last prescription (which was previously swapped) gets deleted from the array of the pharmacist to prevent that the pharmacist can redeem a prescription twice.
-        if(swap == true){
-            prescriptionPharmacist[msg.sender].pop();
-        }
+        // if(swap == true){
+        //     prescriptionPharmacist[msg.sender].pop();
+        // }
     }
 
     function getPrescription(uint prescription_id_) public returns (Prescription memory){
