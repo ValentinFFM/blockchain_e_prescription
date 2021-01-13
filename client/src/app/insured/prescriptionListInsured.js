@@ -17,7 +17,9 @@ import Alert from 'react-bootstrap/Alert';
 // Smart Contract imports
 import PrescriptionsContract from '../../contracts/Prescriptions.json';
 import UserContract from '../../contracts/User.json';
-import LandingInsured from "../pharmacist/landingPharmacist";
+
+// Components imports
+import LandingInsured from "../insured/landingInsured";
 
 
 

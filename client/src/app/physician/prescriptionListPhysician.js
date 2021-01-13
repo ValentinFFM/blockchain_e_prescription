@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card';
 
 // Smart Contract imports
 import PrescriptionsContract from '../../contracts/Prescriptions.json';
-import UserContract from '../../contracts/User.json'
+import UserContract from '../../contracts/User.json';
 
 
 
@@ -84,7 +84,6 @@ class PrescriptionListPhysician extends Component {
         for(var i = 0; i < prescriptionIds_.length; i++){
             var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
             prescription.insured_name = await this.getInsuredName(prescription.insured)
-            
             prescriptionsArray.push(prescription)
         }
             
