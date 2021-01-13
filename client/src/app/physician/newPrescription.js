@@ -103,6 +103,7 @@ class NewPrescription extends Component {
     const insured = formData.public_key_patient;
     const pharmacist = formData.public_key_patient;
     const pharmacistEqualsInsured = true;
+    const status = "";
     const medicine_name = formData.medicine_name;
     const medicine_amount = formData.medicine_amount;
     
@@ -116,7 +117,7 @@ class NewPrescription extends Component {
       && medicine_amount !== undefined
     ){
       try {
-        await prescriptionsContract.methods.newPrescription({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
+        await prescriptionsContract.methods.newPrescription({physician, insured, pharmacist, pharmacistEqualsInsured, status, medicine_name, medicine_amount}).send({ from: physician, gas: 1000000 });
         this.setState({sendingComplete: true})
       } catch {
         this.setState({sendingError: true})

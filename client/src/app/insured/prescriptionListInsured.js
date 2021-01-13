@@ -4,6 +4,7 @@
 
 import React, { Component } from "react";
 import getWeb3 from "../getWeb3";
+import { Redirect, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // React-Bootstrap imports
 import Card from 'react-bootstrap/Card';
@@ -11,15 +12,18 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Alert from 'react-bootstrap/Alert';
 
 // Smart Contract imports
 import PrescriptionsContract from '../../contracts/Prescriptions.json';
+import UserContract from '../../contracts/User.json';
+import LandingInsured from "../pharmacist/landingPharmacist";
 
 
 
 class PrescriptionListInsured extends Component {
 
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
+    state = {web3: null, standardAccount: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
 
     constructor(props){
         super(props)
@@ -47,13 +51,19 @@ class PrescriptionListInsured extends Component {
             const standardAccount = accounts[0]
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
-      
+            const UserContractNetwork = UserContract.networks[networkId];
+
             const PrescriptionsContractInstance = new web3.eth.Contract(
-              PrescriptionsContract.abi,
-              PrescriptionContractNetwork && PrescriptionContractNetwork.address,
+                PrescriptionsContract.abi,
+                PrescriptionContractNetwork && PrescriptionContractNetwork.address,
+            );
+
+            const UserContractInstance = new web3.eth.Contract(
+                UserContract.abi,
+                UserContractNetwork && UserContractNetwork.address,
             );
       
-            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance });
+            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
@@ -76,81 +86,152 @@ class PrescriptionListInsured extends Component {
     // Returns all prescriptions that were filled for the patient.
     getPrescriptions = async () => {
         var prescriptionsArray = [];
-        const { account, standardAccount, prescriptionsContract, formData } = this.state;
+        const { account, standardAccount, prescriptionsContract } = this.state;
         const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
 
         for(var i = 0; i < prescriptionIds_.length; i++){
             var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
-        
-            formData['physician_' + prescriptionIds_[i]] = prescription.physician;
-            formData['insured_' + prescriptionIds_[i]] = prescription.insured;
-            formData['medicine_name_' + prescriptionIds_[i]] = prescription.medicine_name;
-            formData['medicine_amount_' + prescriptionIds_[i]] = prescription.medicine_amount;
-            
+            prescription.physician_name = await this.getPhysicianName(prescription.physician)
+            prescription.pharmacist_name = await this.getPharmacistName(prescription.pharmacist)
             prescriptionsArray.push(prescription)
         }
             
-        this.setState({prescriptions: prescriptionsArray, prescriptionIds: prescriptionIds_, formData: formData});
+        this.setState({prescriptions: prescriptionsArray, prescriptionIds: prescriptionIds_});
+    }
+
+    getPhysicianName = async (public_key_physician) => {
+        const { standardAccount, userContract } = this.state;
+        const physician = await userContract.methods.getPhysician(public_key_physician).call({ from: standardAccount, gas: 1000000 });
+        const physician_name = physician.surname + " " + physician.name;
+        return physician_name;
+    }
+
+    getPharmacistName = async (public_key_pharmacist) => {
+        const { standardAccount, userContract } = this.state;
+        const pharmacist = await userContract.methods.getPharmacist(public_key_pharmacist).call({ from: standardAccount, gas: 1000000 });
+        const pharmacist_name =  pharmacist.name;
+        return pharmacist_name;
     }
 
     // Sends the prescription to the pharmacist, whichs address was entered by the user
     sendPrescription = async (event) => {
         const { formData, account, prescriptionsContract } = this.state
-
-        const prescription_id_ = event.target.id
-        const physician = formData['physician_' + prescription_id_];
-        const insured = formData['insured_' + prescription_id_];
+        const prescription_id_ = event.target.id;
         const pharmacist = formData['public_key_pharmacist_' + prescription_id_];
-        const pharmacistEqualsInsured = false;
-        const medicine_name = formData['medicine_name_' + prescription_id_];
-        const medicine_amount = formData['medicine_amount_' + prescription_id_];
 
-        await prescriptionsContract.methods.transferPrescriptionToPharmacist({physician, insured, pharmacist, pharmacistEqualsInsured, medicine_name, medicine_amount}, prescription_id_).send({ from: account, gas: 1000000 });
+        try{
+            await prescriptionsContract.methods.transferPrescriptionToPharmacist(prescription_id_, pharmacist).send({ from: account, gas: 1000000 });
+            this.setState({sendPrescription: true})
+        } catch {
+            this.setState({sendPrescription: false})
+        }
+        
     }
 
     render(){
-        // If the insured has no prescription in his list, then a message is shown. Otherwise the prescriptions are shown.
-        if(this.state.prescriptions.length === 0){
-            return(
-                <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
-            )
-        } else {
-            var items = []
-            var counter = 0;
-
-            for(var prescription of this.state.prescriptions){
-                var prescription_id = this.state.prescriptionIds[counter]
-                var formId = "public_key_pharmacist_" + prescription_id
-
-                items.push(
-                    <Card className="mt-5">
-                        <Card.Body>
-                            <Card.Title>{prescription.medicine_name} ({prescription.medicine_amount})</Card.Title>
-                            <Card.Text></Card.Text>
-                            <Row>
-                                <Col>
-                                    <Form>
-                                        <Form.Group controlId={formId}>
-                                            <Form.Control type="text" placeholder="Public Key Apotheke" value={this.state.value} onChange={this.handleChange}></Form.Control>
-                                        </Form.Group>
-                                    </Form>
-                                </Col>
-                                <Col>
-                                    <Button id={prescription_id} onClick={this.sendPrescription} variant="dark">An Apotheke senden</Button>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                )
-                counter = counter + 1;
-            }
-
+        if(this.state.sendPrescription === true){
             return (
                 <>
-                    {items}
+                  <Router forceRefresh={true}>
+                    <Redirect push to='/insured'/>
+                    <Switch>
+                        <Route path="/insured">
+                            <LandingInsured/>
+                        </Route>
+                    </Switch>
+                  </Router>
                 </>
-            )
-        }
+              )
+        } else {
+            // If the insured has no prescription in his list, then a message is shown. Otherwise the prescriptions are shown.
+            if(this.state.prescriptions.length === 0){
+                return(
+                    <p>Aktuelle wurden Ihnen keine Rezept verordnet!</p>
+                )
+            } else {
+                var items = []
+                var counter = 0;
+
+                for(var prescription of this.state.prescriptions){
+                    var prescription_id = this.state.prescriptionIds[counter]
+
+                    var formId = "public_key_pharmacist_" + prescription_id
+                    console.log(prescription)
+
+                    if(prescription.status === 'Patient'){
+                        items.push(
+                            <Card className="mt-5" border="danger">
+                                <Card.Header as="h6"><b>Status:</b> Noch nicht eingelöst</Card.Header>
+                                <Card.Body>
+                                    <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
+                                    <Card.Text className="mt-4">
+                                        <b>Dosis:</b> {prescription.medicine_amount}<br/>
+                                        <b>Ausgestellt von:</b> {prescription.physician_name}    
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Row>
+                                        <Col sm={6} lg={9}>
+                                            <Form>
+                                                <Form.Group className="mb-0" controlId={formId}>
+                                                    <Form.Control type="text" placeholder="Public Key der Apotheke" value={this.state.value} onChange={this.handleChange}></Form.Control>
+                                                </Form.Group>
+                                            </Form>
+                                        </Col>
+                                        <Col sm={6} lg={3}>
+                                            <Button block id={prescription_id} onClick={this.sendPrescription} variant="dark">Senden</Button>
+                                        </Col>
+                                    </Row>
+                                </Card.Footer>
+                            </Card>
+                        )
+                    } else if (prescription.status === 'Pharmacist') {
+                        items.push(
+                            <Card className="mt-5" border="warning">
+                                <Card.Header as="h6"><b>Status:</b> In der Apotheke</Card.Header>
+                                <Card.Body>
+                                    <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
+                                    <Card.Text className="mt-4">
+                                        <b>Dosis:</b> {prescription.medicine_amount}<br/>
+                                        <b>Ausgestellt von:</b> {prescription.physician_name}    
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <b>Gesendet an:</b> {prescription.pharmacist_name}
+                                </Card.Footer>
+                            </Card>
+                        )
+                    } else if (prescription.status === 'Redeemed') {
+                        items.push(
+                            <Card className="mt-5" border="success">
+                                <Card.Header as="h6"><b>Status:</b> Eingelöst</Card.Header>
+                                <Card.Body>
+                                    <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
+                                    <Card.Text className="mt-4">
+                                        <b>Dosis:</b> {prescription.medicine_amount}<br/>
+                                        <b>Ausgestellt von:</b> {prescription.physician_name}    
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <b>Gesendet an:</b> {prescription.pharmacist_name}
+                                </Card.Footer>
+                            </Card>
+                        )
+                    }
+
+                    counter = counter + 1;
+                }
+
+                return (
+                    <>
+                        <Alert show={this.state.sendPrescription === false} variant="danger" className="mt-3">
+                            Fehler bei der Übertragung! Bitte überprüfen Sie Ihre Eingaben und versuchen Sie es erneut!
+                        </Alert>
+                        {items}
+                    </>
+                )
+            }
+        }        
     }
 }
 export default PrescriptionListInsured;

@@ -96,7 +96,7 @@ class LandingInsured extends Component {
                         </Navbar.Collapse>
                     </Navbar>
     
-                    <Container fluid className="mt-5">
+                    <Container fluid className="my-5">
                         <Row> 
                             <Col xs={0} sm={1} md={2} lg={3}></Col>
                             <Col>
