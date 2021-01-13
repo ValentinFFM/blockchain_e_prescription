@@ -7,16 +7,15 @@ import getWeb3 from "../getWeb3";
 
 // React-Bootstrap imports
 import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 
 // Smart Contract imports
 import PrescriptionsContract from '../../contracts/Prescriptions.json';
+import UserContract from '../../contracts/User.json'
 
 
 
 class PrescriptionListPhysician extends Component {
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
+    state = {web3: null, standardAccount: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
 
     constructor(props){
         super(props)
@@ -44,13 +43,19 @@ class PrescriptionListPhysician extends Component {
             const standardAccount = accounts[0]
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
-      
+            const UserContractNetwork = UserContract.networks[networkId];
+
             const PrescriptionsContractInstance = new web3.eth.Contract(
-              PrescriptionsContract.abi,
-              PrescriptionContractNetwork && PrescriptionContractNetwork.address,
+                PrescriptionsContract.abi,
+                PrescriptionContractNetwork && PrescriptionContractNetwork.address,
             );
 
-            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance });
+            const UserContractInstance = new web3.eth.Contract(
+                UserContract.abi,
+                UserContractNetwork && UserContractNetwork.address,
+            );
+
+            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
@@ -78,16 +83,19 @@ class PrescriptionListPhysician extends Component {
 
         for(var i = 0; i < prescriptionIds_.length; i++){
             var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
-        
-            formData['physician_' + prescriptionIds_[i]] = prescription.physician;
-            formData['insured_' + prescriptionIds_[i]] = prescription.insured;
-            formData['medicine_name_' + prescriptionIds_[i]] = prescription.medicine_name;
-            formData['medicine_amount_' + prescriptionIds_[i]] = prescription.medicine_amount;
+            prescription.insured_name = await this.getInsuredName(prescription.insured)
             
             prescriptionsArray.push(prescription)
         }
             
         this.setState({prescriptions: prescriptionsArray, prescriptionIds: prescriptionIds_, formData: formData});
+    }
+
+    getInsuredName = async (public_key_insured) => {
+        const { standardAccount, userContract } = this.state;
+        const insured = await userContract.methods.getInsured(public_key_insured).call({ from: standardAccount, gas: 1000000 });
+        const insured_name =  insured.surname + " " + insured.name;
+        return insured_name;
     }
 
     render(){
@@ -103,17 +111,13 @@ class PrescriptionListPhysician extends Component {
             // Iterates through the prescriptions and created for every prescription a card.
             for(var prescription of this.state.prescriptions){
                 items.push(
-                    <Card className="mt-5">
+                    <Card className="mt-5" border="dark">
+                        <Card.Header as="h6"><b>Patient:</b> {prescription.insured_name}</Card.Header>
                         <Card.Body>
-                            <Card.Title>{prescription.medicine_name} ({prescription.medicine_amount})</Card.Title>
-                            <Card.Text></Card.Text>
-                            <Row>
-                                <Col>
-                                </Col>
-                                <Col>
-                                </Col>
-                            </Row>
-                            
+                            <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
+                            <Card.Text className="mt-4">
+                                <b>Dosis:</b> {prescription.medicine_amount}<br/>
+                            </Card.Text>
                         </Card.Body>
                     </Card>
                 )

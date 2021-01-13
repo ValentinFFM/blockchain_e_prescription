@@ -87,7 +87,7 @@ class LandingPhysician extends Component {
         } else {
             return(
                 <>
-                    <Navbar bg="dark" variant="dark" expand="lg">
+                    <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
                         <Navbar.Brand>E-Rezept</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
@@ -98,7 +98,7 @@ class LandingPhysician extends Component {
                         </Navbar.Collapse>
                     </Navbar>
 
-                    <Container fluid className="mt-5">
+                    <Container fluid className="my-5">
                         <Row> 
                             <Col xs={0} sm={1} md={2} lg={3}></Col>
                             <Col>
