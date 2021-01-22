@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
 // Smart Contract imports
 import UserContract from "./../contracts/User.json";
@@ -23,8 +24,8 @@ import Login from './login';
 
 
 
-class RegisterInsured extends Component {
-    state = {formData: {}, web3: null, accounts: null, userContract: null, prescriptions_contract: null, userVerfied: null, initialize: false}
+class Administration extends Component {
+    state = {formData: {}, web3: null, accounts: null, userContract: null, prescriptions_contract: null, userVerfied: null, initialize: false, transactionComplete: null}
 
     constructor(props){
         super(props)
@@ -78,6 +79,7 @@ class RegisterInsured extends Component {
         console.log(this.state)
         const smart_contract_key = formData.user_smart_contract;
         await prescriptions_contract.methods.establishConnectionToUserSmartContract(smart_contract_key).send({ from: accounts[0], gas: 1000000 });
+        this.setState({transactionComplete: true});
     }
 
     // Checks if the user, that is logged in in MetaMask, is the verifying institution.
@@ -111,8 +113,8 @@ class RegisterInsured extends Component {
     verifyInsured = async () => {
         const { formData, accounts, userContract } = this.state;
         const insured_address_ = formData.insured_address;
-        const returnedValue = await userContract.methods.verifyInsured(insured_address_).send({ from: accounts[0], gas: 1000000 });
-        console.log(returnedValue);
+        await userContract.methods.verifyInsured(insured_address_).send({ from: accounts[0], gas: 1000000 });
+        this.setState({transactionComplete: true});
     }
 
     // Returns the data of the physician who is belonging to the address that was entered
@@ -127,8 +129,8 @@ class RegisterInsured extends Component {
     verifyPhysician = async () => {
         const { formData, accounts, userContract } = this.state;
         const physician_address_ = formData.physician_address;
-        const returnedValue = await userContract.methods.verifyPhysician(physician_address_).send({ from: accounts[0], gas: 1000000 });
-        console.log(returnedValue);
+        await userContract.methods.verifyPhysician(physician_address_).send({ from: accounts[0], gas: 1000000 });
+        this.setState({transactionComplete: true});
     }
 
     // Returns the data of the pharmacist who is belonging to the address that was entered
@@ -143,8 +145,8 @@ class RegisterInsured extends Component {
     verifyPharmacist = async () => {
         const { formData, accounts, userContract } = this.state;
         const pharmacist_address_ = formData.pharmacist_address;
-        const returnedValue = await userContract.methods.verifyPharmacist(pharmacist_address_).send({ from: accounts[0], gas: 1000000 });
-        console.log(returnedValue);
+        await userContract.methods.verifyPharmacist(pharmacist_address_).send({ from: accounts[0], gas: 1000000 });
+        this.setState({transactionComplete: true});
     }
 
     render() {
@@ -163,90 +165,103 @@ class RegisterInsured extends Component {
                 </div>
             )
         } else {
-            return (
-                <>
-                    <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
-                        <Navbar.Brand href="/login">E-Rezept</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Button href="/" variant="outline-danger">Hauptmenü</Button>
-                        </Navbar.Collapse>
-                    </Navbar>
-
-                    <Container fluid className="mt-5">
-                        <Row> 
-                            <Col xs={0} sm={0} md={1} lg={2}></Col>
-
-                            <Col>
-                                <div className="pb-3 pt-4">
-                                    Insured:
-                                </div>
-
-                                <Form>
-                                    <Form.Group controlId="insured_address">
-                                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
-                                    </Form.Group>
-                                </Form>
-
-                                <Button variant="primary" block onClick={this.getInsured}>Get</Button>
-                                <Button variant="success" block onClick={this.verifyInsured}>Verify</Button>                                
-                            </Col>
-
-                            <Col>
-                                <div className="pb-3 pt-4">
-                                    Physician:
-                                </div>
-
-                                <Form>
-                                    <Form.Group controlId="physician_address">
-                                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
-                                    </Form.Group>
-                                </Form>
-
-                                <Button variant="primary" block onClick={this.getPhysician}>Get</Button>
-                                <Button variant="success" block onClick={this.verifyPhysician}>Verify</Button>
-                            </Col>
-
-                            <Col>
-                                <div className="pb-3 pt-4">
-                                    Pharmacist:
-                                </div>
-
-                                <Form>
-                                    <Form.Group controlId="pharmacist_address">
-                                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
-                                    </Form.Group>
-                                </Form>
-
-                                <Button variant="primary" block onClick={this.getPharmacist}>Get</Button>
-                                <Button variant="success" block onClick={this.verifyPharmacist}>Verify</Button>
-                            </Col>
-
-                            <Col xs={0} sm={0} md={1} lg={2}></Col>
-                        </Row>
-                        <Row>
-                            <Col xs={0} sm={0} md={1} lg={2}></Col>
-
-                            <Col>
-                                <div className="pb-3 pt-4">
-                                    User Smart Contract:
-                                </div>
-
-                                <Form>
-                                    <Form.Group controlId="user_smart_contract">
-                                        <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Address"></Form.Control>
-                                    </Form.Group>
-                                </Form>
-
-                                <Button variant="primary" block onClick={this.connectSmartContractUser}>Connect</Button>
-                            </Col>
-
-                            <Col xs={0} sm={0} md={1} lg={2}></Col>
-                        </Row>
-                    </Container>
-                </>
-            );
+            if(this.state.transactionComplete === true){
+                return(
+                    <div>
+                        <Router forceRefresh={true}>
+                            <Redirect push to='/admin'/>
+                            <Switch>
+                                <Route path="/admin">
+                                    <Administration/>
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </div>
+                )
+            } else {
+                return (
+                    <>
+                        <Navbar sticky="top" bg="dark" variant="dark" expand="lg">
+                            <Navbar.Brand href="/login">E-Rezept</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="mr-auto"></Nav>
+                                <Button href="/" variant="outline-danger">Hauptmenü</Button>
+                            </Navbar.Collapse>
+                        </Navbar>
+    
+                        <Container fluid className="mt-5">
+                            <Row className="mb-5"> 
+                                <Col xs={0} sm={0} md={1} lg={2}></Col>
+    
+                                <Col>
+                                    <div className="pb-3 pt-4">
+                                        Verifizierung des Versicherten:
+                                    </div>
+    
+                                    <Form>
+                                        <Form.Group controlId="insured_address">
+                                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Public Key des Versicherten"></Form.Control>
+                                        </Form.Group>
+                                    </Form>
+    
+                                    <Button variant="success" block onClick={this.verifyInsured}>Verifizieren</Button>                                
+                                </Col>
+    
+                                <Col>
+                                    <div className="pb-3 pt-4">
+                                        Verifizierung des Arztes:
+                                    </div>
+    
+                                    <Form>
+                                        <Form.Group controlId="physician_address">
+                                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Public Key des Arztes"></Form.Control>
+                                        </Form.Group>
+                                    </Form>
+    
+                                    <Button variant="success" block onClick={this.verifyPhysician}>Verifizieren</Button>
+                                </Col>
+    
+                                <Col>
+                                    <div className="pb-3 pt-4">
+                                        Verifizierung der Apotheke:
+                                    </div>
+    
+                                    <Form>
+                                        <Form.Group controlId="pharmacist_address">
+                                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Public Key der Apotheke"></Form.Control>
+                                        </Form.Group>
+                                    </Form>
+    
+                                    <Button variant="success" block onClick={this.verifyPharmacist}>Verifizieren</Button>
+                                </Col>
+    
+                                <Col xs={0} sm={0} md={1} lg={2}></Col>
+                            </Row>
+    
+                            <Row>
+                                <Col xs={0} sm={0} md={1} lg={2}></Col>
+                                <Col>
+                                    <div className="pb-3 pt-4">
+                                        Verbindung von Smart Contract Prescription und Smart Contract User:
+                                    </div>
+    
+                                    <Form>
+                                        <Form.Group controlId="user_smart_contract">
+                                            <Form.Control value={this.state.value} onChange={this.handleChange} type="text" placeholder="Addresse des Smart Contracts User"></Form.Control>
+                                        </Form.Group>
+                                    </Form>
+    
+                                    <Button variant="primary" block onClick={this.connectSmartContractUser}>Verbinden</Button>
+                                </Col>
+    
+                                <Col xs={0} sm={0} md={1} lg={2}></Col>
+                            </Row>
+                        </Container>
+                    </>
+                );
+            }
         }
       }
 }
-export default RegisterInsured;
+export default Administration;
