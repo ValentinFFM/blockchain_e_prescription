@@ -25,7 +25,7 @@ import Login from './login';
 
 
 class Administration extends Component {
-    state = {formData: {}, web3: null, accounts: null, userContract: null, prescriptions_contract: null, userVerfied: null, initialize: false, transactionComplete: null}
+    state = {formData: {}, web3: null, accounts: null, account: null, userContract: null, prescriptions_contract: null, userVerfied: null, initialize: false, transactionComplete: null}
 
     constructor(props){
         super(props)
@@ -36,8 +36,8 @@ class Administration extends Component {
 
         // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
-        const public_key = ethereum.selectedAddress;
-        this.setState({account: public_key});
+        // const public_key = ethereum.selectedAddress;
+        // this.setState({account: public_key});
 
         // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
         ethereum.on('accountsChanged', (public_key) => {
@@ -51,6 +51,7 @@ class Administration extends Component {
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
+            const account = accounts[0]
             const networkId = await web3.eth.net.getId();
             const UserContractNetwork = UserContract.networks[networkId];
             const PrescriptionsContractNetwork = PrescriptionsContract.networks[networkId];
@@ -65,7 +66,7 @@ class Administration extends Component {
                 PrescriptionsContractNetwork && PrescriptionsContractNetwork.address,
             );
 
-            this.setState({ web3, accounts, userContract: UserContractInstance, prescriptions_contract: PrescriptionsContractInstance, initialize: true});
+            this.setState({ web3, accounts, account: account, userContract: UserContractInstance, prescriptions_contract: PrescriptionsContractInstance, initialize: true});
             this.checkVerification();
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);

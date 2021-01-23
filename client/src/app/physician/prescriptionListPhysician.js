@@ -15,7 +15,7 @@ import UserContract from '../../contracts/User.json';
 
 
 class PrescriptionListPhysician extends Component {
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
+    state = {web3: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
 
     constructor(props){
         super(props)
@@ -40,7 +40,7 @@ class PrescriptionListPhysician extends Component {
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
-            const standardAccount = accounts[0]
+            const account = accounts[0]
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
             const UserContractNetwork = UserContract.networks[networkId];
@@ -55,7 +55,7 @@ class PrescriptionListPhysician extends Component {
                 UserContractNetwork && UserContractNetwork.address,
             );
 
-            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
+            this.setState({ web3: web3, account: account, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);

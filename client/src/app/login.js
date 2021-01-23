@@ -31,7 +31,7 @@ import Administration from './administration';
 
 class NewLogin extends Component {
 
-    state = { web3: null, standardAccount: null, userContract: null, account: null, formData: {}, missingInput: false, unknownUser: false, unverifiedUser: false, status: 'default' }
+    state = { web3: null, userContract: null, account: null, formData: {}, missingInput: false, unknownUser: false, unverifiedUser: false, status: 'default' }
 
     constructor(props){
         super(props)
@@ -53,7 +53,7 @@ class NewLogin extends Component {
             // Get web3 instance and the accounts that are stored 
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
-            const standardAccount = accounts[0]
+            const account = accounts[0]
 
             // Get the contract instance.
             const networkId = await web3.eth.net.getId();
@@ -65,7 +65,7 @@ class NewLogin extends Component {
             );
 
             // Save data into the react state
-            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance });
+            this.setState({ web3: web3, account: account, userContract: UserContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
@@ -134,7 +134,7 @@ class NewLogin extends Component {
     checkExistence = async (role, public_key) => {
         console.log("Check Existence", role, public_key)
 
-        const {standardAccount, userContract } = this.state;
+        const {account, userContract } = this.state;
         var existenceInsured = false;
         var existencePhysician = false;
         var existencePharmacist = false;
@@ -142,25 +142,25 @@ class NewLogin extends Component {
         var existence = undefined;
 
         try{
-            existenceInsured = await userContract.methods.checkExistence('insured', public_key).call({from: standardAccount, gas: 1000000});
+            existenceInsured = await userContract.methods.checkExistence('insured', public_key).call({from: account, gas: 1000000});
         } catch {
             existenceInsured = false;
         }
         
         try{
-            existencePhysician =  await userContract.methods.checkExistence('physician', public_key).call({from: standardAccount, gas: 1000000});
+            existencePhysician =  await userContract.methods.checkExistence('physician', public_key).call({from: account, gas: 1000000});
         } catch {
             existencePhysician = false;
         }
         
         try{
-            existencePharmacist =  await userContract.methods.checkExistence('pharmacist', public_key).call({from: standardAccount, gas: 1000000});
+            existencePharmacist =  await userContract.methods.checkExistence('pharmacist', public_key).call({from: account, gas: 1000000});
         } catch {
             existencePharmacist = false;
         }
 
         try{
-            existenceVerifyingInstitution =  await userContract.methods.checkExistence('verifying_institution', public_key).call({from: standardAccount, gas: 1000000});
+            existenceVerifyingInstitution =  await userContract.methods.checkExistence('verifying_institution', public_key).call({from: account, gas: 1000000});
         } catch {
             existenceVerifyingInstitution = false;
         }
@@ -176,31 +176,31 @@ class NewLogin extends Component {
 
     // Checks out if the user with the public_key exists in the mapping of the role in the smart contract
     checkVerification = async (role, public_key) => {
-        const {standardAccount, userContract } = this.state;
+        const {account, userContract } = this.state;
         var verified = undefined;
 
         if(role === "Versicherte"){
             try{
                 console.log("Versicherte")
-                verified = await userContract.methods.checkVerification('insured', public_key).call({from: standardAccount, gas: 1000000});
+                verified = await userContract.methods.checkVerification('insured', public_key).call({from: account, gas: 1000000});
             } catch {
                 verified = false;
             }
         } else if (role === "Arzt"){
             try{
-                verified =  await userContract.methods.checkVerification('physician', public_key).call({from: standardAccount, gas: 1000000});
+                verified =  await userContract.methods.checkVerification('physician', public_key).call({from: account, gas: 1000000});
             } catch {
                 verified = false;
             }
         } else if (role === "Apotheker"){
             try{
-                verified =  await userContract.methods.checkVerification('pharmacist', public_key).call({from: standardAccount, gas: 1000000});
+                verified =  await userContract.methods.checkVerification('pharmacist', public_key).call({from: account, gas: 1000000});
             } catch {
                 verified = false;
             }
         } else if (role === "Admin"){
             try{
-                verified =  await userContract.methods.checkVerification('verifying_institution', public_key).call({from: standardAccount, gas: 1000000});
+                verified =  await userContract.methods.checkVerification('verifying_institution', public_key).call({from: account, gas: 1000000});
             } catch {
                 verified = false;
             }

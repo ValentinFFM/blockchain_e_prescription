@@ -25,7 +25,7 @@ import LandingInsured from "../insured/landingInsured";
 
 class PrescriptionListInsured extends Component {
 
-    state = {web3: null, standardAccount: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
+    state = {web3: null, prescriptionsContract: null, userContract: null, account: null, formData: {}, prescriptions: [], prescriptionIds: [], sendPrescription: null}
 
     constructor(props){
         super(props)
@@ -36,8 +36,8 @@ class PrescriptionListInsured extends Component {
 
         // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
-        const public_key = ethereum.selectedAddress;
-        this.setState({account: public_key});
+        // const public_key = ethereum.selectedAddress;
+        // this.setState({account: public_key});
 
         // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
         ethereum.on('accountsChanged', (public_key) => {
@@ -50,7 +50,7 @@ class PrescriptionListInsured extends Component {
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
-            const standardAccount = accounts[0]
+            const account = accounts[0]
             const networkId = await web3.eth.net.getId();
             const PrescriptionContractNetwork = PrescriptionsContract.networks[networkId];
             const UserContractNetwork = UserContract.networks[networkId];
@@ -65,7 +65,7 @@ class PrescriptionListInsured extends Component {
                 UserContractNetwork && UserContractNetwork.address,
             );
       
-            this.setState({ web3: web3, standardAccount: standardAccount, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
+            this.setState({ web3: web3, account: account, prescriptionsContract: PrescriptionsContractInstance, userContract: UserContractInstance });
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
             console.error(error);
@@ -88,11 +88,11 @@ class PrescriptionListInsured extends Component {
     // Returns all prescriptions that were filled for the patient.
     getPrescriptions = async () => {
         var prescriptionsArray = [];
-        const { account, standardAccount, prescriptionsContract } = this.state;
-        const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: standardAccount, gas: 1000000 });
+        const { account, prescriptionsContract } = this.state;
+        const prescriptionIds_ = await prescriptionsContract.methods.getInsuredPrescriptionsIDs(account).call({ from: account, gas: 1000000 });
 
         for(var i = 0; i < prescriptionIds_.length; i++){
-            var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: standardAccount, gas: 1000000 });
+            var prescription = await prescriptionsContract.methods.getPrescription(prescriptionIds_[i]).call({ from: account, gas: 1000000 });
             prescription.physician_name = await this.getPhysicianName(prescription.physician)
             prescription.pharmacist_name = await this.getPharmacistName(prescription.pharmacist)
             prescriptionsArray.push(prescription)
@@ -102,15 +102,15 @@ class PrescriptionListInsured extends Component {
     }
 
     getPhysicianName = async (public_key_physician) => {
-        const { standardAccount, userContract } = this.state;
-        const physician = await userContract.methods.getPhysician(public_key_physician).call({ from: standardAccount, gas: 1000000 });
+        const { account, userContract } = this.state;
+        const physician = await userContract.methods.getPhysician(public_key_physician).call({ from: account, gas: 1000000 });
         const physician_name = physician.surname + " " + physician.name;
         return physician_name;
     }
 
     getPharmacistName = async (public_key_pharmacist) => {
-        const { standardAccount, userContract } = this.state;
-        const pharmacist = await userContract.methods.getPharmacist(public_key_pharmacist).call({ from: standardAccount, gas: 1000000 });
+        const { account, userContract } = this.state;
+        const pharmacist = await userContract.methods.getPharmacist(public_key_pharmacist).call({ from: account, gas: 1000000 });
         const pharmacist_name =  pharmacist.name;
         return pharmacist_name;
     }

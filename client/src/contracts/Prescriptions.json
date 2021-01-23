@@ -9444,12 +9444,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xfEf45d7CbB44A370aCAd417953521da24f04b5e2",
-      "transactionHash": "0xd72cf0eabd320e31b8b5cc3d0743f312853e5f308efbd4cefb5b693bcf4b7610"
+      "address": "0x338659b7Abb01960357b6DA7F4759F08DcA2E779",
+      "transactionHash": "0x68c907d25955366fb40ac914744302e206c5bf9ee6c43046dc4060dcf9a1ff7a"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2021-01-22T14:27:27.200Z",
+  "updatedAt": "2021-01-23T18:34:43.592Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

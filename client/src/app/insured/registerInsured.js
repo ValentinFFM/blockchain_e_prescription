@@ -23,7 +23,7 @@ import Login from './../login'
 
 
 class RegisterInsured extends Component {
-    state = {web3: null, standardAccount: null, userContract: null, account: null, formData: {} , missingInput: false, registration_accepted: false, userExistance: null, initialize: false}
+    state = {web3: null, userContract: null, account: null, formData: {} , missingInput: false, registration_accepted: false, userExistance: null, initialize: false}
 
     constructor(props){
         super(props)
@@ -34,8 +34,10 @@ class RegisterInsured extends Component {
 
         // Reads out the selected account from the user in MetaMask and stores it in the react state
         const ethereum = await window.ethereum;
-        const public_key = ethereum.selectedAddress;
-        this.setState({account: public_key});
+        // console.log(ethereum)
+        // console.log(ethereum.selectedAddress)
+        // const public_key = ethereum.selectedAddress;
+        // this.setState({account: public_key});
 
         // If user changes his account, then the verification to access the page is checked and afterwards the new account is stored in the react state
         ethereum.on('accountsChanged', (public_key) => {
@@ -49,7 +51,7 @@ class RegisterInsured extends Component {
         try {
             const web3 = await getWeb3();
             const accounts = await web3.eth.getAccounts();
-            const standardAccount = accounts[0]
+            const account = accounts[0]
             const networkId = await web3.eth.net.getId();
             const UserContractNetwork = UserContract.networks[networkId];
 
@@ -58,7 +60,9 @@ class RegisterInsured extends Component {
                 UserContractNetwork && UserContractNetwork.address,
             );
 
-            this.setState({ web3: web3, standardAccount: standardAccount, userContract: UserContractInstance, initialize: true });
+            this.setState({ web3: web3, account: account, userContract: UserContractInstance, initialize: true });
+            console.log(this.state.standardAccount)
+            console.log(this.state.account)
             this.checkExistence();
         } catch (error) {
             alert(`Failed to load web3, accounts, or contract. Check console for details.`);
@@ -69,10 +73,10 @@ class RegisterInsured extends Component {
     // Checks if the user, that is logged in in MetaMask, is already registered as any role.
     checkExistence = async () => {
         const { userContract } = this.state;
-        const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
-        const existence_physician = await userContract.methods.checkExistence('physician', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
-        const existence_pharmacist = await userContract.methods.checkExistence('pharmacist', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
-        const existence_verifying_inst = await userContract.methods.checkExistence('verifying_institution', this.state.account).call({from: this.state.standardAccount, gas: 1000000})
+        const existence_insured = await userContract.methods.checkExistence('insured', this.state.account).call({from: this.state.account, gas: 1000000})
+        const existence_physician = await userContract.methods.checkExistence('physician', this.state.account).call({from: this.state.account, gas: 1000000})
+        const existence_pharmacist = await userContract.methods.checkExistence('pharmacist', this.state.account).call({from: this.state.account, gas: 1000000})
+        const existence_verifying_inst = await userContract.methods.checkExistence('verifying_institution', this.state.account).call({from: this.state.account, gas: 1000000})
 
         if(existence_insured === true || existence_physician === true || existence_pharmacist === true || existence_verifying_inst === true){
             this.setState({userExistance: true})
