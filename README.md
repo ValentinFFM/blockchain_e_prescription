@@ -2,6 +2,7 @@
 
 **Table of Contents:**
 - [E-Prescription-Application build on Ethereum Blockchain](#e-prescription-application-build-on-ethereum-blockchain)
+  - [⚠️ News ⚠️](#️-news-️)
   - [Message from the project team](#message-from-the-project-team)
     - [Introduction](#introduction)
     - [Stage of the project](#stage-of-the-project)
@@ -11,6 +12,19 @@
   - [How to interact with the application!](#how-to-interact-with-the-application)
   - [How it works](#how-it-works)
 
+
+---
+
+## ⚠️ News ⚠️
+
+On Thursday, the 21st January 2021, MetaMask removed the injected window.web3 object from their extension. Therefore this application was no longer working, so we decided to switch to the legacy version of MetaMask. This allows us to keep the application completly working, while we make the transition to an alternative of window.web3. In this transition time, we would ask you to download additionally the following extension, so that the appliaction is still working:
+
+- https://chrome.google.com/webstore/detail/metamask-legacy-web3/dgoegggfhkapjphahmgihfgemkgecdgl (Google Chrome)
+- https://microsoftedge.microsoft.com/addons/detail/metamask-legacy-web3/obkfjbjkiofoponpkmphnpaaadebfloh?hl=en-US (Microsoft Edge)
+- https://addons.mozilla.org/en-US/firefox/addon/metamask-legacy-web3/ (Mozilla Firefox)
+
+For more information read: https://docs.metamask.io/guide/provider-migration.html#table-of-contents
+<br/><br/>
 
 ---
 
