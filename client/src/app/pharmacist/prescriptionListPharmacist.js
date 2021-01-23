@@ -141,7 +141,7 @@ class PrescriptionListPharmacist extends Component {
 
                     if(prescription.status === "Pharmacist"){
                         items.push(
-                            <Card className="mt-5" border="danger">
+                            <Card className="mt-5" border="danger" key={prescription_id}>
                                 <Card.Header as="h6"><b>Patient:</b> {prescription.insured_name}</Card.Header>
                                 <Card.Body>
                                     <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
@@ -156,7 +156,7 @@ class PrescriptionListPharmacist extends Component {
                         )
                     } else {
                         items.push(
-                            <Card className="mt-5" border="success">
+                            <Card className="mt-5" border="success" key={prescription_id}>
                                 <Card.Header as="h6"><b>Patient:</b> {prescription.insured_name}</Card.Header>
                                 <Card.Body>
                                     <Card.Title as="h3">{prescription.medicine_name}</Card.Title>

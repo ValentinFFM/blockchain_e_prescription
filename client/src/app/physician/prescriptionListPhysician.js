@@ -111,7 +111,7 @@ class PrescriptionListPhysician extends Component {
             // Iterates through the prescriptions and created for every prescription a card.
             for(var prescription of this.state.prescriptions){
                 items.push(
-                    <Card className="mt-5" border="dark">
+                    <Card className="mt-5" border="dark" key={counter}>
                         <Card.Header as="h6"><b>Patient:</b> {prescription.insured_name}</Card.Header>
                         <Card.Body>
                             <Card.Title as="h3">{prescription.medicine_name}</Card.Title>

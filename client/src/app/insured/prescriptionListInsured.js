@@ -162,7 +162,7 @@ class PrescriptionListInsured extends Component {
 
                     if(prescription.status === 'Patient'){
                         items.push(
-                            <Card className="mt-5" border="danger">
+                            <Card className="mt-5" border="danger" key={formId}>
                                 <Card.Header as="h6"><b>Status:</b> Noch nicht eingelöst</Card.Header>
                                 <Card.Body>
                                     <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
@@ -189,7 +189,7 @@ class PrescriptionListInsured extends Component {
                         )
                     } else if (prescription.status === 'Pharmacist') {
                         items.push(
-                            <Card className="mt-5" border="warning">
+                            <Card className="mt-5" border="warning" key={formId}>
                                 <Card.Header as="h6"><b>Status:</b> In der Apotheke</Card.Header>
                                 <Card.Body>
                                     <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
@@ -205,7 +205,7 @@ class PrescriptionListInsured extends Component {
                         )
                     } else if (prescription.status === 'Redeemed') {
                         items.push(
-                            <Card className="mt-5" border="success">
+                            <Card className="mt-5" border="success" key={formId}>
                                 <Card.Header as="h6"><b>Status:</b> Eingelöst</Card.Header>
                                 <Card.Body>
                                     <Card.Title as="h3">{prescription.medicine_name}</Card.Title>
